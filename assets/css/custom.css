@@ -1,0 +1,140 @@
+ @font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Regular.ttf");
+}
+
+
+body{
+	min-width: 400px;
+}
+
+.centered {
+    text-align: center;
+    font-size: 0;
+}
+.centered > div {
+    float: none;
+    display: inline-block;
+    text-align: left;
+    font-size: 13px;
+}
+
+.card{
+}
+
+.disponibles .col-md-3{
+	max-width: 400px;
+	vertical-align: top;
+}
+.card-body.jornada{
+	height: 18em;
+	background:-webkit-linear-gradient(rgba(33, 150, 243, 0.55), rgba(8, 82, 146, 0.68)), 
+	url("../img/fondo_cursos.jpg");
+	background:-o-linear-gradient(rgba(33, 150, 243, 0.55), rgba(8, 82, 146, 0.68)),
+	url("../img/fondo_cursos.jpg");
+	background:linear-gradient(rgba(33, 150, 243, 0.55), rgba(8, 82, 146, 0.68)), 
+	url("../img/fondo_cursos.jpg");
+
+}
+
+.card-body.curso{
+	height: 18em;
+	background:-webkit-linear-gradient(rgba(53, 140, 57, 0.76), rgba(76, 175, 80, 0.69)),
+	url("../img/fondo_cursos.jpg");
+	background:-o-linear-gradient(rgba(53, 140, 57, 0.76), rgba(76, 175, 80, 0.69)),
+	url("../img/fondo_cursos.jpg");
+	background:linear-gradient(rgba(53, 140, 57, 0.76), rgba(76, 175, 80, 0.69)),
+	url("../img/fondo_cursos.jpg");
+
+}
+
+.card-body.taller{
+	height: 18em;
+	background:-webkit-linear-gradient(rgba(244, 67, 54, 0.52), rgba(169, 68, 66, 0.58)),
+	url("../img/fondo_cursos.jpg");
+	background:-o-linear-gradient(rgba(244, 67, 54, 0.52), rgba(169, 68, 66, 0.58)),
+	url("../img/fondo_cursos.jpg");
+	background:linear-gradient(rgba(244, 67, 54, 0.52), rgba(169, 68, 66, 0.58)),
+	url("../img/fondo_cursos.jpg");
+
+}
+
+.card-body.diplomado{
+	height: 18em;
+	background:-webkit-linear-gradient(rgba(255, 152, 0, 0.72), rgba(255, 152, 0, 0.57)),
+	url("../img/fondo_cursos.jpg");
+	background:-o-linear-gradient(rgba(255, 152, 0, 0.72), rgba(255, 152, 0, 0.57)),
+	url("../img/fondo_cursos.jpg");
+	background:linear-gradient(rgba(255, 152, 0, 0.72), rgba(255, 152, 0, 0.57)),
+	url("../img/fondo_cursos.jpg");
+}
+
+.card-curso.style-danger{
+	height: 18em;
+	background:-webkit-linear-gradient(rgba(33, 150, 243, 0.55), rgba(8, 82, 146, 0.68)), 
+	url("../img/fondo_cursos.jpg");
+	background:-o-linear-gradient(rgba(33, 150, 243, 0.55), rgba(8, 82, 146, 0.68)),
+	url("../img/fondo_cursos.jpg");
+	background:linear-gradient(rgba(33, 150, 243, 0.55), rgba(8, 82, 146, 0.68)), 
+	url("../img/fondo_cursos.jpg");
+
+}
+
+.card-body.no-padding.card-disponibles{
+	height: 20em;
+}
+
+span.help-block {
+    position: static !important;
+}
+
+h3 small{
+	color:white;
+}
+
+.form-mayus input{
+	text-transform: uppercase;
+}
+.form-mayus .tile-text{
+	text-transform: uppercase;
+}
+section:first-child {
+  padding-top: 24px;
+}
+
+
+tr button{
+	text-align: center;
+}
+
+.table-hover tbody tr:hover{
+	background-color: rgba(33, 150, 243, 0.15) !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: rgb(229, 230, 230);
+}
+
+.form-control{
+	color: #777 !important;
+}
+
+.form-group .form-control ~ label {
+	opacity: .7 !important;
+}
+
+.dropdown-header {
+	opacity: .9;
+}
+
+.card-head header small{
+	opacity: .9;
+}
+
+.txt-up{
+	text-transform: uppercase;
+}
+
+.txt-low{
+	text-transform: lowercase;
+}
