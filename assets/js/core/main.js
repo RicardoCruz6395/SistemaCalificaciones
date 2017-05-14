@@ -3,7 +3,6 @@ $( document ).ready(function() {
         this.value = this.value.toUpperCase();
     });
 
-
     
     $('.toggles button').click(function(e){
     	e.preventDefault();
@@ -20,9 +19,6 @@ $( document ).ready(function() {
     $('#showall').click(function() {
         $('.post').show(500);
     });
-
-
-	
 });
 
 
