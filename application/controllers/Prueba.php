@@ -14,11 +14,21 @@ class Prueba extends CI_Controller
     {
         parent::__construct();
     }
-    public function index(){
+    public function index2(){
         $this->load->model('prueba_model');
         echo "<pre>";
-        print_r($this->prueba_model->test());
+        print_r($this->prueba_model->password());
         echo "</pre>";
+    }
+    public function index(){
+
+        $data = array('page_title'=>'Panel de administración');
+        $this->load->view('layout/head',$data);
+        $this->load->view('layout/header');
+        $this->load->view('prueba/content');
+        $this->load->view('layout/menu');
+        $this->load->view('layout/scripts');
+
     }
 
 }
