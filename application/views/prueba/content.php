@@ -20,7 +20,7 @@
                     <div class="col-md-12">
                         <div class="card card-underline">
                             <div class="card-head">
-                                <header>TITULO </header>
+                                <header>LISTA DE MATERIAS </header>
                                 <div class="tools">
                                     <div class="btn-group">
                                         <a class="btn btn-icon-toggle btn-collapse"><i class="fa fa-angle-down"></i></a>
@@ -29,7 +29,110 @@
                             </div><!--end .card-head -->
                             <div class="card-body">
 
-                                <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci asperiores consequatur cum dolorum, expedita harum illum impedit ipsa nostrum nulla obcaecati officia quas qui sint sit temporibus ut voluptatem? </p>
+                                <table class="table datatable table-bordered table-hover" id="mytable">
+                                    <thead>
+                                        <tr>
+                                            <th>Materia</th>
+                                            <th>Semestre</th>
+                                            <th>Alumnos</th>
+                                            <th>Aula</th>
+                                            <th>Carrera</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Programacion web</td>
+                                            <td>8vo semestre</td>
+                                            <td>20</td>
+                                            <td>V2</td>
+                                            <td>ISIC</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Programacion web</td>
+                                            <td>8vo semestre</td>
+                                            <td>20</td>
+                                            <td>V2</td>
+                                            <td>ISIC</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Programacion web</td>
+                                            <td>8vo semestre</td>
+                                            <td>20</td>
+                                            <td>V2</td>
+                                            <td>ISIC</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Programacion web</td>
+                                            <td>8vo semestre</td>
+                                            <td>20</td>
+                                            <td>V2</td>
+                                            <td>ISIC</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Programacion web</td>
+                                            <td>8vo semestre</td>
+                                            <td>20</td>
+                                            <td>V2</td>
+                                            <td>ISIC</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Programacion web</td>
+                                            <td>8vo semestre</td>
+                                            <td>20</td>
+                                            <td>V2</td>
+                                            <td>ISIC</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Programacion web</td>
+                                            <td>8vo semestre</td>
+                                            <td>20</td>
+                                            <td>V2</td>
+                                            <td>ISIC</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Programacion web</td>
+                                            <td>8vo semestre</td>
+                                            <td>20</td>
+                                            <td>V2</td>
+                                            <td>ISIC</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Programacion web</td>
+                                            <td>8vo semestre</td>
+                                            <td>20</td>
+                                            <td>V2</td>
+                                            <td>ISIC</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Programacion web</td>
+                                            <td>8vo semestre</td>
+                                            <td>20</td>
+                                            <td>V2</td>
+                                            <td>ISIC</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Programacion web</td>
+                                            <td>8vo semestre</td>
+                                            <td>20</td>
+                                            <td>V2</td>
+                                            <td>ISIC</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Programacion web</td>
+                                            <td>8vo semestre</td>
+                                            <td>20</td>
+                                            <td>V2</td>
+                                            <td>ISIC</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Programacion web</td>
+                                            <td>8vo semestre</td>
+                                            <td>20</td>
+                                            <td>V2</td>
+                                            <td>ISIC</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
 
                             </div><!--end .card-body -->
                         </div><!--end .card -->

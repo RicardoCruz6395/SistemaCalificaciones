@@ -40,4 +40,16 @@ class Prueba extends CI_Controller
         $this->load->view('layout/scripts');
     }
 
+    // Funcion maestros
+    // Sin parámetros
+    // Elaborado por Amaury
+    public function maestros(){
+       $data = array('page_title'=>'Panel de maestros');
+        $this->load->view('layout/head',$data);
+        $this->load->view('layout/header');
+        $this->load->view('prueba/content');
+        $this->load->view('layout/menu');
+        $this->load->view('prueba/scripts');
+    }
+
 }

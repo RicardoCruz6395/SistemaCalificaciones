@@ -62,3 +62,4 @@ Temporary Items
 /application/config
 /application/config/
 /application/config/*
+application/config/config.php

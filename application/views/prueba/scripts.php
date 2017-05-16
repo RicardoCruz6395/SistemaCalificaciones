@@ -4,7 +4,7 @@
 		<script src="<?=base_url()?>assets/js/libs/bootstrap/bootstrap.min.js"></script>
 		<script src="<?=base_url()?>assets/js/libs/spin.js/spin.min.js"></script>
 		<script src="<?=base_url()?>assets/js/libs/autosize/jquery.autosize.min.js"></script>
-		<script src="<?=base_url()?>assets/js/libs/DataTables/jquery.dataTables.min.js"></script>
+		<script src="<?=base_url()?>assets/js/libs/DataTables/jquery.dataTables.js"></script>
 		<script src="<?=base_url()?>assets/js/libs/moment/moment.min.js"></script>
 		<script src="<?=base_url()?>assets/js/libs/flot/jquery.flot.min.js"></script>
 		<script src="<?=base_url()?>assets/js/libs/flot/jquery.flot.time.min.js"></script>
@@ -31,5 +31,11 @@
 		<script src="<?=base_url()?>assets/js/core/demo/Demo.js"></script>
 		<script src="<?=base_url()?>assets/js/core/main.js"></script>
 		<!-- END JAVASCRIPT -->
+		<script type="text/javascript">
+			$(document).ready(function(){
+			    $('#mytable').DataTable();
+			});
+		</script>
+
 	</body>
 </html>
