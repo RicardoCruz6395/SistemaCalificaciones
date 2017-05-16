@@ -28,7 +28,6 @@
                                 </div>
                             </div><!--end .card-head -->
                             <div class="card-body">
-
                                 <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci asperiores consequatur cum dolorum, expedita harum illum impedit ipsa nostrum nulla obcaecati officia quas qui sint sit temporibus ut voluptatem? </p>
 
                             </div><!--end .card-body -->
