@@ -43,7 +43,7 @@
                                         <tr>
                                             <td>Programacion web</td>
                                             <td>8vo semestre</td>
-                                            <td>20</td>
+                                            <td>21</td>
                                             <td>V2</td>
                                             <td>ISIC</td>
                                         </tr>

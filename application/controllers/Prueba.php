@@ -51,5 +51,16 @@ class Prueba extends CI_Controller
         $this->load->view('layout/menu');
         $this->load->view('prueba/scripts');
     }
+    // Funcion calificaciones
+    // Sin parámetros
+    // Elaborado por Amaury
+      public function calificaciones(){
+       $data = array('page_title'=>'Panel de Calificaciones');
+        $this->load->view('layout/head',$data);
+        $this->load->view('layout/header');
+        $this->load->view('prueba/content1');
+        $this->load->view('layout/menu');
+        $this->load->view('prueba/scripts');
+    }
 
 }
