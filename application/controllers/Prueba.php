@@ -44,7 +44,7 @@ class Prueba extends CI_Controller
     // Sin parámetros
     // Elaborado por Amaury
     public function maestros(){
-       $data = array('page_title'=>'Panel de maestros');
+       $data = array('page_title'=>'Panel de Maestros');
         $this->load->view('layout/head',$data);
         $this->load->view('layout/header');
         $this->load->view('prueba/content');
@@ -59,6 +59,44 @@ class Prueba extends CI_Controller
         $this->load->view('layout/head',$data);
         $this->load->view('layout/header');
         $this->load->view('prueba/content1');
+        $this->load->view('layout/menu');
+        $this->load->view('prueba/scripts');
+    }
+    // Funcion Materias
+    // Sin parámetros
+    // Elaborado por Amaury
+      public function materias(){
+       $data = array('page_title'=>'Panel de Materias');
+        $this->load->view('layout/head',$data);
+        $this->load->view('layout/header');
+        $this->load->view('prueba/content2');
+        $this->load->view('layout/menu');
+        $this->load->view('prueba/scripts');
+    }
+      // Funcion Modales
+    // Sin parámetros
+    // Elaborado por Amaury
+    public function modal1(){
+       $data = array('page_title'=>'Panel de Modales');
+        $this->load->view('layout/head',$data);
+        $this->load->view('layout/header');
+        $this->load->view('prueba/contentm1');
+        $this->load->view('layout/menu');
+        $this->load->view('prueba/scripts');
+    }
+     public function modal2(){
+       $data = array('page_title'=>'Panel de Modales');
+        $this->load->view('layout/head',$data);
+        $this->load->view('layout/header');
+        $this->load->view('prueba/contentm2');
+        $this->load->view('layout/menu');
+        $this->load->view('prueba/scripts');
+    }
+     public function modal3(){
+       $data = array('page_title'=>'Panel de Modales');
+        $this->load->view('layout/head',$data);
+        $this->load->view('layout/header');
+        $this->load->view('prueba/contentm3');
         $this->load->view('layout/menu');
         $this->load->view('prueba/scripts');
     }

@@ -20,7 +20,7 @@
                     <div class="col-md-12">
                         <div class="card card-underline">
                             <div class="card-head">
-                                <header>Lista De Calificaciones </header>
+                                <header>LISTA DE MATERIAS </header>
                                 <div class="tools">
                                     <div class="btn-group">
                                         <a class="btn btn-icon-toggle btn-collapse"><i class="fa fa-angle-down"></i></a>
@@ -30,61 +30,110 @@
                             <div class="card-body">
 
                                 <table class="table datatable table-bordered table-hover" id="mytablem">
-                                    <thead>
+                                   <thead>
                                         <tr>
-                                            <th scope="row">Materias</th>
+                                            <th>Materia</th>
                                             <th>Unidad 1</th>
                                             <th>Unidad 2</th>
                                             <th>Unidad 3</th>
                                             <th>Unidad 4</th>
-                                            <th>Unidad 5</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                        <th scope="row">Calculo Integral</th>
-                                            <td>80</td>
-                                            <td>84</td>
-                                            <td>91</td>
-                                            <td>71</td>
-                                            <td>60</td>
+                                            <td>Programacion web</td>
+                                            <td>90</td>
+                                            <td>21</td>
+                                            <td>89</td>
+                                            <td>69</td>
+                                        </tr><tr>
+                                            <td>Programacion web</td>
+                                            <td>90</td>
+                                            <td>21</td>
+                                            <td>89</td>
+                                            <td>69</td>
+                                        </tr><tr>
+                                            <td>Programacion web</td>
+                                            <td>90</td>
+                                            <td>21</td>
+                                            <td>89</td>
+                                            <td>69</td>
+                                        </tr><tr>
+                                            <td>Programacion web</td>
+                                            <td>90</td>
+                                            <td>21</td>
+                                            <td>89</td>
+                                            <td>69</td>
+                                        </tr><tr>
+                                            <td>Programacion web</td>
+                                            <td>90</td>
+                                            <td>21</td>
+                                            <td>89</td>
+                                            <td>69</td>
+                                        </tr><tr>
+                                            <td>Programacion web</td>
+                                            <td>90</td>
+                                            <td>21</td>
+                                            <td>89</td>
+                                            <td>69</td>
+                                        </tr><tr>
+                                            <td>Programacion web</td>
+                                            <td>90</td>
+                                            <td>21</td>
+                                            <td>89</td>
+                                            <td>69</td>
+                                        </tr><tr>
+                                            <td>Programacion web</td>
+                                            <td>90</td>
+                                            <td>21</td>
+                                            <td>89</td>
+                                            <td>69</td>
+                                        </tr><tr>
+                                            <td>Programacion web</td>
+                                            <td>90</td>
+                                            <td>21</td>
+                                            <td>89</td>
+                                            <td>69</td>
+                                        </tr><tr>
+                                            <td>Programacion web</td>
+                                            <td>90</td>
+                                            <td>21</td>
+                                            <td>89</td>
+                                            <td>69</td>
+                                        </tr><tr>
+                                            <td>Programacion web</td>
+                                            <td>90</td>
+                                            <td>21</td>
+                                            <td>89</td>
+                                            <td>69</td>
+                                        </tr><tr>
+                                            <td>Programacion web</td>
+                                            <td>90</td>
+                                            <td>21</td>
+                                            <td>89</td>
+                                            <td>69</td>
+                                        </tr><tr>
+                                            <td>Programacion web</td>
+                                            <td>90</td>
+                                            <td>21</td>
+                                            <td>89</td>
+                                            <td>69</td>
+                                        </tr><tr>
+                                            <td>Programacion web</td>
+                                            <td>90</td>
+                                            <td>21</td>
+                                            <td>89</td>
+                                            <td>69</td>
+                                        </tr><tr>
+                                            <td>Programacion web</td>
+                                            <td>90</td>
+                                            <td>21</td>
+                                            <td>89</td>
+                                            <td>69</td>
                                         </tr>
-                                        <tr><th scope="row">Programacion Web</th>
-                                            <td>80</td>
-                                            <td>84</td>
-                                            <td>91</td>
-                                            <td>71</td>
-                                            <td>60</td>
-                                        </tr>
-                                        <tr><th scope="row">Redes</th>
-                                            <td>80</td>
-                                            <td>84</td>
-                                            <td>91</td>
-                                            <td>71</td>
-                                            <td>60</td>
-                                        </tr>
-                                        <tr><th scope="row">Taller 2</th>
-                                            <td>80</td>
-                                            <td>84</td>
-                                            <td>91</td>
-                                            <td>71</td>
-                                            <td>60</td>
-                                        </tr>
-                                        <tr><th scope="row">FrameWorks</th>
-                                            <td>80</td>
-                                            <td>84</td>
-                                            <td>91</td>
-                                            <td>71</td>
-                                            <td>60</td>
-                                        </tr>
-                                        <tr><th scope="row">Mercadotecnia</th>
-                                            <td>80</td>
-                                            <td>84</td>
-                                            <td>91</td>
-                                            <td>71</td>
-                                            <td>60</td>
-                                        </tr>
+                                       
                                     </tbody>
+
                                 </table>
 
                             </div><!--end .card-body -->
