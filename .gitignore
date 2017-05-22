@@ -45,3 +45,17 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+.idea/deployment.xml
+.idea/modules.xml
+.idea/workspace.xml
+.idea/sistema_calificaciones.iml
+.idea/vcs.xml
+.idea/vcs.xml
+.idea/dataSources.xml
+.idea/dataSources/01c9de4f-0d8b-4d72-a10c-9a84a855c64b.xml
+.idea/dataSources.xml
+.idea/dataSources.local.xml
+.idea/sqldialects.xml
+.idea/dataSources.xml
+.idea/dataSources/67481cc8-57a5-4ead-b96c-653837e49a1b.xml
+/application/config/*

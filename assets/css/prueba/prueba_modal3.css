@@ -1,0 +1,22 @@
+body { 
+    margin-top:20px; 
+}
+.modal-body:not(.two-col) {
+ padding:0px 
+}
+.margin-bottom-none { 
+    margin-bottom: 0; 
+}
+.modal-footer {
+    margin-top: 0px;
+}
+@media screen and (max-width: 325px){
+    .btn-close {
+        margin-top: 5px;
+        width: 100%;
+    }   
+}
+.modal-footer .btn+.btn {
+    margin-left: 0px;
+}
+
