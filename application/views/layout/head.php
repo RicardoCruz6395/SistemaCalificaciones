@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" moznomarginboxes>
 	<head>
-		<title><?=$page_title ?></title>
+		<title><?=$page_title?></title>
 		<!-- BEGIN META -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
