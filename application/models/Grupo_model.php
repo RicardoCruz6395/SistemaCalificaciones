@@ -1,10 +1,5 @@
 <?php
-/**
- * Date: 09/05/2017
- * Time: 06:47 PM
- */
-class Prueba_model extends CI_Model
-{
+class Grupo extends CI_Model{
     // Elaborado por Angel Camara
     public function test(){
 

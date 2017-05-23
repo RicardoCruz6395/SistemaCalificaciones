@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" moznomarginboxes>
 	<head>
-		<title><?=$page_title ?></title>
+		<title><?=$page_title?></title>
 		<!-- BEGIN META -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,6 +20,7 @@
 		<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/theme-1/libs/toastr/toastr.css" />
 
 		<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/sweetalert.css" />
+        <link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/animate.min.css" />
 		<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/custom.css" />
 
 		<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/theme-1/materialadmin_print.css?1419847669"  media="print"/>
