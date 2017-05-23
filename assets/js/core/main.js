@@ -21,8 +21,7 @@ $( document ).ready(function() {
     });
 });
 
-
- function start() {
+function start() {
     $('button.btn-submit').prop('disabled', 1);
      $('.loading').fadeIn();
 }
@@ -34,5 +33,39 @@ function end() {
     //     $('.loading').hide();
     //     $('.btn-submit').show();
     // },500);
-    
+}
+
+function postAjax(url, data, callback) {
+
+    $.ajax({
+        method: 'post',
+        url: url,
+        data: data,
+        statusCode: {
+            404: function() {
+                alert( "Página no encontrada." );
+            }
+        }
+    })
+    .done(function( response ) {
+        callback(response);
+        console.log('Success');
+        //console.log(response);
+        //after_submit($this, response, modal);
+        //return response;
+    })
+
+    .fail(function( response ) {
+        console.log("Error");
+        //console.log(response);
+        //modal.addClass('shake');
+        //after_submit($this, response, modal);
+        //return response;
+    })
+
+    .complete(function(response, xhr) {
+        //callback(response);
+        console.log("Complete, Status: "+xhr);
+        //after_submit($this, response);
+    });
 }

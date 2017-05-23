@@ -1,4 +1,5 @@
 <!-- BEGIN JAVASCRIPT -->
+        <script>var base_url = '<?=base_url()?>';</script>
 		<script src="<?=base_url()?>assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
 		<script src="<?=base_url()?>assets/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
 		<script src="<?=base_url()?>assets/js/libs/bootstrap/bootstrap.min.js"></script>
@@ -31,5 +32,18 @@
 		<script src="<?=base_url()?>assets/js/core/demo/Demo.js"></script>
 		<script src="<?=base_url()?>assets/js/core/main.js"></script>
 		<!-- END JAVASCRIPT -->
+        <script>
+            $(".btn-alumnos").click(function (e) {
+                e.preventDefault();
+                console.log($(this).data('id'));
+
+                postAjax(base_url+'docente/getAlumnosByGrupo',
+                    {grupo:$(this).data('id')},
+
+                    function(response){
+                        $(".lista-alumnos").html(response);
+                    });
+            });
+        </script>
 	</body>
 </html>
