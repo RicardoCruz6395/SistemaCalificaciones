@@ -5,7 +5,11 @@
  * Date: 14/05/2017
  * Time: 04:01 PM
  */
+/**
+ * @var CI_Controller $this
+ */
 ?>
+
 <!-- BEGIN BASE-->
 <div id="base">
     <!-- BEGIN OFFCANVAS LEFT -->
@@ -13,6 +17,7 @@
     </div><!--end .offcanvas-->
     <!-- END OFFCANVAS LEFT -->
     <!-- BEGIN CONTENT-->
+
     <div id="content">
         <section>
             <div class="section-body">
