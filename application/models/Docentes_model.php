@@ -3,7 +3,7 @@
  * Date: 09/05/2017
  * Time: 06:47 PM
  */
-class Alumnos_model extends CI_Model
+class Docentes_model extends CI_Model
 {
     // Elaborado por Angel Camara
     public function test(){
@@ -16,44 +16,9 @@ class Alumnos_model extends CI_Model
         }
     }
 
-    // Elaborado por Rodolfo
-    public function getImparte(){
-
-        $result = $this->db->query("
-                SELECT * FROM alumnos JOIN grupos_detalles ON GDET_ALUMNO = ALUM_ALUMNO
-                join grupos on GRUP_GRUPO = GDET_GRUPO
-                join docentes on DOCE_DOCENTE = GRUP_DOCENTE
-                WHERE DOCE_DOCENTE = 1
-        ");
-        if($result->num_rows() > 0) {
-            return $result->result();
-        }else{
-            return null;
-        }
-    }
-
-    public function getByGrupo($grupo){
-        try{
-            $result = $this->db->query("
-                SELECT alumnos.* FROM alumnos JOIN grupos_detalles ON GDET_ALUMNO = ALUM_ALUMNO
-  join grupos on GRUP_GRUPO = GDET_GRUPO
-WHERE GRUP_GRUPO = '$grupo'
-            ");
-
-            if($result->num_rows() > 0) {
-                return $result->result();
-            }else{
-                return null;
-            }
-        }catch(Exception $e){
-            return null;
-        }
-
-    }
-
     public function get(){
         try{
-            $result = $this->db->get('alumnos');
+            $result = $this->db->get('docentes');
 
             if($result->num_rows() > 0) {
                 return ["success"=>true, "response"=>$result->result()];
