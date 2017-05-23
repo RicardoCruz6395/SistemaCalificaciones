@@ -44,6 +44,47 @@
         $(".modal-content").html(response);
       });
   });
+
+  $("#tabla-cal td.cal").dblclick(function () {
+    var original = $.trim($(this).text());
+    $(this).addClass('cellEditing');
+    $(this).html('<input type="text" class="form-control input-sm" value="'+original+'">');
+    $(this).children().first().focus();
+    $(this).children().first().keypress( function(e){
+      if(e.which == 13){
+        var newContent = $(this).val();
+        var cell = $(this).parent();
+        cell.text(newContent);
+        if($.trim(newContent) != original)
+          saveChanges(cell);
+      }
+    });
+
+    $(this).children().first().blur(function () {
+      var cell = $(this).parent();
+      cell.text(original);
+      cell.removeClass('cellEditing');
+    });
+
+  });
+
+  var getData = function (cell) {
+
+    return {
+      "id": $.trim(cell.parent().data('id')),
+      "name": $.trim(cell.data('name')),
+      "value": $.trim(cell.html())
+    };
+  };
+
+  var saveChanges= function (cell) {
+    console.log("datas");
+    console.log(getData(cell));
+    postAjax(base_url+'docente/test', getData(cell), function (data) {
+      console.log(data);
+    });
+  }
+
 </script>
 </body>
 </html>

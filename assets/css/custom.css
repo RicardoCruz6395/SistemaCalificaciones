@@ -142,3 +142,15 @@ tr button{
 .m-b-0{
 	margin-bottom: 0;
 }
+
+.input-sm{
+	width: auto !important;
+}
+.cellEditing{
+  width: auto !important;
+}
+
+table thead{
+  background: #0c0b0b;
+  color: white;
+}

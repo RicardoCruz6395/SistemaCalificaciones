@@ -42,6 +42,7 @@
             </div>
             <div class="card card-underline">
               <div class="card-head">
+
                 <header>PANEL DE CALIFICACIONES</header>
                 <div class="tools">
                   <div class="btn-group">
@@ -51,7 +52,7 @@
               </div><!--end .card-head -->
               <div class="card-body">
                 <div class="row">
-                  <table class="table table-bordered table-hover">
+                  <table class="table table-bordered table-hover" id="tabla-cal">
                     <thead>
                       <tr>
                         <th>MATRICULA</th>
@@ -68,14 +69,14 @@
                         if($alumnos!=null){
                         foreach ($alumnos as $alum){
                       ?>
-                      <tr>
+                      <tr data-id="<?= $alum->ALUM_ALUMNO ?>">
                         <td> <?= $alum->ALUM_MATRICULA ?> </td>
                         <td> <?= $alum->ALUM_NOMBRE." ".$alum->ALUM_APELLIDOS ?> </td>
-                        <td>100</td>
-                        <td>100</td>
-                        <td>100</td>
-                        <td>100</td>
-                        <td><b>100</b></td>
+                        <td class="cal" data-name="u1">100</td>
+                        <td class="cal" data-name="u2">100</td>
+                        <td class="cal" data-name="u3">100</td>
+                        <td class="cal" data-name="u4">100</td>
+                        <td><b data-name="promedio">100</b></td>
                       </tr>
                       <?php
                         }
