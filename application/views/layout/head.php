@@ -20,6 +20,7 @@
 		<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/theme-1/libs/toastr/toastr.css" />
 
 		<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/sweetalert.css" />
+        <link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/animate.min.css" />
 		<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/custom.css" />
 
 		<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/theme-1/materialadmin_print.css?1419847669"  media="print"/>
