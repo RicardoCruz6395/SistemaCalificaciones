@@ -35,9 +35,9 @@ class Alumnos_model extends CI_Model
     public function getByGrupo($grupo){
         try{
             $result = $this->db->query("
-                SELECT alumnos.* FROM alumnos JOIN grupos_detalles ON GDET_ALUMNO = ALUM_ALUMNO
-  join grupos on GRUP_GRUPO = GDET_GRUPO
-WHERE GRUP_GRUPO = '$grupo'
+            SELECT alumnos.* FROM alumnos JOIN grupos_detalles ON GDET_ALUMNO = ALUM_ALUMNO
+                JOIN grupos ON GRUP_GRUPO = GDET_GRUPO
+                WHERE GDET_ACTIVO = 1 AND GRUP_GRUPO = '$grupo'
             ");
 
             if($result->num_rows() > 0) {

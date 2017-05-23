@@ -29,23 +29,22 @@
                   <tbody>
 
                   <?php
-                  if (sizeof($materias) != null) {
-
-                    foreach ($materias as $mate) {
-                      ?>
+                  if ($grupos != null) {
+                    foreach ($grupos as $grupo) {
+                        ?>
                       <tr>
-                        <td> <?= $mate->MATE_CLAVE ?> </td>
-                        <td> <?= $mate->MATE_NOMBRE ?> </td>
-                        <td> <?= $mate->SEME_NOMBRE ?> </td>
+                        <td> <?= $grupo->MATE_CLAVE ?> </td>
+                        <td> <?= $grupo->MATE_NOMBRE ?> </td>
+                        <td> <?= $grupo->SEME_NOMBRE ?> </td>
                         <td>
                           <button type="button" class="btn btn-primary btn-alumnos" title="Ver lista"
-                                  data-id="<?= $mate->GRUP_GRUPO ?>" data-toggle="modal"
-                                  data-target="#modal"> <?= $mate->NUM_ALUMNOS ?> </button>
+                                  data-id="<?= $grupo->GRUP_GRUPO ?>" data-toggle="modal"
+                                  data-target="#modal"> <?= $grupo->NUM_ALUMNOS ?> </button>
                         </td>
-                        <td> <?= $mate->AULA_NOMBRE ?> </td>
-                        <td> <?= $mate->CARR_NOMBRE ?> </td>
+                        <td> <?= $grupo->AULA_NOMBRE ?> </td>
+                        <td> <?= $grupo->CARR_NOMBRE ?> </td>
                         <td>
-                          <a href="<?= base_url() ?>docente/calificar/<?= $mate->GRUP_GRUPO ?>" class="btn btn-primary btn"
+                          <a href="<?= base_url() ?>docente/calificar/<?= $grupo->GRUP_GRUPO ?>" class="btn btn-primary btn"
                              title="Lista de alumnos"><span
                               class="glyphicon glyphicon-pencil"></span></a>
                           <button class="btn btn-danger btn" data-title="Delete"
