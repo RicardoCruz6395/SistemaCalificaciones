@@ -33,6 +33,7 @@
                             </div><!--end .card-head -->
                             <div class="card-body">
 
+
                                 <table class="table datatable table-bordered table-hover" id="mytable">
                                     <thead>
                                         <tr>
@@ -198,6 +199,7 @@
                                         </tr>                                       
                                     </tbody>
 </table>
+                                <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, adipisci asperiores consequatur cum dolorum, expedita harum illum impedit ipsa nostrum nulla obcaecati officia quas qui sint sit temporibus ut voluptatem? </p>
 
 </div><!--end .card-body -->
 </div><!--end .card -->
