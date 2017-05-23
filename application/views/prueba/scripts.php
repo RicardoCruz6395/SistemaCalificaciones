@@ -1,4 +1,9 @@
 <!-- BEGIN JAVASCRIPT -->
+<script language="JavaScript" src="https://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script language="JavaScript" src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js" type="text/javascript"></script>
+<script language="JavaScript" src="https://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.css">
+<script src="HTTPS://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="<?=base_url()?>assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
 <script src="<?=base_url()?>assets/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
 <script src="<?=base_url()?>assets/js/libs/bootstrap/bootstrap.min.js"></script>
@@ -30,33 +35,8 @@
 <script src="<?=base_url()?>assets/js/core/source/AppVendor.js"></script>
 <script src="<?=base_url()?>assets/js/core/demo/Demo.js"></script>
 <script src="<?=base_url()?>assets/js/core/main.js"></script>
-<script language="JavaScript" src="https://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
-<script language="JavaScript" src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js" type="text/javascript"></script>
-<script language="JavaScript" src="https://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.js" type="text/javascript"></script>
 
-<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.css">
 <!-- END JAVASCRIPT -->
-<script type="text/javascript">
-
-	$(document).ready(function() {
-		$('#mytable').DataTable( {
-			"oLanguage": {
-				"sSearch": "Period: ",
-				"sLengthMenu": "Muestrar _MENU_ Filas"
-			}
-		} );
-	} );
-
-	$(document).ready(function() {
-		$('#mytablem').DataTable( {
-			"oLanguage": {
-				"sSearch": "Semestre: ",
-				"sLengthMenu": "Muestrar _MENU_ Filas"
-			}
-		} );
-	} );
-
-</script>
 
 
 </body>

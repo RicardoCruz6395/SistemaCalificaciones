@@ -1,4 +1,9 @@
-
+.pagination>li {
+display: inline;
+padding:0px !important;
+margin:0px !important;
+border:none !important;
+}
 .modal-backdrop {
   z-index: -1 !important;
 }
@@ -44,5 +49,3 @@ background: #d9534f !important;
 border-color: #d9534f !important;
 box-shadow:none !important;
 }
-
-

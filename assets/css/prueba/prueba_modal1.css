@@ -1,22 +1,31 @@
-body { 
-	margin-top:20px; 
-}
-.modal-body:not(.two-col) {
- padding:0px 
-}
-.margin-bottom-none { 
-	margin-bottom: 0; 
-}
-.modal-footer {
-	margin-top: 0px;
-}
-@media screen and (max-width: 325px){
-    .btn-close {
-        margin-top: 5px;
-        width: 100%;
-    }   
-}
-.modal-footer .btn+.btn {
-    margin-left: 0px;
+dt{
+    font-size: 15px;
 }
 
+label{
+	 font-size: 15px;
+}
+
+.top-alert {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 100000;
+  left: 0;
+  padding: 20px;
+  display: inline-block;
+  text-align: center;
+}
+.top-alert .alert {
+  width: auto !important;
+  height: 100%;
+  display: inline;
+  position: relative;
+  margin: 0;
+}
+.top-alert .alert .close {
+  position: absolute;
+  top: 11px;
+  right: 10px;
+  color: inherit;
+}

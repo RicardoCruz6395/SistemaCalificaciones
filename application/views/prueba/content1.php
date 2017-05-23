@@ -8,6 +8,9 @@
 ?>
 <!-- BEGIN BASE-->
 <div id="base">
+<script src="HTTPS://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="<?=base_url()?>assets/js/prueba/panel.js"></script>
+<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/prueba/panel.css" />
     <!-- BEGIN OFFCANVAS LEFT -->
     <div class="offcanvas">
     </div><!--end .offcanvas-->
@@ -37,6 +40,7 @@
                                             <th>Unidad 2</th>
                                             <th>Unidad 3</th>
                                             <th>Unidad 4</th>
+                                            <th>Editar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -46,90 +50,120 @@
                                             <td>21</td>
                                             <td>89</td>
                                             <td>69</td>
+                                            <td><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button>
+                                           <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></td>
                                         </tr><tr>
                                             <td>Programacion web</td>
                                             <td>90</td>
                                             <td>21</td>
                                             <td>89</td>
                                             <td>69</td>
+                                            <td><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button>
+                                           <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></td>
                                         </tr><tr>
                                             <td>Programacion web</td>
                                             <td>90</td>
                                             <td>21</td>
                                             <td>89</td>
                                             <td>69</td>
+                                            <td><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button>
+                                           <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></td>
                                         </tr><tr>
                                             <td>Programacion web</td>
                                             <td>90</td>
                                             <td>21</td>
                                             <td>89</td>
                                             <td>69</td>
+                                            <td><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button>
+                                           <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></td>
                                         </tr><tr>
                                             <td>Programacion web</td>
                                             <td>90</td>
                                             <td>21</td>
                                             <td>89</td>
                                             <td>69</td>
+                                            <td><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button>
+                                           <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></td>
                                         </tr><tr>
                                             <td>Programacion web</td>
                                             <td>90</td>
                                             <td>21</td>
                                             <td>89</td>
                                             <td>69</td>
+                                            <td><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button>
+                                           <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></td>
                                         </tr><tr>
                                             <td>Programacion web</td>
                                             <td>90</td>
                                             <td>21</td>
                                             <td>89</td>
                                             <td>69</td>
+                                            <td><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button>
+                                           <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></td>
                                         </tr><tr>
                                             <td>Programacion web</td>
                                             <td>90</td>
                                             <td>21</td>
                                             <td>89</td>
                                             <td>69</td>
+                                            <td><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button>
+                                           <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></td>
                                         </tr><tr>
                                             <td>Programacion web</td>
                                             <td>90</td>
                                             <td>21</td>
                                             <td>89</td>
                                             <td>69</td>
+                                            <td><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button>
+                                           <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></td>
                                         </tr><tr>
                                             <td>Programacion web</td>
                                             <td>90</td>
                                             <td>21</td>
                                             <td>89</td>
                                             <td>69</td>
+                                            <td><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button>
+                                           <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></td>
                                         </tr><tr>
                                             <td>Programacion web</td>
                                             <td>90</td>
                                             <td>21</td>
                                             <td>89</td>
                                             <td>69</td>
+                                            <td><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button>
+                                           <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></td>
                                         </tr><tr>
                                             <td>Programacion web</td>
                                             <td>90</td>
                                             <td>21</td>
                                             <td>89</td>
                                             <td>69</td>
+                                            <td><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button>
+                                           <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></td>
                                         </tr><tr>
                                             <td>Programacion web</td>
                                             <td>90</td>
                                             <td>21</td>
                                             <td>89</td>
                                             <td>69</td>
+                                            <td><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button>
+                                           <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></td>
                                         </tr><tr>
                                             <td>Programacion web</td>
                                             <td>90</td>
                                             <td>21</td>
                                             <td>89</td>
                                             <td>69</td>
+                                            <td><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button>
+                                           <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></td>
                                         </tr><tr>
                                             <td>Programacion web</td>
                                             <td>90</td>
                                             <td>21</td>
                                             <td>89</td>
                                             <td>69</td>
+                                            <td><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button>
+                                           <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></td>
                                         </tr>
                                        
                                     </tbody>
