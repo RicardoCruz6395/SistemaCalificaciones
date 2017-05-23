@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Rafael
- * Date: 09/05/2017
- * Time: 07:06 PM
- */
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -43,7 +37,7 @@ class Prueba extends CI_Controller
     // Funcion index
     // Sin parámetros
     // Elaborado por Rodolfo
-    public function alumos(){
+    public function alumnos(){
         // Se escribe el titulo de la pagina y se manda a la vista
         $data = array('page_title'=>'Panel de alumnos');
         // $data array que recibe la vista
@@ -51,6 +45,7 @@ class Prueba extends CI_Controller
         $this->load->view('layout/head',$data);
         // Es la barra superior de la plantilla
         $this->load->view('layout/header');
+
         // Este es el contenedor de la plantilla
         // Este archivo es en el que trabajarán
         $this->load->view('alumnos/content');

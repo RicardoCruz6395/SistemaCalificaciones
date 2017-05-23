@@ -98,7 +98,7 @@
                         </button>
                         <h2 style= "font-size: 20px;" class="panel-title " id="modalConfirmLabel">Info. Sobre Frameworks</h2>
                     </div> 
-                    <div class="modal-body" style="padding: 5px;">
+                    <div class="modal-body" style="padding: 1em;">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;"> 
                                 <label style= "font-size: 15px;">Materia:</label>
