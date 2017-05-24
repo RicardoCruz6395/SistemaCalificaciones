@@ -15,12 +15,13 @@
 
 			<!-- BEGIN MAIN MENU -->
 			<ul id="main-menu" class="gui-controls">
+				<li>Contraseña</li>
 			</ul><!--end .main-menu -->
 			<!-- END MAIN MENU -->
 
 			<div class="menubar-foot-panel">
 				<small class="no-linebreak hidden-folded">
-					<span class="opacity-75">Copyright &copy; 2017</span> <strong>Escuela Rota</strong>
+					<span class="opacity-75">Copyright &copy; <?=date('Y')?></span> <strong>ITChetumal</strong>
 				</small>
 			</div>
 		</div><!--end .menubar-scroll-panel-->

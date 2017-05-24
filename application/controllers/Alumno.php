@@ -9,7 +9,15 @@ class Alumno extends CI_Controller {
     }
 
 	public function index(){
-		$data = array('page_title'=>'Panel de administración');
+
+
+		$semestre = '8° Semestre';
+
+		$this->load->model('model_alumno');
+
+
+
+		$data = array('page_title'=>'SC :: Calificaciones ' . $semestre );
         // $data array que recibe la vista
         // Contiene los css de la plantilla
         $this->load->view('layout/head',$data);
@@ -23,4 +31,8 @@ class Alumno extends CI_Controller {
         // Js para que funcione la plantilla correctamente
         $this->load->view('layout/scripts');
 	}
+
+        public function semestre( $semestre = null ){
+                echo $semestre;
+        }
 }

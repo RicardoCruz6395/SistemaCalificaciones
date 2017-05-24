@@ -1,20 +1,35 @@
 <?php
-/**
- * Date: 09/05/2017
- * Time: 06:47 PM
- */
-class Docentes_model extends CI_Model
-{
-    // Elaborado por Angel Camara
-    public function test(){
 
-        $result = $this->db->query("SELECT * FROM alumnos");
+class Docentes_model extends CI_Model{
+
+
+    public function getGruposByPeriodo( $id_periodo ){
+
+        $sql = "SELECT GRUP_GRUPO, MATE_CLAVE, MATE_NOMBRE, SEME_NOMBRE, COUNT(*) NUM_ALUMNOS, AULA_NOMBRE, CARR_NOMBRE 
+                FROM grupos
+                JOIN grupos_detalles ON GRUP_GRUPO = GDET_GRUPO
+                JOIN aulas ON GRUP_AULA = AULA_AULA
+                JOIN carreras ON GRUP_CARRERA = CARR_CARRERA
+                JOIN materias ON GRUP_MATERIA = MATE_MATERIA
+                JOIN semestres ON GRUP_SEMESTRE = SEME_SEMESTRE
+                WHERE GRUP_DOCENTE = 1
+                AND GDET_ACTIVO = 1
+                AND GRUP_ACTIVO = 1
+                AND GRUP_PERIODO = $id_periodo
+                GROUP BY GRUP_GRUPO
+                ;
+            ";
+
+        $result = $this->db->query( $sql );
         if($result->num_rows() > 0) {
             return $result->result();
         }else{
             return null;
         }
+
     }
+
+
 
     public function get(){
         try{
@@ -29,7 +44,6 @@ class Docentes_model extends CI_Model
                 return ["success"=>false, "response"=>$e->getMessage()];
         }
     }
-    
 
     public function get_by_id($id){
         try{
@@ -73,18 +87,4 @@ class Docentes_model extends CI_Model
         }
     }
 
-    // Elaborado por Angel Camara
-    public function password(){
-
-        $result = $this->db->query("SELECT USUA_PASSWORD FROM alumnos JOIN usuarios ON ALUM_MATRICULA = USUA_MATRICULA");
-        if($result->num_rows() > 0) {
-            return $result->row();
-
-            //return result() => muchos
-            //return row() => primero, uno
-
-        }else{
-            return null;
-        }
-    }
 }
