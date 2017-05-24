@@ -4,7 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Docente extends CI_Controller{
 
 	public function __construct(){
-	  
 		parent::__construct();
 	}
 
@@ -73,7 +72,5 @@ class Docente extends CI_Controller{
 	    $this->load->view('layout/menu');
 	    $this->load->view('layout/scripts');
 	}
-  public function test(){
-      $this->session->userdata('id');
-  }
+
 }
