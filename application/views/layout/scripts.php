@@ -37,6 +37,10 @@
     e.preventDefault();
     console.log($(this).data('id'));
 
+    $(".modal-content").html('<div class="modal-body">'+
+      '<h3><i class="fa fa-spin fa-spinner"></i> Cargando...</h3>'+
+      '</div>');
+
     postAjax(base_url + 'docente/getAlumnosByGrupo',
       {grupo: $(this).data('id')},
 
