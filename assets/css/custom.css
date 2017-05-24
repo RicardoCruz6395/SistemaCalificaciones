@@ -154,3 +154,8 @@ table thead{
   background: #0c0b0b;
   color: white;
 }
+
+
+section.section-account .img-backdrop, section.section-account .spacer {
+    height: 250px !important;
+}
