@@ -2,8 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-
 	<head>
 		<title>Sistema de Calificaciones</title>
 		
