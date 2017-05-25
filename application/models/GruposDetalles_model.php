@@ -1,5 +1,5 @@
 <?php
-class GrupoDetalle extends CI_Model{
+class GruposDetalles_model extends CI_Model{
     // Elaborado por Angel Camara
     
     public function get_id(){

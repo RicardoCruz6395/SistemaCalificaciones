@@ -1,14 +1,9 @@
 <?php
-class Semestre extends CI_Model{
-    // Elaborado por Angel Camara
-    public function test(){
-
-        $result = $this->db->query("SELECT * FROM alumnos");
-        if($result->num_rows() > 0) {
-            return $result->result();
-        }else{
-            return null;
-        }
+class Semestres_model extends CI_Model{
+    
+    public function getById( $semestre ){
+        $result = $this->db->query("SELECT SEME_NOMBRE FROM semestres WHERE SEME_SEMESTRE =  $semestre;");
+        return $result->row();
     }
 
    
