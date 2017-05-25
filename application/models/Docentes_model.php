@@ -31,6 +31,7 @@ class Docentes_model extends CI_Model{
 
 
 
+
     public function get(){
         try{
             $result = $this->db->get('docentes');

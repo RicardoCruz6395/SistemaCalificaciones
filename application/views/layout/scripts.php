@@ -33,12 +33,14 @@
 <script src="<?= base_url() ?>assets/js/core/main.js"></script>
 <!-- END JAVASCRIPT -->
 <script>
+  toastr.options.positionClass = 'toast-bottom-left';
+
   $(".btn-alumnos").click(function (e) {
     e.preventDefault();
     console.log($(this).data('id'));
 
-    $(".modal-content").html('<div class="modal-body">'+
-      '<h3><i class="fa fa-spin fa-spinner"></i> Cargando...</h3>'+
+    $(".modal-content").html('<div class="modal-body">' +
+      '<h3><i class="fa fa-spin fa-spinner"></i> Cargando...</h3>' +
       '</div>');
 
     postAjax(base_url + 'docente/getAlumnosByGrupo',
@@ -49,19 +51,37 @@
       });
   });
 
+  $("#tabla-cal").dataTable();
+
+
   $("#tabla-cal td.cal").dblclick(function () {
     var original = $.trim($(this).text());
     $(this).addClass('cellEditing');
-    $(this).html('<input type="text" class="form-control input-sm" value="'+original+'">');
+    $(this).html('<input type="text" maxlength="3"  minlength="2" class="form-control" value="'+original+'">');
+
     $(this).children().first().focus();
-    $(this).children().first().keypress( function(e){
-      if(e.which == 13){
-        var newContent = $(this).val();
-        var cell = $(this).parent();
-        cell.text(newContent);
-        if($.trim(newContent) != original)
-          saveChanges(cell);
+    $(this).children().first().keypress(function (e) {
+      if (e.which == 13) {
+
+        var newContent = parseInt($(this).val());
+        console.log(newContent);
+        if(newContent > 100 || isNaN(newContent)){
+          console.log("Calificación inválida");
+          toastr.error('Calificación inválida, intenta de nuevo', '');
+          $(this).children().first().focus();
+        }else {
+          var cell = $(this).parent();
+          cell.text(newContent);
+          if ($.trim(newContent) != original)
+            calculaPromedio(cell);
+          //saveChanges(cell);
+        }
       }
+    });
+
+    $(".form-validate").on('submit', function (e) {
+      e.preventDefault();
+      console.log("form cancelado");
     });
 
     $(this).children().first().blur(function () {
@@ -81,12 +101,29 @@
     };
   };
 
-  var saveChanges= function (cell) {
+  var saveChanges = function (cell) {
     console.log("datas");
     console.log(getData(cell));
-    postAjax(base_url+'docente/test', getData(cell), function (data) {
+    postAjax(base_url + 'docente/test', getData(cell), function (data) {
       console.log(data);
     });
+  };
+
+  var calculaPromedio = function (cell) {
+    var fila = cell.parent();
+    var suma = 0;
+    var c = 0;
+    $(fila).find('.cal').each(function () {
+      suma+=parseInt($.trim($(this).text()));
+      c++;
+    });
+    var promedio = suma/c;
+    var clase = "success";
+    if(promedio < 70){
+      clase = "danger";
+    }
+    $(fila).find('.promedio b').addClass('no-bg alert-'+clase).text(promedio);
+
   }
 
 </script>
