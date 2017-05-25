@@ -73,4 +73,8 @@ class Docente extends CI_Controller{
 	    $this->load->view('layout/scripts');
 	}
 
+	public function test(){
+      echo "test";
+  }
+
 }

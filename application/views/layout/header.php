@@ -64,8 +64,7 @@
             <li class="dropdown-header">Configuraciones</li>
             <!--								<li><a href="-->
             <? //=base_url('usuarios/perfil')?><!--"><i class="fa fa-fw fa-user text-info"></i> Mi perfil</a></li>-->
-            <!--								<li><a href="-->
-            <? //=base_url('auth/logout')?><!--"><i class="fa fa-fw fa-power-off text-danger"></i> Cerrar sesión</a></li>-->
+            <li><a href="<?=base_url('auth/logout')?>"><i class="fa fa-fw fa-power-off text-danger"></i> Cerrar sesión</a></li>
           </ul><!--end .dropdown-menu -->
         </li><!--end .dropdown -->
       </ul><!--end .header-nav-profile -->

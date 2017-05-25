@@ -14,13 +14,13 @@
 
 		<!-- BEGIN STYLESHEETS -->
 				<link href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css'/>
-			<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/theme-1/bootstrap.css?1422823238" />
+			<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/theme-1/bootstrap.css" />
 
-			<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/theme-1/materialadmin.css?1422823243" />
+			<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/theme-1/materialadmin.css" />
 
-			<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/theme-1/font-awesome.min.css?1422823239" />
+			<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/theme-1/font-awesome.min.css" />
 
-			<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/theme-1/material-design-iconic-font.min.css?1422823240" />
+			<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/theme-1/material-design-iconic-font.min.css" />
 
 	
 		<!-- END STYLESHEETS -->
@@ -90,8 +90,6 @@
 <script src="<?=base_url()?>assets/js/libs/spin.js/spin.min.js"></script>
 <script src="<?=base_url()?>assets/js/libs/autosize/jquery.autosize.min.js"></script>
 <script src="<?=base_url()?>assets/js/libs/nanoscroller/jquery.nanoscroller.min.js"></script>
-<script src="<?=base_url()?>assets/js/core/cache/63d0445130d69b2868a8d28c93309746.js"></script>
-<script src="<?=base_url()?>assets/js/core/demo/Demo.js"></script>
 
 	
 	<!-- END JAVASCRIPT -->

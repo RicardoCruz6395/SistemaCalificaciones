@@ -13,7 +13,7 @@ class Alumno extends CI_Controller {
 
 		$semestre = '8° Semestre';
 
-		$this->load->model('model_alumno');
+		//$this->load->model('alumnos_model');
 
 
 
