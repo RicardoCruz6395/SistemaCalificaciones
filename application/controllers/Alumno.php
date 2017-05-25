@@ -13,8 +13,6 @@ class Alumno extends CI_Controller {
 
 		$this->load->model('alumnos_model');
 
-
-
 		$data = array('page_title'=>'SC :: Calificaciones ' . $semestre );
         // $data array que recibe la vista
         // Contiene los css de la plantilla
