@@ -124,7 +124,7 @@
 			        .done(function(data) {
                 console.log(data);
                   if(data.success){
-							        toastr.success('Bienvenido: '+data.rol, '');
+							        toastr.success('Bienvenido: '+data.rol+'. Redireccionando, espere...', '');
                       setTimeout(function(){
                         redirect("../home/");
                         //window.location.href = "../home/";

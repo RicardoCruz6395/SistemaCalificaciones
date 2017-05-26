@@ -122,7 +122,7 @@
     if(promedio < 70){
       clase = "danger";
     }
-    $(fila).find('.promedio b').addClass('no-bg alert-'+clase).text(promedio);
+    $(fila).find('.promedio b').removeClass().addClass('no-bg alert-'+clase).text(promedio);
 
   }
 

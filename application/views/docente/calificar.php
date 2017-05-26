@@ -74,7 +74,6 @@
                       </tr>
                     </thead>
                     <tbody>
-                    <form action="validar" method="post" class="form-validate">
                       <?php
                         if($alumnos!=null){
                         foreach ($alumnos as $alum){
@@ -82,19 +81,21 @@
                       <tr data-id="<?= $alum->ALUM_ALUMNO ?>">
                         <td> <?= $alum->ALUM_MATRICULA ?> </td>
                         <td> <?= $alum->ALUM_NOMBRE." ".$alum->ALUM_APELLIDOS ?> </td>
-                        <td class="cal" data-name="u1">100</td>
-                        <td class="cal" data-name="u2">100</td>
-                        <td class="cal" data-name="u3">100</td>
-                        <td class="cal" data-name="u4">100</td>
-                        <td class="promedio"><b class="" data-name="promedio">100</b></td>
-                      </tr>
-                      <?php
+                          <?php
+                          $promedio = 0;
+                          foreach ($alum->CALIFICACIONES as $cali){
+                            echo " <td class='cal' data-name='u".$cali->CALI_UNIDAD."'>".$cali->CALI_PUNTAJE."</td>";
+                            $promedio += $cali->CALI_PUNTAJE;
+                          }
+                          $promedio = $promedio / 4;
+                          $clase = ($promedio > 70)?"succcess":"danger";
+                          echo "<td class='promedio'><b class='no-bg alert-".$clase."'>".$promedio."</b></td>";
+                        echo "</tr>";
                         }
                         }else{
                           echo "NO HAY ALUMNOS";
                         }
                       ?>
-                    </form>
                     </tbody>
                   </table>
 
@@ -112,7 +113,7 @@
               </div><!--end .card-head -->
               <div class="card-body">
                 <pre>
-                  <?php print_r($grupo);   ?>
+                  <?php print_r($alumnos);   ?>
                 </pre>
               </div><!--end .card-body -->
             </div>

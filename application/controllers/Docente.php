@@ -3,27 +3,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Docente extends CI_Controller{
 
-	public function __construct(){
-		parent::__construct();
-	}
+  public function __construct(){
+    parent::__construct();
+    if(!$this->session->userdata('login') or $this->session->rol != 1)
+      redirect('home');
+  }
 
 	public function index(){
+
 	    $data = array('page_title' => 'SC :: Grupos');
-	    // $data array que recibe la vista
-	    // Contiene los css de la plantilla
 	    $this->load->view('layout/head', $data);
-	    // Es la barra superior de la plantilla
 	    $this->load->view('layout/header');
-	    // Este es el contenedor de la plantilla
-	    // Este archivo es en el que trabajarán
 	    $this->load->model('docentes_model');
 
 	    $data = ["grupos" => $this->docentes_model->getGruposByPeriodo( 1 )];
 
 	    $this->load->view('docente/index', $data);
-	    // Menu lateral
 	    $this->load->view('layout/menu');
-	    // Js para que funcione la plantilla correctamente
 	    $this->load->view('layout/scripts');
 	}
 
@@ -63,9 +59,12 @@ class Docente extends CI_Controller{
 	    $this->load->view('layout/header');
 	    $this->load->model('materias_model');
 	    $this->load->model('alumnos_model');
-
-	    $data = ["alumnos" => $this->alumnos_model->getByGrupo($grupo),
-	            "grupo"    => $this->materias_model->getByCurso($grupo),
+	    $this->load->model('calificaciones_model');
+      $alumnos = $this->alumnos_model->getByGrupo($grupo);
+      $alumnos = $this->calificaciones_model->getByAlumno($alumnos, $grupo);
+	    $data = [
+	      "alumnos"         => $alumnos,
+        "grupo"           => $this->materias_model->getByCurso($grupo)
 	      ];
 
 	    $this->load->view('docente/calificar', $data);

@@ -57,8 +57,7 @@
         <li class="dropdown">
           <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
             <img src="<?= base_url() ?>assets/img/gravatar.png" alt=""/>
-            Usuario
-
+            <span style="margin-right: 1em"><?=$this->session->name?></span>
           </a>
           <ul class="dropdown-menu animation-dock">
             <li class="dropdown-header">Configuraciones</li>

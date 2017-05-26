@@ -4,13 +4,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Home extends CI_Controller {
 
 	public function __construct(){
-		parent::__construct();
-		if(!$this->session->userdata('login')){
-			redirect('auth/login');
-		}
+    parent::__construct();
+    if(!$this->session->userdata('login')){
+      redirect('auth/login');
+    }
 	}
 
 	public function index(){
+	  switch ($this->session->rol){
+      case 1:
+        redirect('docente');
+        break;
+      case 2:
+        redirect('alumno');
+        break;
+    }
     $data = array('page_title' => 'SC :: HOME ALUMNOS');
     $this->load->view('layout/head', $data);
 		$this->load->view('layout/header');

@@ -17,7 +17,7 @@ class Auth extends CI_Controller {
 
 	public function login(){
 		if($this->session->userdata('login')){
-			redirect("/");
+			redirect("home");
 		}
 		
 		$this->load->view('auth/login');
@@ -34,24 +34,31 @@ class Auth extends CI_Controller {
 		if($response["success"]){ // Comprueba que la fila no este vacia
       $usuario = $response["response"];
 			if($usuario->USUA_PASSWORD == $password){
-				$data = array(
+				$session = array(
 					'id' 		=> $usuario->USUA_USUARIO,
 					'rol'		=> $usuario->USUA_ROL,
 					'login'		=> true
 				);
-				$this->session->set_userdata($data);
+
         $data = ["success"=>true];
-				switch ($this->session->userdata('rol')){
+				switch ($usuario->USUA_ROL){
           case 1:
             $data["rol"] = "Docente";
+            $this->load->model('docentes_model');
+            $docente = $this->docentes_model->getByUsuario($usuario->USUA_USUARIO);
+            $session["name"] = $docente->DOCE_NOMBRE." ".$docente->DOCE_APELLIDOS;
             break;
           case 2:
             $data["rol"] = "Alumno";
+            $this->load->model('alumnos_model');
+            $alumno = $this->alumnos_model->getByUsuario($usuario->USUA_USUARIO);
+            $session["name"] = $alumno->ALUM_NOMBRE." ".$alumno->ALUM_APELLIDOS;
             break;
           case 3:
             $data["rol"] = "Admin";
             break;
         }
+        $this->session->set_userdata($session);
 			}else{
         $data = ["success"=>false, "message"=>"Datos incorrectos"];
 			}
@@ -66,9 +73,7 @@ class Auth extends CI_Controller {
 		if($this->session->userdata('login')){
 			header("Location: ". base_url()."home");
 		}
-		
 		$this->load->view('auth/register');
-		
 	}
 
 

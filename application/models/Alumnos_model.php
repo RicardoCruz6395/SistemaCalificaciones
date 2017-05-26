@@ -73,4 +73,17 @@ class Alumnos_model extends CI_Model
     }
 
   }
+
+  public function getByUsuario($usuario){
+
+    $this->db->where('ALUM_USUARIO', $usuario);
+    $result = $this->db->get('alumnos');
+
+    if($result->num_rows() > 0) {
+      return $result->row();
+    }else{
+      return null;
+    }
+
+  }
 }

@@ -61,6 +61,20 @@ class Docentes_model extends CI_Model{
         }
     }
 
+  public function getByUsuario($usuario){
+
+    $this->db->where('DOCE_USUARIO', $usuario);
+    $result = $this->db->get('docentes');
+
+    if($result->num_rows() > 0) {
+      return $result->row();
+    }else{
+      return null;
+    }
+
+  }
+
+
     public function delete($id){
         try{
 
