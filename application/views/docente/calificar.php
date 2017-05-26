@@ -48,9 +48,18 @@
                   <div class="btn-group">
                     <a class="btn btn-icon-toggle btn-collapse"><i class="fa fa-angle-down"></i></a>
                   </div>
+                  <button class="btn btn-primary btn-save-cali"> <i class="fa fa-save"></i> GUARDAR</button>
                 </div>
+
               </div><!--end .card-head -->
               <div class="card-body">
+                <div class="alert alert-callout alert-info" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                    ×</button>
+                  <b>Nota:</b> Ingrese calificaciones en un rango de [0 - 100].
+                  Haga doble clic en la calificación que desee modificar, "enter" para guardar calificación.<br>
+                  Al finalizar haga clic en "Guardar" para confirmar las calificaciones.
+                </div>
                 <div class="row">
                   <table class="table table-bordered table-hover" id="tabla-cal">
                     <thead>
@@ -65,6 +74,7 @@
                       </tr>
                     </thead>
                     <tbody>
+                    <form action="validar" method="post" class="form-validate">
                       <?php
                         if($alumnos!=null){
                         foreach ($alumnos as $alum){
@@ -76,7 +86,7 @@
                         <td class="cal" data-name="u2">100</td>
                         <td class="cal" data-name="u3">100</td>
                         <td class="cal" data-name="u4">100</td>
-                        <td><b data-name="promedio">100</b></td>
+                        <td class="promedio"><b class="" data-name="promedio">100</b></td>
                       </tr>
                       <?php
                         }
@@ -84,10 +94,10 @@
                           echo "NO HAY ALUMNOS";
                         }
                       ?>
+                    </form>
                     </tbody>
-
                   </table>
-                  <button class="btn btn-primary btn-save-cali pull-right"> <i class="fa fa-save"></i> GUARDAR</button>
+
                 </div>
               </div><!--end .card-body -->
             </div><!--end .card -->

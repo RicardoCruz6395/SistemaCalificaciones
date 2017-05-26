@@ -26,7 +26,7 @@
                         <tr>
                             <td> <?=$alum->ALUM_MATRICULA?> </td>
                             <td> <?=$alum->ALUM_NOMBRE." ".$alum->ALUM_APELLIDOS?> </td>
-                            <td class="text-center"> <?=$alum->ALUM_SEMESTRE?> </td>
+                            <td class="text-center"> <?=$alum->SEME_NOMBRE?> </td>
                         </tr>
                 <?php
 

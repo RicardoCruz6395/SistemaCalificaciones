@@ -21,7 +21,7 @@ class Alumno extends CI_Controller {
         $this->load->view('layout/header');
         // Este es el contenedor de la plantilla
         // Este archivo es en el que trabajarán
-        $this->load->view('alumno/index', $materias);
+        $this->load->view('alumno/index');
         // Menu lateral
         $this->load->view('layout/menu');
         // Js para que funcione la plantilla correctamente
