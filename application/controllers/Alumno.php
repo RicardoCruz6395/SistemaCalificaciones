@@ -7,7 +7,6 @@ class Alumno extends CI_Controller {
     }
 
 	public function index(){
-    
         $id_usuario = $this->session->userdata['id'];
         $this->load->model('usuarios_model');       
         $alumno = $this->usuarios_model->getAlumno( $id_usuario );

@@ -65,4 +65,26 @@ class Alumnos_model extends CI_Model {
                 return ["success"=>false, "response"=>$e->getMessage()];
         }
     }
+
+  public function getByGrupo( $id_grupo ){
+
+    $sql = "SELECT ALUM_MATRICULA, ALUM_ALUMNO, ALUM_NOMBRE, ALUM_APELLIDOS, SEME_NOMBRE
+                FROM alumnos
+                JOIN grupos_detalles ON ALUM_ALUMNO = GDET_ALUMNO
+                JOIN grupos ON GRUP_GRUPO = GDET_GRUPO
+                JOIN semestres ON ALUM_SEMESTRE = SEME_SEMESTRE
+                WHERE GRUP_GRUPO = $id_grupo
+                AND GDET_ACTIVO = 1
+                AND GRUP_ACTIVO = 1
+                ;
+            ";
+
+    $result = $this->db->query( $sql );
+    if($result->num_rows() > 0) {
+      return $result->result();
+    }else{
+      return null;
+    }
+
+  }
 }
