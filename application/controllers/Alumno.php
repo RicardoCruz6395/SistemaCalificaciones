@@ -22,16 +22,31 @@ class Alumno extends CI_Controller {
 
         if( $periodo ){
 
-            $this->load->model('alumnos_model');
-            $materias = $this->alumnos_model->getMateriasByPeriodo( $periodo );
+            $id_usuario = $this->session->userdata['id'];
+            $this->load->model('usuarios_model');       
+            $alumno = $this->usuarios_model->getAlumno( $id_usuario );
 
-            $data = [
-                'page_title'    =>  'SC :: Panel de Calificaciones',
-                'materias'      =>  $materias
+            $this->load->model('alumnos_model');
+            $SQLcalificaciones = $this->alumnos_model->getMateriasByPeriodo( $periodo );
+            $materias = [];
+            $unidades[ 0 ] = 'MATERIA' ;
+            $calificaciones = [];
+            foreach ($SQLcalificaciones as $key => $c) {
+                $unidades[ $c->UNID_NUMERO ] = $c->UNID_NOMBRE;
+                $calificaciones[ $c->GDET_DETALLE ][ 0 ] = $c->MATE_NOMBRE;
+                $calificaciones[ $c->GDET_DETALLE ][ $c->UNID_NUMERO ] = $c->CALI_PUNTAJE;
+            }
+
+            $data1 = ['page_title'    => 'SC :: Panel de Calificaciones'];
+            $data2 = ['nombre_usuario' => $alumno->ALUM_NOMBRE ];
+            $data3 = [
+                'unidades'   => $unidades,
+                'calificaciones'   => $calificaciones
             ];
-            $this->load->view('layout/head',$data);
-            $this->load->view('layout/header');
-            $this->load->view('alumno/index');
+
+            $this->load->view('layout/head'   , $data1);
+            $this->load->view('layout/header' , $data2);
+            $this->load->view('alumno/index'  , $data3);
             $this->load->view('layout/menu');
             $this->load->view('layout/scripts');
         }else{

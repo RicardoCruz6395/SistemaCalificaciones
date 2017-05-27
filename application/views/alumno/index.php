@@ -1,12 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Rafael
- * Date: 14/05/2017
- * Time: 04:01 PM
- */
-?>
-<!-- BEGIN BASE-->
 <div id="base">
     <div id="content">
         <section>
@@ -23,65 +14,35 @@
                                 </div>
                             </div><!--end .card-head -->
                             <div class="card-body">
-
-                                <table class="table datatable table-bordered table-hover" id="mytablem">
-                                   <thead>
-                                        <tr>
-                                            <th>Materia</th>
-                                            <th>Unidad 1</th>
-                                            <th>Unidad 2</th>
-                                            <th>Unidad 3</th>
-                                            <th>Unidad 4</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-            <button href="#myModal"  id="openBtn" data-toggle="modal" class="btn btn-primary">Frameworks</button>
-                                                
-                                            </td>
-                                            <td>90</td>
-                                            <td>21</td>
-                                            <td>89</td>
-                                            <td>69</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Programacion web</td>
-                                            <td>90</td>
-                                            <td>21</td>
-                                            <td>89</td>
-                                            <td>69</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Programacion web</td>
-                                            <td>90</td>
-                                            <td>21</td>
-                                            <td>89</td>
-                                            <td>69</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Programacion web</td>
-                                            <td>90</td>
-                                            <td>21</td>
-                                            <td>89</td>
-                                            <td>69</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Programacion web</td>
-                                            <td>90</td>
-                                            <td>21</td>
-                                            <td>89</td>
-                                            <td>69</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Programacion web</td>
-                                            <td>90</td>
-                                            <td>21</td>
-                                            <td>89</td>
-                                            <td>69</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="form-group col-md-4 col-md-offset-8">
+                                    <label for="select13" class="col-sm-2 control-label"><i class="fa fa-fw fa-search"></i></label>
+                                    <div class="col-sm-10">
+                                        <select id="select13" name="select13" class="form-control">
+                                            <option value="30">Enero-Junio 2017</option>
+                                            <option value="30">Verano 2017</option>
+                                            <option value="30">Agosto-Diciemnbre 2017</option>
+                                        </select><div class="form-control-line"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <table class="table datatable table-bordered table-hover" id="mytablem">
+                                        <thead><tr>
+                                        <?php foreach ($unidades as $key => $u): ?>
+                                            <th><?=$u?></th>
+                                        <?php endforeach ?>
+                                        </tr></thead>
+                                        <tbody>
+                                            <?php foreach ($calificaciones as $key => $c): ?>
+                                            <tr>
+                                                <?php foreach ($unidades as $key2 => $u):?>
+                                                    <td><?=@$c[$key2]?></td>
+                                                <?php endforeach ?>
+                                            </tr>
+                                            <?php endforeach ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- <button href="#myModal"  id="openBtn" data-toggle="modal" class="btn btn-primary">Frameworks</button-->
                             </div><!--end .card-body -->
                         </div><!--end .card -->
                     </div><!--end .col -->

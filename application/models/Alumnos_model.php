@@ -15,7 +15,30 @@ class Alumnos_model extends CI_Model {
     }
 
     public function getMateriasByPeriodo( $periodo ){
-        
+        $sql = "SELECT * FROM (
+                    SELECT GDET_DETALLE, MATE_NOMBRE, UNID_UNIDAD, UNID_NUMERO, UNID_NOMBRE 
+                    FROM periodos
+                    JOIN grupos ON PERI_PERIODO = GRUP_PERIODO
+                    JOIN materias ON GRUP_MATERIA = MATE_MATERIA
+                    JOIN unidades ON MATE_MATERIA = UNID_MATERIA
+                    JOIN grupos_detalles ON GRUP_GRUPO = GDET_GRUPO
+                    WHERE GRUP_PERIODO = $periodo
+                    AND GDET_ALUMNO = 1
+                    AND GDET_ACTIVO = 1 
+                ) a
+                LEFT JOIN
+                (
+                    SELECT CALI_GRUPO_DETALLE, CALI_UNIDAD, CALI_OBTENCION, CALI_PUNTAJE, OBTE_NOMBRE
+                    FROM grupos_detalles
+                    JOIN calificaciones ON GDET_DETALLE = CALI_GRUPO_DETALLE
+                    JOIN obtenciones ON CALI_OBTENCION = OBTE_OBTENCION
+                    WHERE GDET_ALUMNO = 1
+                    AND GDET_ACTIVO = 1
+                ) b
+                ON (GDET_DETALLE = CALI_GRUPO_DETALLE AND UNID_UNIDAD = CALI_UNIDAD )
+                ORDER BY MATE_NOMBRE, UNID_UNIDAD ASC;
+                ";
+        return $this->db->query($sql)->result();
     }
 
 
