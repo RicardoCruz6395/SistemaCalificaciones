@@ -57,13 +57,18 @@
         <li class="dropdown">
           <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
             <img src="<?= base_url() ?>assets/img/gravatar.png" alt=""/>
-            Usuario
+            <?=$nombre_usuario?>
 
           </a>
           <ul class="dropdown-menu animation-dock">
             <li class="dropdown-header">Configuraciones</li>
             <!--								<li><a href="-->
             <? //=base_url('usuarios/perfil')?><!--"><i class="fa fa-fw fa-user text-info"></i> Mi perfil</a></li>-->
+            <li>
+                <a href="<?=base_url('alumno/password')?>">
+                    <i class="fa fa-fw fa-gears text-default"></i> Cambiar contraseña
+                </a>
+            </li>
             <li><a href="<?=base_url('auth/logout')?>"><i class="fa fa-fw fa-power-off text-danger"></i> Cerrar sesión</a></li>
           </ul><!--end .dropdown-menu -->
         </li><!--end .dropdown -->

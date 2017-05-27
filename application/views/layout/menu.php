@@ -15,7 +15,6 @@
 
 			<!-- BEGIN MAIN MENU -->
 			<ul id="main-menu" class="gui-controls">
-				<li>Contraseña</li>
 			</ul><!--end .main-menu -->
 			<!-- END MAIN MENU -->
 
