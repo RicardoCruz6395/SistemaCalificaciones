@@ -5,51 +5,28 @@ class Home extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
+
 		if(!$this->session->userdata('login')){
 			redirect('auth/login');
+		}
+
+		switch ($this->session->userdata('rol')){
+  			case 1:
+        		redirect('/docente');
+        		break;
+      		case 2:
+      			redirect('/alumno');
+        		break;
+      		case 3:
+      			redirect('/admin');
+        		break;
 		}
 	}
 
 	public function index(){
-    $data = array('page_title' => 'SC :: HOME ALUMNOS');
-    $this->load->view('layout/head', $data);
-		$this->load->view('layout/header');
-		$data = array('home_active'=>1);
-		$this->load->view('layout/menu',$data);
-		$this->load->view('layout/scripts');
-		
-		//$this->load->view('home',$data);
+
 	}
 
-	public function cursos(){	
-				
-		$this->load->view('layout/head');
-		$this->load->view('layout/header');
-		$this->load->view('dashboard/dashboard');
-		$this->load->view('layout/menu');
-		$this->load->view('layout/scripts');
-		
-		$data = array('app' => 'Sistema Servicio Social');
-		
-		//$this->load->view('home',$data);
-	}
-
-	public function login($value='')
-	{
-		if($this->session->userdata('login')){
-			header("Location: ". base_url()."/profile");
-		}
-		$data = array('tittle' => 'Inicio', 'mensaje'=>'Bienvenido al Sistema de Servicio Social', 'sistema'=>'Servicio Social | ITCH');
-		$this->load->view('guest/head',$data);
-		$data = array('app' => 'Sistema Servicio Social');
-		$this->load->view('guest/nav',$data);
-		$data = array('titulo' => 'INICIANDO SESION');
-		//$this->load->view('guest/header',$data);
-		
-		$this->load->view('guest/login',$data);
-		$this->load->view('guest/footer');
-		//$this->load->view('home',$data);
-	}
 	public function registro($value='')
 	{
 

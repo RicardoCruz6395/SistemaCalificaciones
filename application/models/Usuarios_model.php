@@ -3,9 +3,22 @@
 class Usuarios_model extends CI_Model{
 
 
-    public function getAlumno( $id_usuario ){
-        $this->db->where('ALUM_USUARIO', $id_usuario);
-        return $this->db->get('alumnos')->row();
+    public function getDatosUsuario(){
+        $id_usuario = $this->session->userdata['id'];
+        switch ($this->session->userdata('rol')){
+            case 1:
+                $this->db->where('DOCE_USUARIO', $id_usuario);
+                return $this->db->get('docentes')->row();
+            break;
+            case 2:
+                $this->db->where('ALUM_USUARIO', $id_usuario);
+                return $this->db->get('alumnos')->row();
+                break;
+            case 3:
+                $this->db->where('ADMI_USUARIO', $id_usuario);
+                return $this->db->get('administradores')->row();
+                break;
+        }
     }
 
     public function get(){

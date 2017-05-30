@@ -14,7 +14,7 @@ class Alumnos_model extends CI_Model {
 
     }
 
-    public function getMateriasByPeriodo( $periodo ){
+    public function getMateriasByPeriodo( $id_alumno, $periodo ){
         $sql = "SELECT * FROM (
                     SELECT GDET_DETALLE, MATE_NOMBRE, UNID_UNIDAD, UNID_NUMERO, UNID_NOMBRE 
                     FROM periodos
@@ -23,7 +23,7 @@ class Alumnos_model extends CI_Model {
                     JOIN unidades ON MATE_MATERIA = UNID_MATERIA
                     JOIN grupos_detalles ON GRUP_GRUPO = GDET_GRUPO
                     WHERE GRUP_PERIODO = $periodo
-                    AND GDET_ALUMNO = 1
+                    AND GDET_ALUMNO = $id_alumno
                     AND GDET_ACTIVO = 1 
                 ) a
                 LEFT JOIN
@@ -32,7 +32,7 @@ class Alumnos_model extends CI_Model {
                     FROM grupos_detalles
                     JOIN calificaciones ON GDET_DETALLE = CALI_GRUPO_DETALLE
                     JOIN obtenciones ON CALI_OBTENCION = OBTE_OBTENCION
-                    WHERE GDET_ALUMNO = 1
+                    WHERE GDET_ALUMNO = $id_alumno
                     AND GDET_ACTIVO = 1
                 ) b
                 ON (GDET_DETALLE = CALI_GRUPO_DETALLE AND UNID_UNIDAD = CALI_UNIDAD )

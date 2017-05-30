@@ -31,28 +31,25 @@
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="headerbar-right">
-      <ul class="header-nav header-nav-options">
-        <li>
-          <!-- Search form -->
-          <form class="navbar-search" role="search">
-            <div class="form-group">
-              <input type="text" class="form-control" name="headerSearch" placeholder="Ingrese una palabra clave¿">
-            </div>
-            <button type="submit" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-search"></i></button>
-          </form>
-        </li>
-        <li class="dropdown hidden-xs">
-          <a href="javascript:void(0);" class="btn btn-icon-toggle btn-default" data-toggle="dropdown">
-            <i class="fa fa-bell"></i><sup class="badge style-danger"></sup>
-          </a>
-          <ul class="dropdown-menu animation-expand">
-            <li class="dropdown-header">Notificaciones</li>
-            <li class="dropdown-header">Opciones</li>
-
-          </ul><!--end .dropdown-menu -->
-        </li><!--end .dropdown -->
-
-      </ul><!--end .header-nav-options -->
+        <!--ul class="header-nav header-nav-options">
+            <li>
+                <form class="navbar-search" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="headerSearch" placeholder="Ingrese una palabra clave¿">
+                    </div>
+                    <button type="submit" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-search"></i></button>
+                </form>
+            </li>
+            <li class="dropdown hidden-xs">
+                <a href="javascript:void(0);" class="btn btn-icon-toggle btn-default" data-toggle="dropdown">
+                    <i class="fa fa-bell"></i><sup class="badge style-danger"></sup>
+                </a>
+                <ul class="dropdown-menu animation-expand">
+                    <li class="dropdown-header">Notificaciones</li>
+                    <li class="dropdown-header">Opciones</li>
+                </ul>
+            </li>
+        </ul-->
       <ul class="header-nav header-nav-profile">
         <li class="dropdown">
           <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">

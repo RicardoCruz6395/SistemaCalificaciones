@@ -6,43 +6,60 @@
                     <div class="col-md-12">
                         <div class="card card-underline">
                             <div class="card-head">
-                                <header>LISTA DE MATERIAS </header>
-                                <div class="tools">
-                                    <div class="btn-group">
-                                        <a class="btn btn-icon-toggle btn-collapse"><i class="fa fa-angle-down"></i></a>
-                                    </div>
-                                </div>
+                                <header><span class="text-primary">PANEL DE CALIFICACIONES ::</span> <?=$nombre_periodo?> </header>
                             </div><!--end .card-head -->
                             <div class="card-body">
                                 <div class="form-group col-md-4 col-md-offset-8">
                                     <label for="select13" class="col-sm-2 control-label"><i class="fa fa-fw fa-search"></i></label>
                                     <div class="col-sm-10">
-                                        <select id="select13" name="select13" class="form-control">
-                                            <option value="30">Enero-Junio 2017</option>
-                                            <option value="30">Verano 2017</option>
-                                            <option value="30">Agosto-Diciemnbre 2017</option>
-                                        </select><div class="form-control-line"></div>
+                                        <?=$periodos?>
+                                        <div class="form-control-line"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <table class="table datatable table-bordered table-hover" id="mytablem">
-                                        <thead><tr>
-                                        <?php foreach ($unidades as $key => $u): ?>
-                                            <th><?=$u?></th>
-                                        <?php endforeach ?>
-                                        </tr></thead>
-                                        <tbody>
-                                            <?php foreach ($calificaciones as $key => $c): ?>
+                                        <thead>
                                             <tr>
-                                                <?php foreach ($unidades as $key2 => $u):?>
-                                                    <td><?=@$c[$key2]?></td>
-                                                <?php endforeach ?>
+                                                <th>MATERIA</th>
+                                                <?php foreach($unidades as $unidad){
+                                                    echo '<th class="text-center">' . $unidad . '</th>';
+                                                } ?>
                                             </tr>
-                                            <?php endforeach ?>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                                foreach ($materias as $keyM => $m){
+                                                echo '<tr>
+                                                        <td>
+                                                            <a href="#myModal" data-toggle="modal" class="openBtn text-primary" data-g="'.$keyM.'">'.$m.'</a>
+                                                        </td>';
+                                                    foreach ($unidades as $keyU => $u){
+                                                        echo '<td class="text-center">';
+                                                            $calificacion = null;
+                                                            if(array_key_exists($keyU, $calificaciones[$keyM])){
+                                                                $calificacion = $calificaciones[ $keyM ][ $keyU ];
+                                                            }
+                                                            switch (true) {
+                                                                case ( $calificacion == null ):
+                                                                    echo '<button type="button" class="btn ink-reaction btn-floating-action btn-danger text-center" disabled> . . . </button>';
+                                                                    break;
+                                                                case ( $calificacion < 70 ):
+                                                                    echo '<button type="button" class="btn ink-reaction btn-floating-action btn-danger text-center">N/A</button>';
+                                                                    break;
+                                                                case ( $calificacion >= 70 ):
+                                                                    echo '<button type="button" class="btn ink-reaction btn-floating-action btn-primary text-center">'. $calificacion .'</button>';
+                                                                    break;
+                                                                default: break;
+                                                            }
+                                                        
+                                                    echo '</td>';
+                                                    }
+                                                echo '</tr>';
+                                                } 
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
-                                <!-- <button href="#myModal"  id="openBtn" data-toggle="modal" class="btn btn-primary">Frameworks</button-->
                             </div><!--end .card-body -->
                         </div><!--end .card -->
                     </div><!--end .col -->
@@ -50,61 +67,6 @@
             </div><!--end .section-body -->
         </section>
 
-        <div class="modal fade" id="myModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="panel-heading panel-primary">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </button>
-                        <h2 style= "font-size: 20px;" class="panel-title " id="modalConfirmLabel">Info. Sobre Frameworks</h2>
-                    </div> 
-                    <div class="modal-body" style="padding: 1em;">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;"> 
-                                <label style= "font-size: 15px;">Materia:</label>
-                                <input class="form-control" name="framework" placeholder="Frameworks" type="text" readonly="readonly" />
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
-                                <label style= "font-size: 15px;" >Semestre:</label>
-                                <input class="form-control" name="semestre" placeholder="8" id ="semestre" type="text" readonly="readonly" />
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
-                                <label style= "font-size: 15px;">Docente:</label>
-                                <input class="form-control" name="docente" placeholder="Carlos E. Azueta Leon" id ="docente" type="text" readonly="readonly" />
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
-                                <label  style= "font-size: 15px;">Periodo:</label>
-                                <input class="form-control" name="periodo" placeholder="Ene-Jun 2017" id ="periodo" type="text" readonly="readonly" />
-                            </div>
-                        </div>
-                        <hr>
-                        <table class="table table-striped" id="tblGrid">
-                            <thead id="tblHead">
-                                <tr>
-                                    <th style= "font-size: 15px;">Unidad 1</th>
-                                    <th style= "font-size: 15px;">Unidad 2</th>
-                                    <th style= "font-size: 15px;">Unidad 3</th>
-                                    <th style= "font-size: 15px;">Unidad 4</th>
-                                    <th style= "font-size: 15px;" class="text-right">Promedio</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>89</td>
-                                    <td>56</td>
-                                    <td>89</td>
-                                    <td>70</td>
-                                    <td class="text-right">79</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer"  >
-                        <button type="button"  class="btn btn-primary  pull-right" data-dismiss="modal">Cerrar</button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div>
+        <div class="modal fade" id="myModal"></div>
     </div><!--end #content-->
     <!-- END CONTENT -->
