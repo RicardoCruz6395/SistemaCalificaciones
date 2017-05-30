@@ -5,34 +5,31 @@ class Auth extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
+		
 		$this->load->model('usuarios_model');
 		$this->load->library('encrypt');
 		//date_default_timezone_set("America/Cancun");
 	}
 
-	public function index(){
-		//echo date("d-m-Y H:i:s");
-		$this->login();
-	}
-
 	public function login(){
+
 		if($this->session->userdata('login')){
-			redirect("/");
+			redirect('/home');
+		}else{
+			$this->load->view('auth/login');
 		}
-		
-		$this->load->view('auth/login');
-		
+
 	}
 
 	public function postLogin(){
 		// Recibe los valores de los campos enviados por el método post()		
-		$matricula		= $this->input->post('matricula');
+		$matricula  = $this->input->post('matricula');
 		$password	= $this->input->post('password');
 		// Llama a la function getUser() del modelo usuarios
 		$response = $this->usuarios_model->get_by_matricula($matricula);
 
 		if($response["success"]){ // Comprueba que la fila no este vacia
-      $usuario = $response["response"];
+      		$usuario = $response["response"];
 			if($usuario->USUA_PASSWORD == $password){
 				$data = array(
 					'id' 		=> $usuario->USUA_USUARIO,
@@ -40,25 +37,25 @@ class Auth extends CI_Controller {
 					'login'		=> true
 				);
 				$this->session->set_userdata($data);
-        $data = ["success"=>true];
+	        	$data = ["success"=>true];
 				switch ($this->session->userdata('rol')){
-          case 1:
-            $data["rol"] = "Docente";
-            break;
-          case 2:
-            $data["rol"] = "Alumno";
-            break;
-          case 3:
-            $data["rol"] = "Admin";
-            break;
-        }
+          			case 1:
+	            		$data["rol"] = "Docente";
+	            		break;
+	          		case 2:
+	            		$data["rol"] = "Alumno";
+	            		break;
+	          		case 3:
+	            		$data["rol"] = "Admin";
+	            		break;
+        		}
 			}else{
-        $data = ["success"=>false, "message"=>"Datos incorrectos"];
+        		$data = ["success"=>false, "message"=>"Datos incorrectos"];
 			}
 		}else{
-      $data = ["success"=>false, "message"=>"Datos incorrectos, no se ha registrado"];
+     		$data = ["success"=>false, "message"=>"Datos incorrectos, no se ha registrado"];
 		}
-    header('Content-Type: application/json');
+    	header('Content-Type: application/json');
 		echo json_encode($data);
 	}
 
@@ -515,7 +512,6 @@ a {
 
 	public function logout(){
 		$this->session->sess_destroy();
-		header("Location: " . base_url());
-
+		redirect('/auth/login');
 	}
 }
