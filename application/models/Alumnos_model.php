@@ -1,6 +1,20 @@
 <?php
 class Alumnos_model extends CI_Model {
     
+    public function getAlumnos(){
+        $this->db->where('ALUM_ACTIVO', 1);
+        $result = $this->db->get('alumnos');
+        return $result->result();
+    }
+
+    public function semestre( $id_alumno ){
+         $sql = "SELECT semestres.*
+                FROM alumnos
+                JOIN semestres ON (ALUM_SEMESTRE = SEME_SEMESTRE)
+                WHERE ALUM_ALUMNO = '$id_alumno'
+                LIMIT 1;";
+        return $this->db->query($sql)->row();
+    }
         
     public function getUltimoPeriodo( $id_alumno ){
         

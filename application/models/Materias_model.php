@@ -1,12 +1,21 @@
 <?php
 
-/**
- * Date: 09/05/2017
- * Time: 06:47 PM
- */
-class Materias_model extends CI_Model
-{
-  // Elaborado por Rodolfo
+class Materias_model extends CI_Model{
+
+    public function getMaterias(){
+        $this->db->where('MATE_ACTIVO', 1);
+        $result = $this->db->get('materias');
+        return $result->result();
+    }
+
+    public function unidades( $id_materia ){
+        $sql = "SELECT unidades.*
+                FROM materias
+                JOIN unidades ON (MATE_MATERIA = UNID_MATERIA)
+                WHERE MATE_MATERIA = '$id_materia';";
+        return $this->db->query($sql)->result();
+    }
+
   public function getImparte()
   {
 
