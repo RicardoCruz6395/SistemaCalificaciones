@@ -22,7 +22,7 @@ class Alumno extends CI_Controller {
 
 	public function index(){
         $this->load->model('usuarios_model');       
-        $alumno = $this->usuarios_model->getDatosUsuario( $id_usuario );
+        $alumno = $this->usuarios_model->getDatosUsuario();
 
         $id_alumno = $alumno->ALUM_ALUMNO;
         $this->load->model('alumnos_model');
