@@ -42,7 +42,7 @@
       });
   });
 
-  $("#tabla-cal").dataTable();
+  // $("#tabla-cal").dataTable();
 
 
   $("#tabla-cal td.cal").dblclick(function () {

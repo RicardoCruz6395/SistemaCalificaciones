@@ -5,39 +5,25 @@ class Docente extends CI_Controller{
 
 	public function __construct(){
 		parent::__construct();
-
-		if(!$this->session->userdata('login')){
-            redirect('/auth/login');
-        }
-
-        switch ($this->session->userdata('rol')){
-  			case 2:
-      			redirect('/alumno');
-        		break;
-      		case 3:
-      			redirect('/admin');
-        		break;
-		}
-
+		if(!$this->session->login || $this->session->rol != 1)
+            redirect('/');
+    	$this->load->model('usuarios_model');
+        $this->docente = $this->usuarios_model->getDatosUsuario();
 	}
 
 	public function index(){
+
+        $data2 = ['nombre_usuario' => $this->docente->DOCE_NOMBRE ];
+		
 	    $data = array('page_title' => 'SC :: Grupos');
-	    // $data array que recibe la vista
-	    // Contiene los css de la plantilla
 	    $this->load->view('layout/head', $data);
-	    // Es la barra superior de la plantilla
-	    $this->load->view('layout/header');
-	    // Este es el contenedor de la plantilla
-	    // Este archivo es en el que trabajarán
+	    $this->load->view('layout/header', $data2);
 	    $this->load->model('docentes_model');
 
 	    $data = ["grupos" => $this->docentes_model->getGruposByPeriodo( 1 )];
 
 	    $this->load->view('docente/index', $data);
-	    // Menu lateral
 	    $this->load->view('layout/menu');
-	    // Js para que funcione la plantilla correctamente
 	    $this->load->view('layout/scripts');
 	}
 
@@ -72,9 +58,11 @@ class Docente extends CI_Controller{
 
     public function calificar($grupo){
 
-	    $data = array('page_title' => 'Panel de Calificar');
-	    $this->load->view('layout/head', $data);
-	    $this->load->view('layout/header');
+	    $data = array('page_title' => 'SC :: Calificar');
+        $data2 = ['nombre_usuario' => $this->docente->DOCE_NOMBRE ];
+
+	    $this->load->view('layout/head'   , $data);
+	    $this->load->view('layout/header' , $data2);
 	    $this->load->model('materias_model');
 	    $this->load->model('alumnos_model');
 

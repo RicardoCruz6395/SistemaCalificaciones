@@ -14,7 +14,7 @@
                 </div>
               </div><!--end .card-head -->
               <div class="card-body">
-                <table class="table datatable table-bordered table-hover" id="mytable">
+                <table class="table datatable table-bordered table-hover" id="table-grupos">
                   <thead>
                   <tr>
                     <th>CLAVE</th>
@@ -91,4 +91,30 @@
       </div>
     </div>
   </div>
+  <script src="<?= base_url() ?>assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
+    <script src="<?= base_url() ?>assets/js/libs/DataTables/jquery.dataTables.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var table = $('#table-grupos').DataTable({
+                /*'ajax': {
+                    'url' : '<?= base_url() ?>admin/postMaterias',
+                    'type' : 'POST'
+                },
+                */
+                'columnDefs' : [{
+                    className : 'text-center',
+                    'targets' : [2,3,4,6]     
+                }],
+                'order': [[ 1, 'asc' ]]
+            });
+
+
+            $('#recargar').click(function(e){
+                table.ajax.reload();
+            });
+
+        });
+
+
+    </script>
 

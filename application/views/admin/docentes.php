@@ -6,19 +6,19 @@
                     <div class="col-md-12">
                         <div class="card card-underline">
                             <div class="card-head">
-                                <header><span class="text-primary">MATERIAS</span></header>
-                                <button id="recargar"></button>
+                                <header><span class="text-primary">DOCENTES</span></header>
                             </div><!--end .card-head -->
                             <div class="card-body">
                                 <div class="col-md-12">
-                                    <table class="table datatable table-bordered table-hover" id="table-materias">
+                                    <table class="table datatable table-bordered table-hover" id="table-docentes">
                                         <thead>
-                                        	<tr>
-                                                <th>CÓDIGO</th>
-                                                <th>NOMBRE</th>
-                                                <th>NÓ. UNIDADES</th>
-                                                <th>OPCIONES</th>
-                                        	</tr>
+                                            <tr>
+                                                <th>MATR&Iacute;CULA</th>
+                                                <th>NOMBRE COMPLETO</th>
+                                                <th>FECHA ALTA</th>
+                                                <th>STATUS</th>
+                                            	<th>OPCIONES</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
                                         </tbody>
@@ -36,14 +36,14 @@
     <script src="<?= base_url() ?>assets/js/libs/DataTables/jquery.dataTables.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            var table = $('#table-materias').DataTable({
+            var table = $('#table-docentes').DataTable({
                 'ajax': {
-                    'url' : '<?= base_url() ?>admin/postMaterias',
+                    'url' : '<?= base_url() ?>admin/postDocentes',
                     'type' : 'POST'
                 },
                 'columnDefs' : [{
                     className : 'text-center',
-                    'targets' : [2,3]     
+                    'targets' : [2,3,4]     
                 }],
                 'order': [[ 1, 'asc' ]]
             });

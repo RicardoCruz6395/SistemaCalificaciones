@@ -6,23 +6,11 @@ class Admin extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-
-		if(!$this->session->userdata('login')){
-            redirect('/auth/login');
-        }
-
-        switch ($this->session->userdata('rol')){
-  			case 1:
-      			redirect('/docente');
-        		break;
-  			case 2:
-      			redirect('/alumno');
-        		break;
-		}
+        if(!$this->session->login || $this->session->rol != 3)
+            redirect('/');
 
 		$this->load->model('usuarios_model');
-        $this->admin = $this->usuarios_model->getDatosUsuario(); 
-
+        $this->admin = $this->usuarios_model->getDatosUsuario();
 	}
 
 	public function index(){
@@ -106,7 +94,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function materias(){
-		$data1 = ['page_title'    => 'SC :: Periodos'];
+		$data1 = ['page_title'    => 'SC :: Materias'];
 		$data2 = ['nombre_usuario' => $this->admin->ADMI_NOMBRE ];
 
 		$this->load->view('layout/head'   , $data1);
@@ -156,5 +144,71 @@ class Admin extends CI_Controller {
         $this->load->view('layout/scripts');
 		
 	}
+
+    public function postGrupos(){
+
+        $data1 = ['page_title'    => 'SC :: Grupos'];
+        $data2 = ['nombre_usuario' => $this->admin->ADMI_NOMBRE ];
+
+
+        $this->load->view('layout/head'   , $data1);
+        $this->load->view('layout/header' , $data2);
+        $this->load->view('admin/grupos'  , []);
+        $this->load->view('layout/menu');
+        $this->load->view('layout/scripts');
+        
+    }
+
+    public function docentes(){
+
+        $data1 = ['page_title'    => 'SC :: Docentes'];
+        $data2 = ['nombre_usuario' => $this->admin->ADMI_NOMBRE ];
+
+
+        $this->load->view('layout/head'   , $data1);
+        $this->load->view('layout/header' , $data2);
+        $this->load->view('admin/docentes'  , []);
+        $this->load->view('layout/menu');
+        $this->load->view('layout/scripts');
+        
+    }
+
+    public function postDocentes(){
+
+        $this->load->model('docentes_model');
+        $docentes = $this->docentes_model->getDocentes();
+
+        $data['data'] = [];
+
+        foreach ($docentes as $d) {
+
+            $opciones = '
+            <button class="btn btn-xs btn-success" data-p="'.$d->DOCE_DOCENTE.'"><i class="fa fa-pencil"></i></button>
+            <button class="btn btn-xs btn-danger" data-p="'.$d->DOCE_DOCENTE.'"><i class="fa fa-trash-o"></i></button>';
+
+            $usuario_status = '<span class="text-default">NO CREADO</span>';
+
+            $usuario = $this->docentes_model->usuario( $d->DOCE_DOCENTE );
+            if( $usuario ){
+                $usuario_status = '<span class="text-success">ACTIVO</span>';
+                if(!$usuario->USUA_ACTIVO)
+                    $usuario_status = '<span class="text-danger">DESACTIVADO</span>'; 
+            }
+
+            $fecha = date('d-m-Y', strtotime($d->DOCE_CREATED_AT));
+
+            $data['data'][] = [
+                $d->DOCE_MATRICULA,
+                $d->DOCE_NOMBRE . ' ' . $d->DOCE_APELLIDOS,
+                $fecha,
+                $usuario_status,
+                $opciones
+            ];
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        
+    }
 
 }

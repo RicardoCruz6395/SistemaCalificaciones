@@ -10,7 +10,7 @@
                             </div><!--end .card-head -->
                             <div class="card-body">
                                 <div class="col-md-12">
-                                    <table class="table datatable table-bordered table-hover" id="mytablem">
+                                    <table class="table datatable table-bordered table-hover" id="table-grupos">
                                         <thead>
                                             <tr>
                                             	<th>MATERIA</th>
@@ -29,7 +29,29 @@
                 </div>
             </div><!--end .section-body -->
         </section>
-
-        <div class="modal fade" id="myModal"></div>
     </div><!--end #content-->
     <!-- END CONTENT -->
+    <script src="<?= base_url() ?>assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
+    <script src="<?= base_url() ?>assets/js/libs/DataTables/jquery.dataTables.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var table = $('#table-grupos').DataTable({
+                'ajax': {
+                    'url' : '<?= base_url() ?>admin/postGrupos',
+                    'type' : 'POST'
+                },
+                'columnDefs' : [{
+                    className : 'text-center',
+                    'targets' : [2,3]     
+                }],
+            });
+
+
+            $('#recargar').click(function(e){
+                table.ajax.reload();
+            });
+
+        });
+
+
+    </script>

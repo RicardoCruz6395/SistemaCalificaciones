@@ -4,29 +4,15 @@ class Alumno extends CI_Controller {
     
     public function __construct(){
         parent::__construct();
-
-        if(!$this->session->userdata('login')){
-            redirect('/auth/login');
-        }
-
-        switch ($this->session->userdata('rol')){
-            case 1:
-                redirect('/docente');
-                break;
-            case 3:
-                redirect('/admin');
-                break;
-        }
-
+        if(!$this->session->login || $this->session->rol != 2)
+            redirect('/');
+        $this->load->model('usuarios_model');
+        $this->alumno = $this->usuarios_model->getDatosUsuario();
     }
 
 	public function index(){
-        $this->load->model('usuarios_model');       
-        $alumno = $this->usuarios_model->getDatosUsuario();
-
-        $id_alumno = $alumno->ALUM_ALUMNO;
         $this->load->model('alumnos_model');
-		$periodo = $this->alumnos_model->getUltimoPeriodo( $id_alumno );
+		$periodo = $this->alumnos_model->getUltimoPeriodo( $this->alumno->ALUM_ALUMNO );
         $periodo = $periodo->GRUP_PERIODO;
         redirect('alumno/periodo/' . $periodo);
 	}
