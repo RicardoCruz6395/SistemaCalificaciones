@@ -1,6 +1,6 @@
 <body class="menubar-hoverable header-fixed menubar-pin">
     <!-- BEGIN HEADER-->
-    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+    <div class="modal fade" id="general-modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
@@ -16,7 +16,7 @@
                 <ul class="header-nav header-nav-options">
                     <li class="header-nav-brand">
                         <div class="brand-holder">
-                            <a href="<?= base_url(); ?>">
+                            <a href="<?=base_url()?>">
                                 <span class="text-lg text-bold text-primary">Sistema calificaciones</span>
                             </a>
                         </div>
@@ -32,8 +32,11 @@
                 <ul class="header-nav header-nav-profile">
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
-                            <img src="<?= base_url() ?>assets/img/gravatar.png" alt=""/>
-                            <?=$nombre_usuario?>
+                            <img src="<?=base_url()?>assets/img/gravatar.png" />
+                            <?php
+                                $this->load->model('usuarios_model');
+                                echo $this->usuarios_model->getNombreUsuario();
+                            ?>
                         </a>
                         <ul class="dropdown-menu animation-dock">
                             <li>

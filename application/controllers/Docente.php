@@ -13,11 +13,9 @@ class Docente extends CI_Controller{
 
 	public function index(){
 
-        $data2 = ['nombre_usuario' => $this->docente->DOCE_NOMBRE ];
-		
 	    $data = array('page_title' => 'SC :: Grupos');
 	    $this->load->view('layout/head', $data);
-	    $this->load->view('layout/header', $data2);
+	    $this->load->view('layout/header');
 	    $this->load->model('docentes_model');
 
 	    $data = ["grupos" => $this->docentes_model->getGruposByPeriodo( 1 )];

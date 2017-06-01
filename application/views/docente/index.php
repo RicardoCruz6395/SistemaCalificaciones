@@ -4,63 +4,67 @@
       <div class="section-body">
         <div class="row">
           <div class="col-md-12">
-            <div class="card card-underline">
+            <div class="card card-bordered style-primary">
               <div class="card-head">
-                <header>LISTA DE MATERIAS</header>
-                <div class="tools">
-                  <div class="btn-group">
-                    <a class="btn btn-icon-toggle btn-collapse"><i class="fa fa-angle-down"></i></a>
+                  <div class="tools">
+                      <div class="btn-group">
+                          <a class="btn btn-icon-toggle btn-refresh" id="recargar">
+                              <i class="md md-refresh"></i>
+                          </a>
+                      </div>
                   </div>
-                </div>
+                  <header><i class="fa fa-users"></i> GRUPOS</header>
               </div><!--end .card-head -->
-              <div class="card-body">
-                <table class="table datatable table-bordered table-hover" id="table-grupos">
-                  <thead>
-                  <tr>
-                    <th>CLAVE</th>
-                    <th>MATERIA</th>
-                    <th>SEMESTRE</th>
-                    <th>ALUMNOS</th>
-                    <th>AULA</th>
-                    <th>CARRERA</th>
-                    <th>CALIFICAR</th>
-                  </tr>
-                  </thead>
-                  <tbody>
+              <div class="card-body style-default-bright">
+                <div class="col-md-12">
+                  <table class="table datatable table-bordered table-hover" id="table-grupos">
+                    <thead>
+                    <tr>
+                      <th>CLAVE</th>
+                      <th>MATERIA</th>
+                      <th>SEMESTRE</th>
+                      <th>ALUMNOS</th>
+                      <th>AULA</th>
+                      <th>CARRERA</th>
+                      <th>CALIFICAR</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-                  <?php
-                  if ($grupos != null) {
-                    foreach ($grupos as $grupo) {
-                        ?>
-                      <tr>
-                        <td> <?= $grupo->MATE_CLAVE ?> </td>
-                        <td> <?= $grupo->MATE_NOMBRE ?> </td>
-                        <td> <?= $grupo->SEME_NOMBRE ?> </td>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-alumnos" title="Ver lista"
-                                  data-id="<?= $grupo->GRUP_GRUPO ?>" data-toggle="modal"
-                                  data-target="#modal"> <?= $grupo->NUM_ALUMNOS ?> </button>
-                        </td>
-                        <td> <?= $grupo->AULA_NOMBRE ?> </td>
-                        <td> <?= $grupo->CARR_NOMBRE ?> </td>
-                        <td>
-                          <a href="<?= base_url() ?>docente/calificar/<?= $grupo->GRUP_GRUPO ?>" class="btn btn-primary btn"
-                             title="Lista de alumnos"><span
-                              class="glyphicon glyphicon-pencil"></span></a>
-                          <button class="btn btn-danger btn" data-title="Delete"
-                                  data-toggle="modal" data-target="#delete"><span
-                              class="glyphicon glyphicon-trash"></span></button>
-                        </td>
-                      </tr>
-                      <?php
+                    <?php
+                    if ($grupos != null) {
+                      foreach ($grupos as $grupo) {
+                          ?>
+                        <tr>
+                          <td> <?= $grupo->MATE_CLAVE ?> </td>
+                          <td> <?= $grupo->MATE_NOMBRE ?> </td>
+                          <td> <?= $grupo->SEME_NOMBRE ?> </td>
+                          <td>
+                            <button type="button" class="btn btn-xs btn-primary btn-alumnos" title="Ver lista"
+                                    data-id="<?=$grupo->GRUP_GRUPO?>" data-toggle="modal"
+                                    data-target="#general-modal"> <?= $grupo->NUM_ALUMNOS ?> </button>
+                          </td>
+                          <td> <?= $grupo->AULA_NOMBRE ?> </td>
+                          <td> <?= $grupo->CARR_NOMBRE ?> </td>
+                          <td>
+                            <a href="<?= base_url() ?>docente/calificar/<?= $grupo->GRUP_GRUPO ?>" class="btn btn-xs btn-primary"
+                               title="Lista de alumnos"><span
+                                class="glyphicon glyphicon-pencil"></span></a>
+                            <button class="btn btn-xs btn-danger" data-title="Delete"
+                                    data-toggle="modal" data-target="#delete"><span
+                                class="glyphicon glyphicon-trash"></span></button>
+                          </td>
+                        </tr>
+                        <?php
 
+                      }
+                    } else {
+                      echo "no Hay materias";
                     }
-                  } else {
-                    echo "no Hay materias";
-                  }
-                  ?>
-                  </tbody>
-                </table>
+                    ?>
+                    </tbody>
+                  </table>
+                </div>
               </div><!--end .card-body -->
             </div><!--end .card -->
           </div><!--end .col -->
@@ -97,7 +101,7 @@
         $(document).ready(function() {
             var table = $('#table-grupos').DataTable({
                 /*'ajax': {
-                    'url' : '<?= base_url() ?>admin/postMaterias',
+                    'url' : '<?= base_url() ?>docente/postGrupos',
                     'type' : 'POST'
                 },
                 */
@@ -112,6 +116,27 @@
             $('#recargar').click(function(e){
                 table.ajax.reload();
             });
+
+            $('.btn-alumnos', '#table-grupos').click(function (e) {
+              e.preventDefault();
+              console.log($(this).data('id'));
+
+              $('.modal-content', '#general-modal').html('<div class="modal-body">' +
+                '<h3><i class="fa fa-spin fa-spinner"></i> Cargando...</h3>' +
+                '</div>');
+
+              postAjax(base_url + 'docente/getAlumnosByGrupo',
+                  {grupo: $(this).data('id')},
+
+                  function (response) {
+                    $(".modal-content", '#general-modal').html(response);
+                  }
+              );
+
+
+            });
+
+              
 
         });
 

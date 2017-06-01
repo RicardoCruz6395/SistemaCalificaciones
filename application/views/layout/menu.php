@@ -52,6 +52,7 @@
 								break;
 							case 'docentes':
 								$docentes = $active;
+								break;
 							case 'periodos':
 								$configuracion = $active2;
 								$periodos = $active3;

@@ -15,10 +15,9 @@ class Admin extends CI_Controller {
 
 	public function index(){
 		$data1 = ['page_title'    => 'SC :: Inicio'];
-		$data2 = ['nombre_usuario' => $this->admin->ADMI_NOMBRE ];
-
+		
 		$this->load->view('layout/head'   , $data1);
-        $this->load->view('layout/header' , $data2);
+        $this->load->view('layout/header');
         $this->load->view('admin/index', []);
         $this->load->view('layout/menu');
         $this->load->view('layout/scripts');
@@ -26,10 +25,9 @@ class Admin extends CI_Controller {
 
 	public function periodos(){
 		$data1 = ['page_title'    => 'SC :: Periodos'];
-		$data2 = ['nombre_usuario' => $this->admin->ADMI_NOMBRE ];
 
 		$this->load->view('layout/head'   , $data1);
-        $this->load->view('layout/header' , $data2);
+        $this->load->view('layout/header');
         $this->load->view('admin/periodos', []);
         $this->load->view('layout/menu');
         $this->load->view('layout/scripts');
@@ -60,10 +58,9 @@ class Admin extends CI_Controller {
 
 	public function alumnos(){
 		$data1 = ['page_title'    => 'SC :: Alumnos'];
-		$data2 = ['nombre_usuario' => $this->admin->ADMI_NOMBRE ];
 
 		$this->load->view('layout/head'   , $data1);
-        $this->load->view('layout/header' , $data2);
+        $this->load->view('layout/header');
         $this->load->view('admin/alumnos', []);
         $this->load->view('layout/menu');
         $this->load->view('layout/scripts');
@@ -95,10 +92,9 @@ class Admin extends CI_Controller {
 
 	public function materias(){
 		$data1 = ['page_title'    => 'SC :: Materias'];
-		$data2 = ['nombre_usuario' => $this->admin->ADMI_NOMBRE ];
 
 		$this->load->view('layout/head'   , $data1);
-        $this->load->view('layout/header' , $data2);
+        $this->load->view('layout/header');
         $this->load->view('admin/materias');
         $this->load->view('layout/menu');
         $this->load->view('layout/scripts');
@@ -148,11 +144,9 @@ class Admin extends CI_Controller {
     public function postGrupos(){
 
         $data1 = ['page_title'    => 'SC :: Grupos'];
-        $data2 = ['nombre_usuario' => $this->admin->ADMI_NOMBRE ];
-
 
         $this->load->view('layout/head'   , $data1);
-        $this->load->view('layout/header' , $data2);
+        $this->load->view('layout/header');
         $this->load->view('admin/grupos'  , []);
         $this->load->view('layout/menu');
         $this->load->view('layout/scripts');
@@ -162,11 +156,9 @@ class Admin extends CI_Controller {
     public function docentes(){
 
         $data1 = ['page_title'    => 'SC :: Docentes'];
-        $data2 = ['nombre_usuario' => $this->admin->ADMI_NOMBRE ];
-
 
         $this->load->view('layout/head'   , $data1);
-        $this->load->view('layout/header' , $data2);
+        $this->load->view('layout/header');
         $this->load->view('admin/docentes'  , []);
         $this->load->view('layout/menu');
         $this->load->view('layout/scripts');

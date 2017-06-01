@@ -8,6 +8,9 @@
                             <div class="card-head">
                                 <div class="tools">
                                     <div class="btn-group">
+                                        <a class="btn btn-icon-toggle" data-toggle="modal" data-target="#general-modal" id="agregar">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
                                         <a class="btn btn-icon-toggle btn-refresh" id="recargar">
                                             <i class="md md-refresh"></i>
                                         </a>

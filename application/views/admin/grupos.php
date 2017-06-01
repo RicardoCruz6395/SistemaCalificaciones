@@ -4,22 +4,33 @@
             <div class="section-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card card-underline">
+                        <div class="card card-bordered style-primary">
                             <div class="card-head">
-                                <header><span class="text-primary">GRUPOS</span></header>
+                                <div class="tools">
+                                    <div class="btn-group">
+                                        <a class="btn btn-icon-toggle" data-toggle="modal" data-target="#general-modal" id="agregar">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                        <a class="btn btn-icon-toggle btn-refresh" id="recargar">
+                                            <i class="md md-refresh"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <header><i class="fa fa-users"></i> GRUPOS</header>
                             </div><!--end .card-head -->
-                            <div class="card-body">
+                            <div class="card-body style-default-bright">
                                 <div class="col-md-12">
                                     <table class="table datatable table-bordered table-hover" id="table-grupos">
                                         <thead>
                                             <tr>
-                                            	<th>MATERIA</th>
+                                                <th>#</th>
+                                                <th>SEMESTRE</th>
+                                                <th>MATERIA</th>
+                                                <th>DOCENTE</th>
+                                            	<th>NÓ. ALUMNOS</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                            	<td></td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -42,7 +53,7 @@
                 },
                 'columnDefs' : [{
                     className : 'text-center',
-                    'targets' : [2,3]     
+                    'targets' : [1,4]
                 }],
             });
 
