@@ -16,18 +16,18 @@
                                         </a>
                                     </div>
                                 </div>
-                                <header><i class="fa fa-users"></i> GRUPOS</header>
+                                <header><i class="fa fa-gavel"></i> DOCENTES</header>
                             </div><!--end .card-head -->
                             <div class="card-body style-default-bright">
                                 <div class="col-md-12">
-                                    <table class="table datatable table-bordered table-hover" id="table-grupos">
+                                    <table class="table datatable table-bordered table-hover" id="table-docentes">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
-                                                <th>SEMESTRE</th>
-                                                <th>MATERIA</th>
-                                                <th>DOCENTE</th>
-                                            	<th>NÓ. ALUMNOS</th>
+                                                <th>MATR&Iacute;CULA</th>
+                                                <th>NOMBRE COMPLETO</th>
+                                                <th>FECHA ALTA</th>
+                                                <th>STATUS</th>
+                                            	<th>OPCIONES</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -46,20 +46,39 @@
     <script src="<?= base_url() ?>assets/js/libs/DataTables/jquery.dataTables.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            var table = $('#table-grupos').DataTable({
+            var table = $('#table-docentes').DataTable({
                 'ajax': {
-                    'url' : '<?= base_url() ?>admin/postGrupos',
+                    'url' : '<?= base_url() ?>admin/postDocentes',
                     'type' : 'POST'
                 },
                 'columnDefs' : [{
                     className : 'text-center',
-                    'targets' : [1,4]
+                    'targets' : [2,3,4]     
                 }],
+                'order': [[ 1, 'asc' ]]
             });
 
 
             $('#recargar').click(function(e){
                 table.ajax.reload();
+            });
+
+            $('#agregar').click(function (e) {
+                e.preventDefault();
+                
+                $('.modal-content', '#general-modal').html('<div class="modal-body">' +
+                '<h3><i class="fa fa-spin fa-spinner"></i> Cargando...</h3>' +
+                '</div>');
+
+                  postAjax(base_url + 'docente/getAlumnosByGrupo',
+                      {grupo: 1},
+
+                      function (response) {
+                        $(".modal-content", '#general-modal').html(response);
+                      }
+                  );
+
+
             });
 
         });

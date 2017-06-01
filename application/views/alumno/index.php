@@ -17,48 +17,53 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <table class="table datatable table-bordered table-hover" id="mytablem">
-                                        <thead>
-                                            <tr>
-                                                <th>MATERIA</th>
-                                                <?php foreach($unidades as $unidad){
-                                                    echo '<th class="text-center">' . $unidad . '</th>';
-                                                } ?>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                                foreach ($materias as $keyM => $m){
-                                                echo '<tr>
-                                                        <td>
-                                                            <a href="#myModal" data-toggle="modal" class="openBtn text-primary" data-g="'.$keyM.'">'.$m.'</a>
-                                                        </td>';
-                                                    foreach ($unidades as $keyU => $u){
-                                                        echo '<td class="text-center">';
-                                                            $calificacion = null;
-                                                            if(array_key_exists($keyU, $calificaciones[$keyM])){
-                                                                $calificacion = $calificaciones[ $keyM ][ $keyU ];
-                                                            }
-                                                            switch (true) {
-                                                                case ( $calificacion == null ):
-                                                                    echo '<button type="button" class="btn ink-reaction btn-floating-action btn-danger text-center" disabled> . . . </button>';
-                                                                    break;
-                                                                case ( $calificacion < 70 ):
-                                                                    echo '<button type="button" class="btn ink-reaction btn-floating-action btn-danger text-center">N/A</button>';
-                                                                    break;
-                                                                case ( $calificacion >= 70 ):
-                                                                    echo '<button type="button" class="btn ink-reaction btn-floating-action btn-primary text-center">'. $calificacion .'</button>';
-                                                                    break;
-                                                                default: break;
-                                                            }
-                                                        
-                                                    echo '</td>';
-                                                    }
-                                                echo '</tr>';
-                                                } 
-                                            ?>
-                                        </tbody>
-                                    </table>
+                                    <div class="table-responsive">
+                                        <table class="table datatable table-bordered table-hover" id="mytablem">
+                                            <thead>
+                                                <tr>
+                                                    <th>MATERIA</th>
+                                                    <?php foreach($unidades as $unidad){
+                                                        echo '<th class="text-center">' . $unidad . '</th>';
+                                                    } ?>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                    foreach ($materias as $keyM => $m){
+                                                    echo '<tr>
+                                                            <td>
+                                                                <a href="#myModal" data-toggle="modal" class="openBtn text-primary" data-g="'.$keyM.'">'.$m.'</a>
+                                                            </td>';
+                                                        foreach ($unidades as $keyU => $u){
+                                                            echo '<td class="text-center">';
+                                                                $calificacion = null;
+                                                                if(array_key_exists($keyU, $calificaciones[$keyM])){
+                                                                    $calificacion = $calificaciones[ $keyM ][ $keyU ];
+
+                                                                    $obtencion = $calificacion > 70 && $calificacion < 80 ? '<sup class="badge style-danger">R</sup>' : '';
+
+                                                                }
+                                                                switch (true) {
+                                                                    case ( $calificacion == null ):
+                                                                        echo '<button type="button" class="btn ink-reaction btn-floating-action btn-danger text-center" disabled> . . . </button>';
+                                                                        break;
+                                                                    case ( $calificacion < 70 ):
+                                                                        echo '<button type="button" class="btn ink-reaction btn-floating-action btn-danger text-center">N/A</button>';
+                                                                        break;
+                                                                    case ( $calificacion >= 70 ):
+                                                                        echo '<button type="button" class="btn ink-reaction btn-floating-action btn-primary text-center">'. $calificacion .'</button>' . $obtencion;
+                                                                        break;
+                                                                    default: break;
+                                                                }
+                                                            
+                                                        echo '</td>';
+                                                        }
+                                                    echo '</tr>';
+                                                    } 
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div><!--end .card-body -->
                         </div><!--end .card -->
@@ -66,7 +71,9 @@
                 </div>
             </div><!--end .section-body -->
         </section>
-
-        <div class="modal fade" id="myModal"></div>
     </div><!--end #content-->
     <!-- END CONTENT -->
+    <script src="<?= base_url() ?>assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript">
+        
+    </script>

@@ -21,6 +21,21 @@ class Usuarios_model extends CI_Model{
         }
     }
 
+    public function getNombreUsuario(){
+        $usuario = $this->getDatosUsuario();
+        switch ($this->session->rol){
+            case 1:
+                return $usuario->DOCE_NOMBRE;
+            break;
+            case 2:
+                return $usuario->ALUM_NOMBRE;
+                break;
+            case 3:
+                return $usuario->ADMI_NOMBRE;
+                break;
+        }
+    }
+
     public function get(){
         try {
             $result = $this->db->get('usuarios');

@@ -26,23 +26,9 @@
 <script>
   toastr.options.positionClass = 'toast-bottom-left';
 
-  $(".btn-alumnos").click(function (e) {
-    e.preventDefault();
-    console.log($(this).data('id'));
+  
 
-    $(".modal-content").html('<div class="modal-body">' +
-      '<h3><i class="fa fa-spin fa-spinner"></i> Cargando...</h3>' +
-      '</div>');
-
-    postAjax(base_url + 'docente/getAlumnosByGrupo',
-      {grupo: $(this).data('id')},
-
-      function (response) {
-        $(".modal-content").html(response);
-      });
-  });
-
-  $("#tabla-cal").dataTable();
+  // $("#tabla-cal").dataTable();
 
 
   $("#tabla-cal td.cal").dblclick(function () {
