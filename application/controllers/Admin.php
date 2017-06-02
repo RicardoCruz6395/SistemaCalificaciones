@@ -225,14 +225,19 @@ class Admin extends CI_Controller {
         
     }
 
+    public function postDocenteForm(){
         echo '<span class="text-danger">Hola</span>';
     }
 
+    public function postMateriaForm(){
+        $this->load->view('admin/materias_form');
     }
 
+    public function postAlumnoForm(){
         echo '<span class="text-danger">Hola</span>';
     }
 
+    public function postGrupoForm(){
         echo '<span class="text-danger">Hola</span>';
     }
 
