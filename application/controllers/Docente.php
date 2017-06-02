@@ -3,11 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Docente extends CI_Controller{
 
-  public function __construct(){
-    parent::__construct();
-    if(!$this->session->userdata('login') or $this->session->rol != 1)
-      redirect('home');
-  }
+	public function __construct(){
+		parent::__construct();
+		if(!$this->session->login || $this->session->rol != 1)
+            redirect('/');
+    	$this->load->model('usuarios_model');
+        $this->docente = $this->usuarios_model->getDatosUsuario();
+	}
 
 	public function index(){
 
@@ -54,9 +56,11 @@ class Docente extends CI_Controller{
 
     public function calificar($grupo){
 
-	    $data = array('page_title' => 'Panel de Calificar');
-	    $this->load->view('layout/head', $data);
-	    $this->load->view('layout/header');
+	    $data = array('page_title' => 'SC :: Calificar');
+        $data2 = ['nombre_usuario' => $this->docente->DOCE_NOMBRE ];
+
+	    $this->load->view('layout/head'   , $data);
+	    $this->load->view('layout/header' , $data2);
 	    $this->load->model('materias_model');
 	    $this->load->model('alumnos_model');
 	    $this->load->model('calificaciones_model');

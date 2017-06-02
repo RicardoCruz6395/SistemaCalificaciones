@@ -1,11 +1,62 @@
 <?php
-/**
- * Date: 09/05/2017
- * Time: 06:47 PM
- */
-class Alumnos_model extends CI_Model
-{
+class Alumnos_model extends CI_Model {
     
+    public function getAlumnos(){
+        $this->db->where('ALUM_ACTIVO', 1);
+        $result = $this->db->get('alumnos');
+        return $result->result();
+    }
+
+    public function semestre( $id_alumno ){
+         $sql = "SELECT semestres.*
+                FROM alumnos
+                JOIN semestres ON (ALUM_SEMESTRE = SEME_SEMESTRE)
+                WHERE ALUM_ALUMNO = '$id_alumno'
+                LIMIT 1;";
+        return $this->db->query($sql)->row();
+    }
+        
+    public function getUltimoPeriodo( $id_alumno ){
+        
+        $sql = "SELECT GRUP_PERIODO FROM alumnos
+                JOIN grupos_detalles ON ALUM_ALUMNO = GDET_ALUMNO
+                JOIN grupos ON GDET_GRUPO = GRUP_GRUPO
+                WHERE ALUM_ALUMNO = $id_alumno
+                ORDER BY GRUP_PERIODO DESC LIMIT 1;";
+
+        return $this->db->query( $sql )->row();
+
+    }
+
+    public function getMateriasByPeriodo( $id_alumno, $periodo ){
+        $sql = "SELECT * FROM (
+                    SELECT GDET_DETALLE, MATE_NOMBRE, UNID_UNIDAD, UNID_NUMERO, UNID_NOMBRE 
+                    FROM periodos
+                    JOIN grupos ON PERI_PERIODO = GRUP_PERIODO
+                    JOIN materias ON GRUP_MATERIA = MATE_MATERIA
+                    JOIN unidades ON MATE_MATERIA = UNID_MATERIA
+                    JOIN grupos_detalles ON GRUP_GRUPO = GDET_GRUPO
+                    WHERE GRUP_PERIODO = $periodo
+                    AND GDET_ALUMNO = $id_alumno
+                    AND GDET_ACTIVO = 1 
+                ) a
+                LEFT JOIN
+                (
+                    SELECT CALI_GRUPO_DETALLE, CALI_UNIDAD, CALI_OBTENCION, CALI_PUNTAJE, OBTE_NOMBRE
+                    FROM grupos_detalles
+                    JOIN calificaciones ON GDET_DETALLE = CALI_GRUPO_DETALLE
+                    JOIN obtenciones ON CALI_OBTENCION = OBTE_OBTENCION
+                    WHERE GDET_ALUMNO = $id_alumno
+                    AND GDET_ACTIVO = 1
+                ) b
+                ON (GDET_DETALLE = CALI_GRUPO_DETALLE AND UNID_UNIDAD = CALI_UNIDAD )
+                ORDER BY MATE_NOMBRE, UNID_UNIDAD ASC;
+                ";
+        return $this->db->query($sql)->result();
+    }
+
+
+
     public function get(){
         try{
             $result = $this->db->get('alumnos');

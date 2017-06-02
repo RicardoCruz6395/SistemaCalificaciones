@@ -1,18 +1,10 @@
 <!-- BEGIN JAVASCRIPT -->
 <script>var base_url = '<?=base_url()?>';</script>
-<script src="<?= base_url() ?>assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
 <script src="<?= base_url() ?>assets/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
 <script src="<?= base_url() ?>assets/js/libs/bootstrap/bootstrap.min.js"></script>
 <script src="<?= base_url() ?>assets/js/libs/spin.js/spin.min.js"></script>
 <script src="<?= base_url() ?>assets/js/libs/autosize/jquery.autosize.min.js"></script>
-<script src="<?= base_url() ?>assets/js/libs/DataTables/jquery.dataTables.min.js"></script>
 <script src="<?= base_url() ?>assets/js/libs/moment/moment.min.js"></script>
-<script src="<?= base_url() ?>assets/js/libs/flot/jquery.flot.min.js"></script>
-<script src="<?= base_url() ?>assets/js/libs/flot/jquery.flot.time.min.js"></script>
-<script src="<?= base_url() ?>assets/js/libs/flot/jquery.flot.resize.min.js"></script>
-<script src="<?= base_url() ?>assets/js/libs/flot/jquery.flot.orderBars.js"></script>
-<script src="<?= base_url() ?>assets/js/libs/flot/jquery.flot.pie.js"></script>
-<script src="<?= base_url() ?>assets/js/libs/flot/curvedLines.js"></script>
 <script src="<?= base_url() ?>assets/js/libs/jquery-knob/jquery.knob.min.js"></script>
 <script src="<?= base_url() ?>assets/js/libs/sparkline/jquery.sparkline.min.js"></script>
 <script src="<?= base_url() ?>assets/js/libs/nanoscroller/jquery.nanoscroller.min.js"></script>
@@ -28,30 +20,12 @@
 <script src="<?= base_url() ?>assets/js/core/source/AppCard.js"></script>
 <script src="<?= base_url() ?>assets/js/core/source/AppForm.js"></script>
 <script src="<?= base_url() ?>assets/js/core/source/AppNavSearch.js"></script>
-<script src="<?= base_url() ?>assets/js/core/source/AppVendor.js"></script>
 <script src="<?= base_url() ?>assets/js/core/demo/Demo.js"></script>
 <script src="<?= base_url() ?>assets/js/core/main.js"></script>
 <!-- END JAVASCRIPT -->
 <script>
   toastr.options.positionClass = 'toast-bottom-left';
 
-  $(".btn-alumnos").click(function (e) {
-    e.preventDefault();
-    console.log($(this).data('id'));
-
-    $(".modal-content").html('<div class="modal-body">' +
-      '<h3><i class="fa fa-spin fa-spinner"></i> Cargando...</h3>' +
-      '</div>');
-
-    postAjax(base_url + 'docente/getAlumnosByGrupo',
-      {grupo: $(this).data('id')},
-
-      function (response) {
-        $(".modal-content").html(response);
-      });
-  });
-
-  $("#tabla-calificaciones").dataTable();
 
 
   $("#tabla-calificaciones td.cal").dblclick(function () {
@@ -153,6 +127,21 @@
       $(".loader-hide").fadeIn();
     });
   });
+
+
+    $('.openBtn').click(function (e) {
+        e.preventDefault();
+        
+        $('#myModal').html('<div class="modal-body">' +
+        '<h3><i class="fa fa-spin fa-spinner"></i> Cargando...</h3>' +
+        '</div>');
+
+        grupo = this.getAttribute('data-g');
+
+        postAjax(base_url + 'alumno/getCalificacionesGrupo', { grupo : grupo }, function (response) {
+            $('#myModal').html(response);
+        });
+    });
 
 </script>
 </body>

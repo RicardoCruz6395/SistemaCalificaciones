@@ -126,4 +126,8 @@
       </div><!--end .section-body -->
     </section>
   </div>
+  <script src="<?= base_url() ?>assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
+  <script type="text/javascript">
+    
+  </script>
 

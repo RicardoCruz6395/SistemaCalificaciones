@@ -2,6 +2,20 @@
 
 class Docentes_model extends CI_Model{
 
+    public function getDocentes(){
+        $this->db->where('DOCE_ACTIVO', 1);
+        $result = $this->db->get('docentes');
+        return $result->result();
+    }
+
+    public function usuario( $id_docente ){
+        $sql = "SELECT usuarios.*
+                FROM docentes
+                JOIN usuarios ON (DOCE_USUARIO = USUA_USUARIO)
+                WHERE DOCE_DOCENTE = '$id_docente'
+                LIMIT 1;";
+        return $this->db->query($sql)->row();
+    }
 
     public function getGruposByPeriodo( $id_periodo ){
 
