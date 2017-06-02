@@ -66,35 +66,66 @@
                       <tr>
                         <th>MATRICULA</th>
                         <th>NOMBRE</th>
-                        <th>UNIDAD I</th>
-                        <th>UNIDAD II</th>
-                        <th>UNIDAD III</th>
-                        <th>UNIDAD IV</th>
+                        <?php foreach($unidades as $unidad){
+                            echo '<th class="text-center">' . $unidad . '</th>';
+                        } ?>
                         <th><b>PROMEDIO</b></th>
                       </tr>
                     </thead>
                     <tbody>
-                    <form action="validar" method="post" class="form-validate">
-                      <?php
-                        if($alumnos!=null){
-                        foreach ($alumnos as $alum){
-                      ?>
-                      <tr data-id="<?= $alum->ALUM_ALUMNO ?>">
-                        <td> <?= $alum->ALUM_MATRICULA ?> </td>
-                        <td> <?= $alum->ALUM_NOMBRE." ".$alum->ALUM_APELLIDOS ?> </td>
-                        <td class="cal" data-name="u1">100</td>
-                        <td class="cal" data-name="u2">100</td>
-                        <td class="cal" data-name="u3">100</td>
-                        <td class="cal" data-name="u4">100</td>
-                        <td class="promedio"><b class="" data-name="promedio">100</b></td>
-                      </tr>
-                      <?php
-                        }
-                        }else{
-                          echo "NO HAY ALUMNOS";
-                        }
-                      ?>
-                    </form>
+                        <?php
+                        foreach ($alumnos as $keyA => $a){
+                        echo '<tr>
+                                <td>
+                                    <a href="#myModal" data-toggle="modal" class="openBtn text-primary" data-g="'.$keyA.'">'.$a["matricula"].'</a>
+                                </td>';
+                        echo  '<td>
+                                    '.$a["nombre"].'
+                                </td>';
+                                $n_unidades = 0;
+                                $suma = 0;
+                            foreach ($unidades as $keyU => $u){
+                                echo '<td class="text-center">';
+                                    $calificacion = null;
+                                    if(array_key_exists($keyU, $calificaciones[$keyA])){
+                                        $calificacion = $calificaciones[ $keyA ][ $keyU ];
+                                        $obtencion = $calificacion > 70 && $calificacion < 80 ? '<sup class="badge style-danger">R</sup>' : '';
+                                    }
+                                    switch (true) {
+                                        case ( $calificacion == null ):
+                                            echo '<button type="button" class="btn ink-reaction btn-floating-action btn-danger text-center" disabled> . . . </button>';
+                                            break;
+                                        case ( $calificacion < 70 ):
+                                            echo '<button type="button" class="btn ink-reaction btn-floating-action btn-danger text-center">N/A</button>';
+                                            break;
+                                        case ( $calificacion >= 70 ):
+                                            echo '<button type="button" class="btn ink-reaction btn-floating-action btn-primary text-center">'. $calificacion .'</button>' . $obtencion;
+                                            break;
+                                        default: break;
+                                    }
+
+                                    $n_unidades++;
+                                    if($calificacion != null)
+                                      $suma+=$calificacion;
+                            echo '</td>';
+                            }
+                            $promedio = number_format($suma/$n_unidades);
+
+                            echo "<td class='text-center'>";
+                              switch (true) {
+                                        case ( $promedio < 70 ):
+                                            echo '<button type="button" class="btn ink-reaction btn-floating-action btn-danger text-center"> '. $promedio .' </button>';
+                                            break;
+                                        case ( $promedio >= 70 ):
+                                            echo '<button type="button" class="btn ink-reaction btn-floating-action btn-primary text-center">'. $promedio .'</button>';
+                                            break;
+                                        default: break;
+                                    }
+                            echo "</td>";
+
+                        echo '</tr>';
+                        } 
+                    ?> 
                     </tbody>
                   </table>
 
@@ -112,6 +143,8 @@
               </div><!--end .card-head -->
               <div class="card-body">
                 <pre>
+                  <?php var_dump($alumnos2);   ?>
+                  <?php var_dump($alumnos);   ?>
                   <?php print_r($grupo);   ?>
                 </pre>
               </div><!--end .card-body -->
