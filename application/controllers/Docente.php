@@ -72,6 +72,15 @@ class Docente extends CI_Controller{
 	    $this->load->view('layout/scripts');
 	}
 
+	public function guardarCalificacion(){
+    $this->load->model('calificaciones_model');
+    $post = $this->input->post();
+    $response = $this->calificaciones_model->guardarCalificaciones($post['grupo'], $post['calificaciones']);
+    print_r( $response );
+    print_r($this->input->post());
+
+  }
+
 	public function test(){
       echo "test";
   }

@@ -38,4 +38,28 @@ class Calificaciones_model extends CI_Model{
     return $alumnos;
   }
 
+  public function guardarCalificaciones($grupo, $calificaciones){
+
+    $sql = "
+    SELECT * FROM grupos 
+      JOIN grupos_detalles ON GDET_GRUPO = GRUP_GRUPO
+      JOIN calificaciones ON GDET_DETALLE = CALI_GRUPO_DETALLE
+      WHERE GRUP_GRUPO = $grupo
+    ";
+    //foreach($calificaciones as $cal){
+    //}
+    $originales = $this->db->query($sql)->result();
+    
+    foreach ($calificaciones as $cal){
+      $sql = "
+    UPDATE calificaciones SET 
+      CALI_PUNTAJE = $cal->cal1
+      WHERE CALI_UNIDAD = 1 AND 
+      CALI_CALIFICACION = 
+    ";
+    }
+    return $this->db->query($sql)->result();
+
+  }
+
 }

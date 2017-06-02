@@ -51,10 +51,11 @@
       });
   });
 
-  $("#tabla-cal").dataTable();
+  $("#tabla-calificaciones").dataTable();
 
 
-  $("#tabla-cal td.cal").dblclick(function () {
+  $("#tabla-calificaciones td.cal").dblclick(function () {
+    console.log("doble clic");
     var original = $.trim($(this).text());
     $(this).addClass('cellEditing');
     $(this).html('<input type="text" maxlength="3"  minlength="2" class="form-control" value="'+original+'">');
@@ -124,7 +125,34 @@
     }
     $(fila).find('.promedio b').removeClass().addClass('no-bg alert-'+clase).text(promedio);
 
-  }
+  };
+
+  $('.btn-save-cali').click(function () {
+    $(".loader-hide").hide();
+    $(".loader").fadeIn();
+    var calificaciones=[];
+    $('#tabla-calificaciones tr.alumno').each(function () {
+      var alumno = new Object();
+      alumno.id = $(this).data('id');
+      alumno.matricula = $(this).find('td').eq(0).text();
+      alumno.nombre = $(this).find('td').eq(1).text();
+      alumno.cal1 = $(this).find('td').eq(2).text();
+      alumno.cal2 = $(this).find('td').eq(3).text();
+      alumno.cal3 = $(this).find('td').eq(4).text();
+      alumno.cal4 = $(this).find('td').eq(5).text();
+      calificaciones.push(alumno);
+    });
+
+    console.log(calificaciones);
+    postAjax(base_url + 'docente/guardarCalificacion', {
+      grupo: $("#grupo").val(),
+      calificaciones:calificaciones
+      }, function (data) {
+      $(".debug").html(data);
+      $(".loader").hide();
+      $(".loader-hide").fadeIn();
+    });
+  });
 
 </script>
 </body>

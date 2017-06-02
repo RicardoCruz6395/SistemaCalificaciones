@@ -18,6 +18,7 @@
                   <div class="form-group">
                     <label for="" class="form-control-label">Semestre</label>
                     <input type="text" class="form-control" value=" <?= $grupo->SEME_NOMBRE ?> " readonly>
+                    <input type="hidden" class="form-control" value=" <?= $grupo->GRUP_GRUPO ?> " readonly id="grupo">
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -48,7 +49,10 @@
                   <div class="btn-group">
                     <a class="btn btn-icon-toggle btn-collapse"><i class="fa fa-angle-down"></i></a>
                   </div>
-                  <button class="btn btn-primary btn-save-cali"> <i class="fa fa-save"></i> GUARDAR</button>
+                  <button class="btn btn-primary btn-save-cali">
+                    <span class="loader" style="display:none"> <i class="fa fa-spin fa-spinner"></i> </span>
+                    <i class="fa fa-save loader-hide"></i>
+                     GUARDAR</button>
                 </div>
 
               </div><!--end .card-head -->
@@ -61,7 +65,7 @@
                   Al finalizar haga clic en "Guardar" para confirmar las calificaciones.
                 </div>
                 <div class="row">
-                  <table class="table table-bordered table-hover" id="tabla-cal">
+                  <table class="table table-bordered table-hover" id="tabla-calificaciones">
                     <thead>
                       <tr>
                         <th>MATRICULA</th>
@@ -78,7 +82,7 @@
                         if($alumnos!=null){
                         foreach ($alumnos as $alum){
                       ?>
-                      <tr data-id="<?= $alum->ALUM_ALUMNO ?>">
+                      <tr class="alumno" data-id="<?= $alum->ALUM_ALUMNO ?>">
                         <td> <?= $alum->ALUM_MATRICULA ?> </td>
                         <td> <?= $alum->ALUM_NOMBRE." ".$alum->ALUM_APELLIDOS ?> </td>
                           <?php
@@ -102,7 +106,7 @@
                 </div>
               </div><!--end .card-body -->
             </div><!--end .card -->
-            <div class="card card-underline">
+            <div class="card card-underline card-collapsed">
               <div class="card-head">
                 <header>DEBUG</header>
                 <div class="tools">
@@ -111,8 +115,8 @@
                   </div>
                 </div>
               </div><!--end .card-head -->
-              <div class="card-body">
-                <pre>
+              <div class="card-body " style="display: none">
+                <pre class="debug">
                   <?php print_r($alumnos);   ?>
                 </pre>
               </div><!--end .card-body -->
