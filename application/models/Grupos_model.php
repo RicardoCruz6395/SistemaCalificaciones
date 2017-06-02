@@ -23,4 +23,10 @@ class Grupos_model extends CI_Model{
         return $this->db->query($sql)->row();
     }
 
+    public function delete( $id ){
+        $this->db->set('GRUP_ACTIVO', 0);
+        $this->db->where('GRUP_GRUPO', $id);
+        return $this->db->update('grupos');
+    }
+
 }
