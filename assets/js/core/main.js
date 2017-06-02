@@ -35,27 +35,31 @@ function end() {
   // },500);
 }
 
-function postAjax(url, data, callback) {
-
-  $.ajax({
-    method: 'post',
-    url: url,
-    data: data,
-    statusCode: {
-      404: function () {
-        alert("Página no encontrada.");
-      }
-    }
-  })
+function postAjax( params ) {
+    $.ajax({
+        method: params.type | 'POST',
+        url: params.url,
+        data: params.data | {},
+        proccessData : false,
+        statusCode: {
+            404: function () {
+                alert('Página no encontrada :(');
+            },
+            500: function () {
+                alert('Ocurrió un erorr en el servidor');
+            }
+        }
+    })
     .done(function (response) {
-      callback(response);
-      console.log('Success');
-      //console.log(response);
-      //after_submit($this, response, modal);
-      //return response;
+        if( params.success )
+            params.success(response);
+        //console.log('Success');
+        //console.log(response);
+        //after_submit($this, response, modal);
+        //return response;
     })
 
-    .fail(function (response) {
+    .fail(function(response) {
       console.log("Error");
       //console.log(response);
       //modal.addClass('shake');
@@ -69,3 +73,4 @@ function postAjax(url, data, callback) {
       //after_submit($this, response);
     });
 }
+
