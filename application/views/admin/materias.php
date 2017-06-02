@@ -62,6 +62,22 @@
                 table.ajax.reload();
             });
 
+            $('#agregar').click(function (e) {
+                e.preventDefault();
+                
+                $('.modal-body', '#general-modal').html('<div class="text-center"><i class="fa fa-spin fa-spinner"></i></div>');
+
+                postAjax({
+                    url : base_url + 'admin/postMateriaForm',
+                    data : { grupo : 1 },
+                    success : function(response){
+                        $('.modal-content', '#general-modal').html(response);
+                    }
+                });
+
+
+            });
+
         });
 
 
