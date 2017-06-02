@@ -79,7 +79,8 @@ class Docente extends CI_Controller{
                 $alumnos[ $c->GDET_DETALLE ]["matricula"] = $c->ALUM_MATRICULA;
                 $alumnos[ $c->GDET_DETALLE ]["nombre"] = $c->ALUM_NOMBRE." ".$c->ALUM_APELLIDOS;
                 $unidades[ $c->UNID_NUMERO ] = $c->UNID_NOMBRE;
-                $calificaciones[ $c->GDET_DETALLE ][ $c->UNID_NUMERO ] = $c->CALI_PUNTAJE;
+                $calificaciones[ $c->GDET_DETALLE ][ $c->UNID_NUMERO ][0] = $c->CALI_PUNTAJE;
+                $calificaciones[ $c->GDET_DETALLE ][ $c->UNID_NUMERO ][1] = $c->OBTE_NOMBRE;
             }
 
             ksort($unidades);

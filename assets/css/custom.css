@@ -150,7 +150,7 @@ tr button {
 }
 
 .cellEditing {
-  width: auto !important;
+  /*width: auto !important;*/
 }
 
 table thead {
@@ -164,4 +164,26 @@ section.section-account .img-backdrop, section.section-account .spacer {
 
 .no-bg {
   background: none;
+}
+
+.form-cal{
+  color: white !important;
+  text-align: center;
+  width: 42px !important;
+}
+
+.form-obt{
+  color: white !important;
+  text-align: center;
+  width: 25px !important;
+  height: 20px;
+  font-size: 120%;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.text-dark{
+  color: #313335 !important;
 }
