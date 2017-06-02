@@ -3,66 +3,55 @@
         <section>
             <div class="section-body">
 				<div class="row">
-					<!-- BEGIN ALERT - REVENUE -->
+					<!-- BEGIN ALERT - TIME ON SITE -->
 					<div class="col-md-3 col-sm-6">
 						<div class="card">
 							<div class="card-body no-padding">
-								<div class="alert alert-callout alert-info no-margin">
-									<strong class="pull-right text-success text-lg">0,38% <i class="md md-trending-up"></i></strong>
-									<strong class="text-xl">$ 32,829</strong><br>
-									<span class="opacity-50">Revenue</span>
-									<div class="stick-bottom-left-right">
-										<div class="height-2 sparkline-revenue" data-line-color="#bdc1c1"><canvas style="display: inline-block; width: 289px; height: 80px; vertical-align: top;" width="289" height="80"></canvas></div>
-									</div>
+								<div class="alert alert-callout alert-primary no-margin">
+									<h1 class="pull-right text-primary"><i class="fa fa-users"></i></h1>
+									<a href="<?=base_url()?>admin/grupos"><strong class="text-xl"><?=$grupos?> grupos</strong></a><br>
+									<span class="opacity-50">Avg. time on site</span>
 								</div>
 							</div><!--end .card-body -->
 						</div><!--end .card -->
 					</div><!--end .col -->
-					<!-- END ALERT - REVENUE -->
+					<!-- END ALERT - TIME ON SITE -->
 					
-					<!-- BEGIN ALERT - VISITS -->
+					<!-- BEGIN ALERT - TIME ON SITE -->
 					<div class="col-md-3 col-sm-6">
 						<div class="card">
 							<div class="card-body no-padding">
 								<div class="alert alert-callout alert-warning no-margin">
-									<strong class="pull-right text-warning text-lg">0,01% <i class="md md-swap-vert"></i></strong>
-									<strong class="text-xl">432,901</strong><br>
-									<span class="opacity-50">Visits</span>
-									<div class="stick-bottom-right">
-										<div class="height-1 sparkline-visits" data-bar-color="#e5e6e6"><canvas width="265" height="40" style="display: inline-block; width: 265px; height: 40px; vertical-align: top;"></canvas></div>
-									</div>
+									<h1 class="pull-right text-warning"><i class="fa fa-graduation-cap"></i></h1>
+									<a href="<?=base_url()?>admin/alumnos"><strong class="text-xl"><?=$alumnos?> alumnos</strong></a><br>
+									<span class="opacity-50">Avg. time on site</span>
 								</div>
 							</div><!--end .card-body -->
 						</div><!--end .card -->
 					</div><!--end .col -->
-					<!-- END ALERT - VISITS -->
+					<!-- END ALERT - TIME ON SITE -->
 					
-					<!-- BEGIN ALERT - BOUNCE RATES -->
+					<!-- BEGIN ALERT - TIME ON SITE -->
 					<div class="col-md-3 col-sm-6">
 						<div class="card">
 							<div class="card-body no-padding">
 								<div class="alert alert-callout alert-danger no-margin">
-									<strong class="pull-right text-danger text-lg">0,18% <i class="md md-trending-down"></i></strong>
-									<strong class="text-xl">42.90%</strong><br>
-									<span class="opacity-50">Bounce rate</span>
-									<div class="stick-bottom-left-right">
-										<div class="progress progress-hairline no-margin">
-											<div class="progress-bar progress-bar-danger" style="width:43%"></div>
-										</div>
-									</div>
+									<h1 class="pull-right text-danger"><i class="fa fa-book"></i></h1>
+									<a href="<?=base_url()?>admin/materias"><strong class="text-xl"><?=$materias?> materias</strong></a><br>
+									<span class="opacity-50">Avg. time on site</span>
 								</div>
 							</div><!--end .card-body -->
 						</div><!--end .card -->
 					</div><!--end .col -->
-					<!-- END ALERT - BOUNCE RATES -->
+					<!-- END ALERT - TIME ON SITE -->
 					
 					<!-- BEGIN ALERT - TIME ON SITE -->
 					<div class="col-md-3 col-sm-6">
 						<div class="card">
 							<div class="card-body no-padding">
 								<div class="alert alert-callout alert-success no-margin">
-									<h1 class="pull-right text-success"><i class="md md-timer"></i></h1>
-									<strong class="text-xl">54 sec.</strong><br>
+									<h1 class="pull-right text-success"><i class="fa fa-gavel"></i></h1>
+									<a href="<?=base_url()?>admin/docentes"><strong class="text-xl"><?=$docentes?> docentes</strong></a><br>
 									<span class="opacity-50">Avg. time on site</span>
 								</div>
 							</div><!--end .card-body -->

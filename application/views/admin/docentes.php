@@ -66,17 +66,15 @@
             $('#agregar').click(function (e) {
                 e.preventDefault();
                 
-                $('.modal-content', '#general-modal').html('<div class="modal-body">' +
-                '<h3><i class="fa fa-spin fa-spinner"></i> Cargando...</h3>' +
-                '</div>');
+                $('.modal-body', '#general-modal').html('<div class="text-center"><i class="fa fa-spin fa-spinner"></i></div>');
 
-                  postAjax(base_url + 'docente/getAlumnosByGrupo',
-                      {grupo: 1},
-
-                      function (response) {
-                        $(".modal-content", '#general-modal').html(response);
-                      }
-                  );
+                postAjax({
+                    url : base_url + 'admin/postDocenteForm',
+                    data : { grupo : 1 },
+                    success : function(response){
+                        $('.modal-content', '#general-modal').html(response);
+                    }
+                });
 
 
             });

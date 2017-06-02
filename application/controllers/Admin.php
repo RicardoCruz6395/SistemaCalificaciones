@@ -15,10 +15,32 @@ class Admin extends CI_Controller {
 
 	public function index(){
 		$data1 = ['page_title'    => 'SC :: Inicio'];
+
+        $this->load->model('grupos_model');
+        $grupos = $this->grupos_model->getGrupos();
+        $grupos = count($grupos);
+
+        $this->load->model('alumnos_model');
+        $alumnos = $this->alumnos_model->getAlumnos();
+        $alumnos = count($alumnos);
+
+        $this->load->model('materias_model');
+        $materias = $this->materias_model->getMaterias();
+        $materias = count($materias);
+
+        $this->load->model('docentes_model');
+        $docentes = $this->docentes_model->getDocentes();
+        $docentes = count($docentes);
+
+
+        $elementos['grupos'] = $grupos;
+        $elementos['alumnos'] = $alumnos;
+        $elementos['materias'] = $materias;
+        $elementos['docentes'] = $docentes;
 		
-		$this->load->view('layout/head'   , $data1);
+		$this->load->view('layout/head', $data1);
         $this->load->view('layout/header');
-        $this->load->view('admin/index', []);
+        $this->load->view('admin/index', $elementos);
         $this->load->view('layout/menu');
         $this->load->view('layout/scripts');
 	}
@@ -201,6 +223,22 @@ class Admin extends CI_Controller {
         header('Content-Type: application/json');
         echo json_encode($data);
         
+    }
+
+    public function postDocenteForm(){
+        echo '<span class="text-danger">Hola</span>';
+    }
+
+    public function postMateriaForm(){
+        $this->load->view('admin/materias_form');
+    }
+
+    public function postAlumnoForm(){
+        echo '<span class="text-danger">Hola</span>';
+    }
+
+    public function postGrupoForm(){
+        echo '<span class="text-danger">Hola</span>';
     }
 
 }
