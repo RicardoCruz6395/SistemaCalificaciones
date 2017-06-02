@@ -56,6 +56,34 @@ class Alumnos_model extends CI_Model {
     }
 
 
+    public function getCalificacionesByGrupo( $grupo ){
+        $sql = "SELECT * FROM (
+                    SELECT ALUM_MATRICULA, GDET_DETALLE, MATE_NOMBRE, UNID_UNIDAD, UNID_NUMERO, UNID_NOMBRE, ALUM_NOMBRE, ALUM_APELLIDOS
+                    FROM periodos
+                    JOIN grupos ON PERI_PERIODO = GRUP_PERIODO
+                    JOIN materias ON GRUP_MATERIA = MATE_MATERIA
+                    JOIN unidades ON MATE_MATERIA = UNID_MATERIA
+                    JOIN grupos_detalles ON GRUP_GRUPO = GDET_GRUPO
+                    JOIN alumnos ON GDET_ALUMNO = ALUM_ALUMNO
+                    WHERE GRUP_GRUPO = $grupo
+                    AND GDET_ACTIVO = 1 
+                ) a
+                LEFT JOIN
+                (
+                    SELECT CALI_GRUPO_DETALLE, CALI_UNIDAD, CALI_OBTENCION, CALI_PUNTAJE, OBTE_NOMBRE
+                    FROM grupos_detalles
+                    JOIN calificaciones ON GDET_DETALLE = CALI_GRUPO_DETALLE
+                    JOIN obtenciones ON CALI_OBTENCION = OBTE_OBTENCION
+                    WHERE GDET_GRUPO= $grupo
+                    AND GDET_ACTIVO = 1
+                ) b
+                ON (GDET_DETALLE = CALI_GRUPO_DETALLE AND UNID_UNIDAD = CALI_UNIDAD )
+                ORDER BY MATE_NOMBRE, UNID_UNIDAD ASC;
+                ";
+        return $this->db->query($sql)->result();
+    }
+
+
 
     public function get(){
         try{
