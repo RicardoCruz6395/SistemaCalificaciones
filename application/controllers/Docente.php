@@ -12,6 +12,15 @@ class Docente extends CI_Controller{
 	}
 
 	public function index(){
+        $this->load->model('docentes_model');
+		$periodo = $this->docentes_model->getUltimoPeriodo( $this->docente->DOCE_DOCENTE );
+        $periodo = $periodo->GRUP_PERIODO;
+        redirect('docente/periodo/' . $periodo);
+	}
+
+	public function index2(){
+
+
 
 	    $data = array('page_title' => 'SC :: Grupos');
 	    $this->load->view('layout/head', $data);
@@ -25,7 +34,7 @@ class Docente extends CI_Controller{
 	    $this->load->view('layout/scripts');
 	}
 
-	public function periodo( $periodo = null ){
+	public function periodo_old( $periodo = null ){
 		
 		$data = array('page_title' => 'SC :: Lista de grupos');
 	    $this->load->view('layout/head', $data);
@@ -64,14 +73,91 @@ class Docente extends CI_Controller{
 	    $this->load->model('materias_model');
 	    $this->load->model('alumnos_model');
 
-	    $data = ["alumnos" => $this->alumnos_model->getByGrupo($grupo),
+	    $SQLcalificaciones = $this->alumnos_model->getCalificacionesByGrupo( $grupo );
+            
+            foreach ($SQLcalificaciones as $key => $c) {
+                $alumnos[ $c->GDET_DETALLE ]["matricula"] = $c->ALUM_MATRICULA;
+                $alumnos[ $c->GDET_DETALLE ]["nombre"] = $c->ALUM_NOMBRE." ".$c->ALUM_APELLIDOS;
+                $unidades[ $c->UNID_NUMERO ] = $c->UNID_NOMBRE;
+                $calificaciones[ $c->GDET_DETALLE ][ $c->UNID_NUMERO ] = $c->CALI_PUNTAJE;
+            }
+
+            ksort($unidades);
+
+	    $data = ["alumnos2" => $this->alumnos_model->getByGrupo($grupo),
 	            "grupo"    => $this->materias_model->getByCurso($grupo),
+	            'alumnos'       => $alumnos,
+	            'unidades'       => $unidades,
+	            "calificaciones"    => $calificaciones,
 	      ];
 
 	    $this->load->view('docente/calificar', $data);
 	    $this->load->view('layout/menu');
 	    $this->load->view('layout/scripts');
 	}
+
+	public function periodo( $id_periodo = null ){
+
+        if( $id_periodo ){
+
+            /******* NOMBRE DEL PERIODO ****************/
+            $this->load->model('periodos_model');
+            $nombre_periodo = $this->periodos_model->getNombrePeriodoById( $id_periodo );
+            
+            if(!$nombre_periodo){
+                $this->index();
+            }
+
+            /******** DATOS DEL DOCENTE ? *****************/
+            $this->load->model('usuarios_model');       
+            $docente = $this->usuarios_model->getDatosUsuario();
+
+            /******* LISTA DE LOS PERIODOS ***********/
+            $periodos = $this->periodos_model->getListaPeriodosByDocente( $docente->DOCE_DOCENTE );
+
+
+            $existe = false;
+            foreach ($periodos as $periodo) {
+                if($periodo->PERI_PERIODO == $id_periodo){
+                    $existe = true;
+                    break;
+                }
+            }
+
+            if(!$existe){
+                $this->index();
+            }
+
+            $select = '<select id="periodos" class="form-control">';
+            foreach($periodos as $periodo) {
+                $selected = $periodo->PERI_PERIODO == $id_periodo ? ' selected' : '' ;
+                $nombre = $this->periodos_model->getNombrePeriodoById( $periodo->PERI_PERIODO );
+                $select .= '<option value="'. $periodo->PERI_PERIODO . '"'. $selected . '>' . $nombre . '</option>';
+            }
+            $select .= '</select>';
+
+
+            /*********** LISTA DE grupos *************/
+            $this->load->model('docentes_model');
+            $data1 = ['page_title'    => 'SC :: Panel de Calificaciones'];
+            $data2 = ['nombre_usuario' => $docente->DOCE_DOCENTE ];
+            $data3 = [
+            	"grupos" => $this->docentes_model->getGruposByPeriodo( $id_periodo ),
+            	'periodos'       => $select,
+                'nombre_periodo' => $nombre_periodo
+        	];
+
+
+            $this->load->view('layout/head'   , $data1);
+            $this->load->view('layout/header' , $data2);
+            $this->load->view('docente/index' , $data3);
+            $this->load->view('layout/menu');
+            $this->load->view('layout/scripts');
+        }else{
+            $this->index();
+        }
+
+    }
 
 	public function test(){
       echo "test";

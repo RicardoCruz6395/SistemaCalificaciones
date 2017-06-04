@@ -92,4 +92,17 @@ class Docentes_model extends CI_Model{
         }
     }
 
+    public function getUltimoPeriodo( $id_docente ){
+        
+        $sql = "SELECT GRUP_PERIODO FROM docentes
+                JOIN grupos ON GRUP_DOCENTE = DOCE_DOCENTE
+                WHERE DOCE_DOCENTE = $id_docente
+                ORDER BY GRUP_PERIODO DESC LIMIT 1;";
+
+        return $this->db->query( $sql )->row();
+
+    }
+
+
+
 }

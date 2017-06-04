@@ -36,17 +36,19 @@ function end() {
 }
 
 function postAjax( params ) {
+    
     $.ajax({
         method: params.type || 'POST',
         url: params.url,
         data: params.data || {},
-        proccessData : false,
+        proccessData : true,
         statusCode: {
             404: function () {
                 alert('Página no encontrada :(');
             },
-            500: function () {
-                alert('Ocurrió un erorr en el servidor');
+            500: function (response) {
+                console.log(response);
+                alert('Ocurrió un error en el servidor');
             }
         }
     })
@@ -60,8 +62,7 @@ function postAjax( params ) {
     })
 
     .fail(function(response) {
-      alert(response)
-      //console.log(response);
+      console.log("Error",response);
       //modal.addClass('shake');
       //after_submit($this, response, modal);
       //return response;
