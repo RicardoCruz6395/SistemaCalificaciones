@@ -75,8 +75,24 @@
                         $('.modal-content', '#general-modal').html(response);
                     }
                 });
+            });
 
 
+            $('.btn-danger').live('click',function(e){
+                id = this.getAttribute('data-p');
+                SCAlerts.confirmCancel({
+                    title : 'Eliminar docente',
+                    message : '¿Desea eliminarlo?',
+                    success : function(){
+                        postAjax({
+                            url : base_url + 'admin/deleteDocente',
+                            data : { id : id },
+                            success : function(response){
+                                table.ajax.reload();
+                            }
+                        });
+                    }
+                });
             });
 
         });

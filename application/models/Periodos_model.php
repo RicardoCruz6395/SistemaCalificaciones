@@ -55,5 +55,21 @@ class Periodos_model extends CI_Model{
 		return $this->db->query($sql)->result();
     }
 
+    public function getListaPeriodosByDocente( $id_docente ){
+    	$sql = "SELECT PERI_PERIODO 
+				FROM periodos
+				JOIN grupos ON PERI_PERIODO = GRUP_PERIODO
+				WHERE GRUP_DOCENTE = '$id_docente'
+				AND GRUP_ACTIVO = 1
+				GROUP BY PERI_PERIODO;
+			";
+
+		return $this->db->query($sql)->result();
+    }
+
+    
+
+    
+
 
 }

@@ -7,13 +7,18 @@
     </div><!--end .card-head -->
     <div class="card-body style-default-bright">
         <form class="form form-validate floating-label" novalidate="novalidate" id="form-materia">
-			<div class="form-group has-error">
+			<div class="form-group">
 				<input type="text" class="form-control" id="clave" name="clave" data-rule-minlength="3" maxlength="10" required="" aria-required="true" aria-describedby="clave-error" aria-invalid="true"><span id="clave-error" class="help-block">Información requerida</span>
 				<label for="clave">Clave</label>
 				<p class="help-block">Introduzca 3 a 10 caracteres</p>
 			</div>
-			<div class="form-group has-error">
-				<input type="text" class="form-control" id="materia" name="materia" data-rule-minlength="1" required="" aria-required="true" aria-describedby="materia-error" aria-invalid="true"><span id="materia-error" class="help-block">Información requerida</span>
+			<div class="form-group">
+				<input type="number" min="1" max="9" class="form-control" id="unidades" name="unidades" data-rule-number="true" required>
+				<label for="number2">Nó. Unidades</label>
+				<p class="help-block">Introduzca una cantidad</p>
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" id="materia" name="materia" data-rule-minlenght="1" required="" aria-required="true" aria-describedby="materia-error" aria-invalid="true"><span id="materia-error" class="help-block">Información requerida</span>
 				<label for="materia">Nombre de la materia</label>
 			</div>
 			<div class="card-actionbar">

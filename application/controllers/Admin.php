@@ -241,4 +241,28 @@ class Admin extends CI_Controller {
         echo '<span class="text-danger">Hola</span>';
     }
 
+    public function deleteMateria(){
+        $id = $this->input->post('id');
+        $this->load->model('materias_model');
+        echo $this->materias_model->delete($id);
+    }
+
+    public function deleteGrupo(){
+        $id = $this->input->post('id');
+        $this->load->model('grupos_model');
+        echo $this->grupos_model->delete($id);
+    }
+
+    public function deleteDocente(){
+        $id = $this->input->post('id');
+        $this->load->model('docentes_model');
+        echo $this->docentes_model->delete($id);
+    }
+
+    public function deleteAlumno(){
+        $id = $this->input->post('id');
+        $this->load->model('alumnos_model');
+        echo $this->alumnos_model->delete($id);
+    }
+
 }

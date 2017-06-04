@@ -45,6 +45,7 @@ WHERE DOCE_DOCENTE = 1 AND MATE_ACTIVO = 1
   JOIN aulas ON AULA_AULA = GRUP_AULA
   JOIN semestres ON SEME_SEMESTRE = GRUP_SEMESTRE
   JOIN carreras ON CARR_CARRERA = GRUP_CARRERA
+  JOIN unidades ON UNID_MATERIA = MATE_MATERIA
 WHERE GRUP_GRUPO = '$curso' AND MATE_ACTIVO = 1
         ");
     if ($result->num_rows() > 0) {
@@ -86,23 +87,12 @@ WHERE GRUP_GRUPO = '$curso' AND MATE_ACTIVO = 1
     }
   }
 
-  public function delete($id)
-  {
-    try {
-
-      $this->db->where('id', $id);
-      $this->db->delete("alumnos");
-
-      if ($this->db->affected_rows() > 0) {
-        return ["success" => true, "response" => "Registro eliminado"];
-      } else {
-        return ["success" => false, "response" => "No se pudo obtener datos"];
-      }
-    } catch (Exception $e) {
-      return ["success" => false, "response" => $e->getMessage()];
+    public function delete( $id ){
+        $this->db->set('MATE_ACTIVO', 0);
+        $this->db->where('MATE_MATERIA', $id);
+        return $this->db->update('materias');
     }
-  }
-
+    
 
   public function get_by_id2($id)
   {

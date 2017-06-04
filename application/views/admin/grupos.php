@@ -68,14 +68,30 @@
                 $('.modal-body', '#general-modal').html('<div class="text-center"><i class="fa fa-spin fa-spinner"></i></div>');
 
                 postAjax({
-                    url : base_url + 'admin/postGrupoNewForm',
+                    url : base_url + 'admin/postGrupoForm',
                     data : { grupo : 1 },
                     success : function(response){
                         $('.modal-content', '#general-modal').html(response);
                     }
                 });
+            });
 
 
+            $('.btn-danger').live('click',function(e){
+                id = this.getAttribute('data-p');
+                SCAlerts.confirmCancel({
+                    title : 'Eliminar grupo',
+                    message : '¿Desea eliminarlo?',
+                    success : function(){
+                        postAjax({
+                            url : base_url + 'admin/deleteGrupo',
+                            data : { id : id },
+                            success : function(response){
+                                table.ajax.reload();
+                            }
+                        });
+                    }
+                });
             });
 
         });

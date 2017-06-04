@@ -74,8 +74,24 @@
                         $('.modal-content', '#general-modal').html(response);
                     }
                 });
+            });
 
 
+            $('.btn-danger').live('click',function(e){
+                id = this.getAttribute('data-p');
+                SCAlerts.confirmCancel({
+                    title : 'Eliminar materia',
+                    message : '¿Desea eliminarla?',
+                    success : function(){
+                        postAjax({
+                            url : base_url + 'admin/deleteMateria',
+                            data : { id : id },
+                            success : function(response){
+                                table.ajax.reload();
+                            }
+                        });
+                    }
+                });
             });
 
         });
