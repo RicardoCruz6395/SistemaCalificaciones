@@ -13,9 +13,17 @@
                           </a>
                       </div>
                   </div>
-                  <header><i class="fa fa-users"></i> GRUPOS</header>
+                  <header><i class="fa fa-users"></i> PANEL DE GRUPOS :: <?=$nombre_periodo?> </header>
               </div><!--end .card-head -->
               <div class="card-body style-default-bright">
+                <div class="form-group col-md-4 col-md-offset-8">
+                    <label for="select13" class="col-sm-2 control-label"><i class="fa fa-fw fa-search"></i></label>
+                    <div class="col-sm-10">
+                        <?=$periodos?>
+                        <div class="form-control-line"></div>
+                    </div>
+                </div>
+
                 <div class="col-md-12">
                   <table class="table datatable table-bordered table-hover" id="table-grupos">
                     <thead>
@@ -120,18 +128,19 @@
             $('.btn-alumnos', '#table-grupos').click(function (e) {
               e.preventDefault();
               console.log($(this).data('id'));
+              var $this = $(this);
 
               $('.modal-content', '#general-modal').html('<div class="modal-body">' +
                 '<h3><i class="fa fa-spin fa-spinner"></i> Cargando...</h3>' +
                 '</div>');
 
-              postAjax(base_url + 'docente/getAlumnosByGrupo',
-                  {grupo: $(this).data('id')},
-
-                  function (response) {
-                    $(".modal-content", '#general-modal').html(response);
-                  }
-              );
+              postAjax({
+                url: base_url + 'docente/getAlumnosByGrupo',
+                data: {grupo: $this.data('id')},
+                success : function(response){
+                    $('.modal-content', '#general-modal').html(response);
+                }
+              });
 
 
             });
