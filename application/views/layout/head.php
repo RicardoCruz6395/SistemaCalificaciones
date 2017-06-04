@@ -19,7 +19,7 @@
 		<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/theme-1/libs/morris/morris.core.css?1420463396" />
 		<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/theme-1/libs/toastr/toastr.css" />
 
-		<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/sweetalert.css" />
+		<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/sweetalert2.min.css" />
         <link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/animate.min.css" />
 		<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/custom.css" />
 

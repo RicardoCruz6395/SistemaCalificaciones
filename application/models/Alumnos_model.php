@@ -115,20 +115,10 @@ class Alumnos_model extends CI_Model {
         }
     }
 
-    public function delete($id){
-        try{
-
-            $this->db->where('id', $id);
-            $this->db->delete("alumnos");
-
-            if($this->db->affected_rows() > 0){
-                return ["success"=>true, "response"=>"Registro eliminado"];
-            }else{
-                return ["success"=>false, "response"=>"No se pudo obtener datos"];
-            }
-        }catch(Exception $e){
-                return ["success"=>false, "response"=>$e->getMessage()];
-        }
+    public function delete( $id ){
+        $this->db->set('ALUM_ACTIVO', 0);
+        $this->db->where('ALUM_ALUMNO', $id);
+        return $this->db->update('alumnos');
     }
 
   public function getByGrupo( $id_grupo ){

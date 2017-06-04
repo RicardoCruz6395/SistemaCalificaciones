@@ -62,8 +62,7 @@ function postAjax( params ) {
     })
 
     .fail(function(response) {
-      console.log("Error");
-      console.log(response);
+      console.log("Error",response);
       //modal.addClass('shake');
       //after_submit($this, response, modal);
       //return response;
@@ -71,8 +70,110 @@ function postAjax( params ) {
 
     .complete(function (response, xhr) {
       //callback(response);
-      console.log("Complete, Status: " + xhr);
+      //console.log("Complete, Status: " + xhr);
       //after_submit($this, response);
     });
 }
 
+
+var SCAlerts = new function() {
+    this.drive     = "SweetAlert";
+
+    this.error = function (options) {
+        swal(
+            options.title || '',
+            options.message || '',
+            'error'
+        );
+    };
+
+    this.success = function (options) {
+        swal({
+            title: options.title || 'Éxito',
+            text : options.message || 'Operación exitosa',
+            type : 'success'
+        }).then(function(){
+            if( options.callback != undefined )
+                options.callback()
+        });
+    };
+
+    this.info = function (options) {
+        swal({
+            title: options.title,
+            text: options.message,
+            type: 'info',
+            showCancelButton: false,
+        }).then(function() {
+            if( options.callback ){
+                options.callback();
+            }
+        });
+    };
+
+    this.confirm = function (options) {
+        swal({
+            title: options.title || '',
+            text: options.message || '',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: options.confirmText || 'Aceptar',
+            cancelButtonText: options.cancelText || 'Cancelar',
+        }).then(function(){
+            options.success();
+        }, function(dismiss){})
+    };
+
+    this.confirmCancel = function(options){
+        swal({
+            title: options.title,
+            text: options.message,
+            html: options.html || '',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: options.confirmText || 'Aceptar',
+            cancelButtonText:  options.cancelText || 'Cancelar',
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-danger',
+        }).then(function () {
+            options.success();
+        }, function(dismiss){})
+    };
+
+    this.input = function(options){
+        swal({
+          title: options.title || '',
+          text: options.message || '',
+          input: options.typeInput || 'text',
+          showCancelButton: options.btnCancel || false,
+          confirmButtonText:  options.confirmText || 'Aceptar',
+          cancelButtonText:  options.cancelText || 'Cancelar',
+          showLoaderOnConfirm: options.loader || false,
+          preConfirm: options.promiseCallback,
+          allowOutsideClick: false
+        }).then(
+            options.successCallback,
+            function(dismiss){}
+        );
+    };
+
+    this.waiting = function(options){
+        swal({
+          type: 'warning',
+          title: options.title || '',
+          html: options.html || '',
+          text: options.message || '',
+          showCancelButton: options.btnCancel || false,
+          confirmButtonText:  options.confirmText || 'Aceptar',
+          cancelButtonText:  options.cancelText || 'Cancelar',
+          showLoaderOnConfirm: options.loader || false,
+          preConfirm: options.promiseCallback,
+          allowOutsideClick: false,
+          reverseButtons: options.reverseButtons || false
+        }).then(
+            options.successCallback,
+            function(dismiss){}
+        );
+    };
+
+};
