@@ -39,7 +39,7 @@
                         </a>
                         <ul class="dropdown-menu animation-dock">
                             <li>
-                                <a href="<?=base_url('usuario/password')?>">
+                                <a href="<?=base_url('auth/cambiar_password')?>">
                                     <i class="fa fa-fw fa-gears text-default"></i> Cambiar contraseña
                                 </a>
                             </li>

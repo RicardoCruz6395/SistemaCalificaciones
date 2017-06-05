@@ -61,9 +61,7 @@
 									<div class="col-xs-6 text-right">
 										<button class="btn btn-submit login btn-primary btn-raised" type="submit"> <i class="fa fa-sign-in"> </i> Iniciar sesión</button>
 									</div><!--end .col -->
-										<span class="loading" style="display: none">
-											<i style="display: none" class="fa fa-spinner loading fa-spin fa-1x fa-fw"></i> Loading...
-                                    	</span>
+										
 								</div><!--end .row -->
 							</form>
 						</div><!--end .col -->
