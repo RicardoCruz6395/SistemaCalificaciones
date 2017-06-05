@@ -35,7 +35,7 @@
 						$configuracion = '';
 						$periodos = '';
 						$aulas = '';
-						$planes = '';
+						$carreras = '';
 
 						switch ($params[1]) {
 							case 'index':
@@ -61,10 +61,16 @@
 								$configuracion = $active2;
 								$aulas = $active3;
 								break;
+							case 'carreras':
+								$configuracion = $active2;
+								$carreras = $active3;
+								break;
+							/*
 							case 'planesestudio':
 								$configuracion = $active2;
 								$planes = $active3;
 								break;
+							*/
 							default: break;
 						}
 
@@ -111,8 +117,8 @@
 						<li<?=$aulas?>>
 							<a <?=$aulas?> href="<?=base_url()?>configuracion/aulas"><span class="title">Aulas</span></a>
 						</li>
-						<li<?=$planes?>>
-							<a <?=$planes?> href="<?=base_url()?>configuracion/planes-estudio"><span class="title">Planes de estudio</span></a>
+						<li<?=$carreras?>>
+							<a <?=$carreras?> href="<?=base_url()?>configuracion/carreras"><span class="title">Carreras</span></a>
 						</li>
 					</ul>
 				</li>

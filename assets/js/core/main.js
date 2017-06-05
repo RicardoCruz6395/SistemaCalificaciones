@@ -75,8 +75,33 @@ function postAjax( params ) {
     });
 }
 
+var SCModals = new function(){
 
-var SCAlerts = new function() {
+    this.openModal = function(options) {
+
+        var modal = $('#general-modal');
+        $('#general-modal-title', modal).html( options.title || 'Modal' )
+        $('#general-modal-ok', modal).html( options.btnOk || 'Aceptar' )
+        $('#general-modal-cancel', modal).html( options.btnCancel || 'Cancelar' )
+        var contenido = $('.modal-body', modal);
+        modal.modal('toggle');
+        contenido.html('<div class="text-center"><i class="fa fa-spin fa-spinner"></i></div>');
+
+        if( options.url ){
+            postAjax({
+                url  : options.url,
+                data : options.data || {},
+                success : function( response ){
+                    contenido.html(response);
+                }
+            });
+        }
+
+    };
+
+};
+
+var SCAlerts = new function(){
     this.drive     = "SweetAlert";
 
     this.error = function (options) {

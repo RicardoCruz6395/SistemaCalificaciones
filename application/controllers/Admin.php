@@ -14,7 +14,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function index(){
-		$data1 = ['page_title'    => 'SC :: Inicio'];
+		$title = ['page_title'    => 'SC :: Inicio'];
 
         $this->load->model('grupos_model');
         $grupos = $this->grupos_model->getGrupos();
@@ -38,45 +38,59 @@ class Admin extends CI_Controller {
         $elementos['materias'] = $materias;
         $elementos['docentes'] = $docentes;
 		
-		$this->load->view('layout/head', $data1);
+		$this->load->view('layout/head', $title);
         $this->load->view('layout/header');
         $this->load->view('admin/index', $elementos);
         $this->load->view('layout/menu');
         $this->load->view('layout/scripts');
 	}
 
-	public function periodos(){
-		$data1 = ['page_title'    => 'SC :: Periodos'];
+    public function grupos(){
 
-		$this->load->view('layout/head'   , $data1);
+        $title = ['page_title'    => 'SC :: Grupos'];
+
+        $this->load->view('layout/head'   , $title);
         $this->load->view('layout/header');
-        $this->load->view('admin/periodos', []);
+        $this->load->view('admin/grupos');
         $this->load->view('layout/menu');
         $this->load->view('layout/scripts');
-	}
+        
+    }
 
-	public function postPeriodos(){
-        $this->load->model('periodos_model');
-        $periodos = $this->periodos_model->getPeriodos();
+    public function postGrupos(){
+        $this->load->model('grupos_model');
+        $this->load->model('semestres_model');
+        $this->load->model('carreras_model');
+        $this->load->model('materias_model');
+        $this->load->model('docentes_model');
+        $this->load->model('grupos_detalles_model');
+        $grupos = $this->grupos_model->getGrupos();
 
         $data['data'] = [];
 
-        foreach ($periodos as $p) {
+        foreach ($grupos as $g) {
 
-        	$opciones = '
-        	<button class="btn btn-xs btn-success" data-p="'.$p->PERI_PERIODO.'"><i class="fa fa-pencil"></i></button>
-        	<button class="btn btn-xs btn-danger" data-p="'.$p->PERI_PERIODO.'"><i class="fa fa-trash-o"></i></button>';
+            $opciones = '
+            <button class="btn btn-xs btn-success" data-p="'.$g->GRUP_GRUPO.'"><i class="fa fa-pencil"></i></button>
+            <button class="btn btn-xs btn-danger" data-p="'.$g->GRUP_GRUPO.'"><i class="fa fa-trash-o"></i></button>';
 
-        	$data['data'][] = [
-        		$p->PERI_PERIODO,
-        		$this->periodos_model->getNombrePeriodoById( $p->PERI_PERIODO ),
-        		$opciones
-        	];
+            $docente = $this->docentes_model->getById( $g->GRUP_DOCENTE);
+            $alumnos = $this->grupos_detalles_model->getByGrupo( $g->GRUP_GRUPO );
+            $alumnos = count( $alumnos );
+
+            $data['data'][] = [
+                $g->GRUP_GRUPO,
+                $this->semestres_model->getById( $g->GRUP_SEMESTRE)->SEME_NOMBRE,
+                $this->carreras_model->getById( $g->GRUP_CARRERA)->CARR_NOMBRE,
+                $this->materias_model->getById( $g->GRUP_MATERIA)->MATE_NOMBRE,
+                $docente->DOCE_NOMBRE . ' ' . $docente->DOCE_APELLIDOS,
+                $alumnos,
+                $opciones
+            ];
         }
 
-        header('Content-Type: application/json');
-		echo json_encode($data);
-	}
+        $this->printJSON($data);
+    }
 
 	public function alumnos(){
 		$data1 = ['page_title'    => 'SC :: Alumnos'];
@@ -108,8 +122,7 @@ class Admin extends CI_Controller {
         	];
         }
 
-        header('Content-Type: application/json');
-		echo json_encode($data);
+        $this->printJSON($data);
 	}
 
 	public function materias(){
@@ -145,35 +158,8 @@ class Admin extends CI_Controller {
         	];
         }
 
-        header('Content-Type: application/json');
-		echo json_encode($data);
+        $this->printJSON($data);
 	}
-
-	public function grupos(){
-
-		$data1 = ['page_title'    => 'SC :: Grupos'];
-		$data2 = ['nombre_usuario' => $this->admin->ADMI_NOMBRE ];
-
-
-		$this->load->view('layout/head'   , $data1);
-        $this->load->view('layout/header' , $data2);
-        $this->load->view('admin/grupos'  , []);
-        $this->load->view('layout/menu');
-        $this->load->view('layout/scripts');
-		
-	}
-
-    public function postGrupos(){
-
-        $data1 = ['page_title'    => 'SC :: Grupos'];
-
-        $this->load->view('layout/head'   , $data1);
-        $this->load->view('layout/header');
-        $this->load->view('admin/grupos'  , []);
-        $this->load->view('layout/menu');
-        $this->load->view('layout/scripts');
-        
-    }
 
     public function docentes(){
 
@@ -220,9 +206,7 @@ class Admin extends CI_Controller {
             ];
         }
 
-        header('Content-Type: application/json');
-        echo json_encode($data);
-        
+        $this->printJSON( $data );        
     }
 
     public function postDocenteForm(){
@@ -231,6 +215,69 @@ class Admin extends CI_Controller {
 
     public function postMateriaForm(){
         $this->load->view('admin/materias_form');
+    }
+
+    public function addMateria(){
+        $clave = strtoupper( $this->input->post('clave') );
+        $nombre = strtoupper( $this->input->post('materia') );
+        $unidades = $this->input->post('unidades');
+        
+        $this->load->model('materias_model');
+        $existe = $this->materias_model->getByClave( $clave );
+
+        $insert = false;
+        if( !$existe ){
+            $this->db->trans_start();
+            $materia = $this->materias_model->insert( $clave, $nombre );
+            $materia_id = $this->db->insert_id();
+            $this->db->trans_complete();
+            if( $materia ){
+                $this->load->model('unidades_model');
+
+                for( $i = 1; $i <= $unidades; $i++ ){
+                    $this->unidades_model->insert( $materia_id , $i );
+                }
+
+                $insert  = true;
+                $message = 'La materia se creó correctamente';
+            }else{
+                $message = 'No se pudo guardar la materia';
+            }
+        }else{
+            $message = 'Ya existe una materia con la clave <b>' . $clave . '</b>';
+        }
+
+        $data = [ 'insert' => $insert, 'message' => $message ];
+
+        $this->printJSON( $data );
+    }
+
+    public function postMateriaFormEdit(){
+        $id = $this->input->post('id');
+        $this->load->model('materias_model');
+        $materia = $this->materias_model->getById( $id );
+        $unidades = $this->materias_model->unidades( $id );
+        $unidades = count($unidades);
+        $this->load->view('admin/materias_form_edit', ['materia' => $materia, 'unidades' => $unidades]);
+    }
+
+    public function editMateria(){
+        $id = $this->input->post('id');
+        $nombre = $this->input->post('materia');
+        $this->load->model('materias_model');
+        $materia = $this->materias_model->update($id, $nombre);
+
+        $edited = false;
+        if( $materia ){
+            $edited = true;
+            $message = 'Los cambios se guardaron correctamente';
+        }else{
+            $message = 'No se pudieron guardar los cambios';
+        }
+        
+        $data = [ 'edited' => $edited, 'message' => $message ];
+        $this->printJSON( $data );
+
     }
 
     public function postAlumnoForm(){
@@ -244,25 +291,74 @@ class Admin extends CI_Controller {
     public function deleteMateria(){
         $id = $this->input->post('id');
         $this->load->model('materias_model');
-        echo $this->materias_model->delete($id);
+        $materia = $this->materias_model->delete($id);
+
+        $deleted = false;
+        if( $materia ){
+            $deleted = true;
+            $message = 'Se ha eliminado la materia';
+        }else{
+            $message = 'No se pudo eliminar la materia';
+        }
+        
+        $data = [ 'deleted' => $deleted, 'message' => $message ];
+        $this->printJSON( $data );
     }
 
     public function deleteGrupo(){
         $id = $this->input->post('id');
         $this->load->model('grupos_model');
         echo $this->grupos_model->delete($id);
+        
+        $deleted = false;
+        if( $materia ){
+            $deleted = true;
+            $message = 'Se ha eliminado la materia';
+        }else{
+            $message = 'No se pudo eliminar la materia';
+        }
+        
+        $data = [ 'deleted' => $deleted, 'message' => $message ];
+        $this->printJSON( $data );
     }
 
     public function deleteDocente(){
         $id = $this->input->post('id');
         $this->load->model('docentes_model');
-        echo $this->docentes_model->delete($id);
+        $docente = $this->docentes_model->delete($id);
+        
+        $deleted = false;
+        if( $docente ){
+            $deleted = true;
+            $message = 'Se ha eliminado el docente';
+        }else{
+            $message = 'No se pudo eliminar el docente';
+        }
+        
+        $data = [ 'deleted' => $deleted, 'message' => $message ];
+        $this->printJSON( $data );
     }
 
     public function deleteAlumno(){
         $id = $this->input->post('id');
         $this->load->model('alumnos_model');
-        echo $this->alumnos_model->delete($id);
+        $alumno = $this->alumnos_model->delete($id);
+        
+        $deleted = false;
+        if( $alumno ){
+            $deleted = true;
+            $message = 'Se ha eliminado el alumno';
+        }else{
+            $message = 'No se pudo eliminar el alumno';
+        }
+        
+        $data = [ 'deleted' => $deleted, 'message' => $message ];
+        $this->printJSON( $data );
+    }
+
+    public function printJSON( $data ){
+        header('Content-Type: application/json');
+        echo json_encode($data);
     }
 
 }

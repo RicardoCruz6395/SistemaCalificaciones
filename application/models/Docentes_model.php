@@ -2,6 +2,12 @@
 
 class Docentes_model extends CI_Model{
 
+    public function getById( $id ){
+        $this->db->where('DOCE_DOCENTE', $id);
+        $result = $this->db->get('docentes');
+        return $result->row();
+    }
+
     public function getDocentes(){
         $this->db->where('DOCE_ACTIVO', 1);
         $result = $this->db->get('docentes');

@@ -16,16 +16,15 @@
                                         </a>
                                     </div>
                                 </div>
-                                <header><i class="fa fa-book"></i> MATERIAS</header>
+                                <header><i class="fa fa-gears"></i> CARRERAS</header>
                             </div><!--end .card-head -->
                             <div class="card-body style-default-bright">
                                 <div class="col-md-12">
-                                    <table class="table datatable table-bordered table-hover" id="table-materias">
+                                    <table class="table datatable table-bordered table-hover" id="table-carreras">
                                         <thead>
                                         	<tr>
                                                 <th>CÓDIGO</th>
                                                 <th>NOMBRE</th>
-                                                <th>NÓ. UNIDADES</th>
                                                 <th>OPCIONES</th>
                                         	</tr>
                                         </thead>
@@ -44,14 +43,14 @@
     <script src="<?= base_url() ?>assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
     <script src="<?= base_url() ?>assets/js/libs/DataTables/jquery.dataTables.js"></script>
     <script type="text/javascript">
-        var table = $('#table-materias').DataTable({
+        var table = $('#table-carreras').DataTable({
             'ajax': {
-                'url' : '<?= base_url() ?>admin/postMaterias',
+                'url' : '<?= base_url() ?>configuracion/postCarreras',
                 'type' : 'POST'
             },
             'columnDefs' : [{
                 className : 'text-center',
-                'targets' : [2,3]     
+                'targets' : [2]     
             }],
             'order': [[ 1, 'asc' ]]
         });
@@ -65,22 +64,22 @@
             e.preventDefault();
 
             SCModals.openModal({
-                title : 'NUEVA MATERIA',
+                title : 'NUEVA CARRERA',
                 btnOk : '<i class="fa fa-floppy-o"></i> GUARDAR',
-                url : base_url + 'admin/postMateriaForm',
+                url : base_url + 'configuracion/postCarreraForm',
             });
             
         });
 
         $(document).ready(function() {
-            $('.btn-danger', '#table-materias').live('click',function(e){
+            $('.btn-danger', '#table-carreras').live('click',function(e){
                 id = this.getAttribute('data-p');
                 SCAlerts.confirmCancel({
-                    title : 'Eliminar materia',
+                    title : 'Eliminar carrera',
                     message : '¿Desea eliminarla?',
                     success : function(){
                         postAjax({
-                            url : base_url + 'admin/deleteMateria',
+                            url : base_url + 'configuracion/deleteCarrera',
                             data : { id : id },
                             success : function(data){
                                 toastr.options.positionClass = 'toast-bottom-right';
@@ -95,14 +94,12 @@
                 });
             });
 
-            $('.btn-success', '#table-materias').live('click',function(e){
+            $('.btn-success', '#table-carreras').live('click',function(e){
                 id = this.getAttribute('data-p');
-                e.preventDefault();
-
                 SCModals.openModal({
-                    title : 'EDITAR MATERIA',
+                    title : 'EDITAR CARRERA',
                     btnOk : '<i class="fa fa-floppy-o"></i> GUARDAR CAMBIOS',
-                    url : base_url + 'admin/postMateriaFormEdit',
+                    url : base_url + 'configuracion/postCarreraFormEdit',
                     data : { id : id }
                 });
             });

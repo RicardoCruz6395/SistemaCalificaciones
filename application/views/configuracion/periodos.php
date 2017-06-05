@@ -16,16 +16,17 @@
                                         </a>
                                     </div>
                                 </div>
-                                <header><i class="fa fa-book"></i> MATERIAS</header>
+                                <header><i class="fa fa-gears"></i> PERIODOS</header>
                             </div><!--end .card-head -->
                             <div class="card-body style-default-bright">
                                 <div class="col-md-12">
-                                    <table class="table datatable table-bordered table-hover" id="table-materias">
+                                    <table class="table datatable table-bordered table-hover" id="table-periodos">
                                         <thead>
                                         	<tr>
-                                                <th>CÓDIGO</th>
+                                                <th>#</th>
+                                                <th>TIPO DE PERIODO</th>
+                                                <th>CICLO ESCOLAR</th>
                                                 <th>NOMBRE</th>
-                                                <th>NÓ. UNIDADES</th>
                                                 <th>OPCIONES</th>
                                         	</tr>
                                         </thead>
@@ -44,16 +45,16 @@
     <script src="<?= base_url() ?>assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
     <script src="<?= base_url() ?>assets/js/libs/DataTables/jquery.dataTables.js"></script>
     <script type="text/javascript">
-        var table = $('#table-materias').DataTable({
+        var table = $('#table-periodos').DataTable({
             'ajax': {
-                'url' : '<?= base_url() ?>admin/postMaterias',
+                'url' : '<?= base_url() ?>configuracion/postPeriodos',
                 'type' : 'POST'
             },
             'columnDefs' : [{
                 className : 'text-center',
-                'targets' : [2,3]     
+                'targets' : [0,4]     
             }],
-            'order': [[ 1, 'asc' ]]
+            'order': [[ 0, 'asc' ]]
         });
 
 
@@ -65,22 +66,22 @@
             e.preventDefault();
 
             SCModals.openModal({
-                title : 'NUEVA MATERIA',
+                title : 'NUEVO PERIODO',
                 btnOk : '<i class="fa fa-floppy-o"></i> GUARDAR',
-                url : base_url + 'admin/postMateriaForm',
+                url : base_url + 'configuracion/postPeriodoForm',
             });
             
         });
 
         $(document).ready(function() {
-            $('.btn-danger', '#table-materias').live('click',function(e){
+            $('.btn-danger', '#table-periodos').live('click',function(e){
                 id = this.getAttribute('data-p');
                 SCAlerts.confirmCancel({
-                    title : 'Eliminar materia',
-                    message : '¿Desea eliminarla?',
+                    title : 'Eliminar periodo',
+                    message : '¿Desea eliminarlo?',
                     success : function(){
                         postAjax({
-                            url : base_url + 'admin/deleteMateria',
+                            url : base_url + 'configuracion/deletePeriodo',
                             data : { id : id },
                             success : function(data){
                                 toastr.options.positionClass = 'toast-bottom-right';
@@ -95,14 +96,12 @@
                 });
             });
 
-            $('.btn-success', '#table-materias').live('click',function(e){
+            $('.btn-success', '#table-periodos').live('click',function(e){
                 id = this.getAttribute('data-p');
-                e.preventDefault();
-
                 SCModals.openModal({
-                    title : 'EDITAR MATERIA',
+                    title : 'EDITAR PERIODO',
                     btnOk : '<i class="fa fa-floppy-o"></i> GUARDAR CAMBIOS',
-                    url : base_url + 'admin/postMateriaFormEdit',
+                    url : base_url + 'configuracion/postPeriodoFormEdit',
                     data : { id : id }
                 });
             });

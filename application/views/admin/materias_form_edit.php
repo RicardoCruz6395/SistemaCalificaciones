@@ -1,16 +1,15 @@
 <form class="form floating-label form-validate" id="form-materia">
+	<input type="hidden" name="id" value="<?=$materia->MATE_MATERIA?>">
 	<div class="form-group">
-		<input type="text" class="form-control" id="clave" name="clave" data-rule-minlength="3" maxlength="10" required="" aria-required="true" aria-describedby="clave-error" aria-invalid="true"><span id="clave-error" class="help-block">Información requerida</span>
+		<input type="text" id="clave" class="form-control dirty" disabled="disabled" value="<?=$materia->MATE_CLAVE?>">
 		<label for="clave">Clave</label>
-		<p class="help-block">Introduzca 3 a 10 caracteres</p>
 	</div>
 	<div class="form-group">
-		<input type="number" min="1" max="9" class="form-control" id="unidades" name="unidades" data-rule-number="true" required>
-		<label for="number2">Nó. Unidades</label>
-		<p class="help-block">Introduzca una cantidad</p>
+		<input type="text" id="unidades" class="form-control dirty" disabled="disabled" value="<?=$unidades?>">
+		<label for="unidades">Nó. Unidades</label>
 	</div>
 	<div class="form-group">
-		<input type="text" class="form-control" id="materia" name="materia" data-rule-minlenght="1" required="" aria-required="true" aria-describedby="materia-error" aria-invalid="true"><span id="materia-error" class="help-block">Información requerida</span>
+		<input type="text" class="form-control dirty" id="materia" name="materia" data-rule-minlenght="1" required="" aria-required="true" aria-describedby="materia-error" aria-invalid="true" value="<?=$materia->MATE_NOMBRE?>"><span id="materia-error" class="help-block">Información requerida</span>
 		<label for="materia">Nombre de la materia</label>
 	</div>
 </form>
@@ -24,7 +23,7 @@
 
 
 		this.init = function(){
-			btnOk.click(function(e){
+			btnOk.bind('click', function(e){
 				$this.formSubmit( form )
 			});
 		};
@@ -32,11 +31,11 @@
 		this.formSubmit = function( form ){
 			if(form.valid()){
 				postAjax({
-					url : base_url + 'admin/addMateria',
+					url : base_url + 'admin/editMateria',
 					data : form.serialize(),
 					success : function(data){
 						toastr.options.positionClass = 'toast-bottom-right';
-						if( data.insert ){
+						if( data.edited ){
 							toastr.success(data.message,'');
 							modal.modal('hide');
 							table.ajax.reload();

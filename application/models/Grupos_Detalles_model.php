@@ -1,8 +1,17 @@
 <?php
 class Grupos_Detalles_model extends CI_Model{
     
-    public function get_id(){
-        
+    public function getById( $id ){
+        $this->db->where('GDET_DETALLE', $id);
+        $result = $this->db->get('grupos_detalles');
+        return $result->row();
+    }
+
+    public function getByGrupo( $id_grupo ){
+		$this->db->where('GDET_GRUPO', $id_grupo);
+		$this->db->where('GDET_ACTIVO', 1);
+        $result = $this->db->get('grupos_detalles');
+        return $result->result();
     }
 
     public function grupo( $id_grupo_detalle ){

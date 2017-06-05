@@ -8,7 +8,7 @@
                             <div class="card-head">
                                 <div class="tools">
                                     <div class="btn-group">
-                                        <a class="btn btn-icon-toggle" data-toggle="modal" data-target="#general-modal" id="agregar">
+                                        <a class="btn btn-icon-toggle" id="agregar">
                                             <i class="fa fa-plus"></i>
                                         </a>
                                         <a class="btn btn-icon-toggle btn-refresh" id="recargar">
@@ -25,9 +25,11 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>SEMESTRE</th>
+                                                <th>CARRERA</th>
                                                 <th>MATERIA</th>
                                                 <th>DOCENTE</th>
-                                            	<th>NÓ. ALUMNOS</th>
+                                                <th>NÓ. ALUMNOS</th>
+                                            	<th>OPCIONES</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -53,7 +55,7 @@
                 },
                 'columnDefs' : [{
                     className : 'text-center',
-                    'targets' : [1,4]
+                    'targets' : [0,1,5]
                 }],
             });
 
@@ -64,16 +66,14 @@
 
             $('#agregar').click(function (e) {
                 e.preventDefault();
-                
-                $('.modal-body', '#general-modal').html('<div class="text-center"><i class="fa fa-spin fa-spinner"></i></div>');
 
-                postAjax({
+                SCModals.openModal({
+                    title : 'GRUPO',
                     url : base_url + 'admin/postGrupoForm',
                     data : { grupo : 1 },
-                    success : function(response){
-                        $('.modal-content', '#general-modal').html(response);
-                    }
                 });
+
+                
             });
 
 

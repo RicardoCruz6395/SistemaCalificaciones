@@ -2,6 +2,12 @@
 
 class Materias_model extends CI_Model{
 
+    public function getById( $id ){
+        $this->db->where('MATE_MATERIA', $id);
+        $result = $this->db->get('materias');
+        return $result->row();
+    }
+
     public function getMaterias(){
         $this->db->where('MATE_ACTIVO', 1);
         $result = $this->db->get('materias');
@@ -14,6 +20,16 @@ class Materias_model extends CI_Model{
                 JOIN unidades ON (MATE_MATERIA = UNID_MATERIA)
                 WHERE MATE_MATERIA = '$id_materia';";
         return $this->db->query($sql)->result();
+    }
+
+    public function getByClave( $clave ){
+        $this->db->where('MATE_CLAVE', $clave);
+        $result = $this->db->get('materias');
+        return $result->row();
+    }
+
+    public function insert($clave, $nombre){
+        return $this->db->insert('materias',['MATE_CLAVE'=>$clave, 'MATE_NOMBRE'=>$nombre]);
     }
 
   public function getImparte()
@@ -54,38 +70,13 @@ WHERE GRUP_GRUPO = '$curso' AND MATE_ACTIVO = 1
       return null;
     }
   }
+  
 
-  public function get()
-  {
-    try {
-      $result = $this->db->get('docentes');
-
-      if ($result->num_rows() > 0) {
-        return ["success" => true, "response" => $result->result()];
-      } else {
-        return ["success" => false, "response" => "No se pudo obtener datos"];
-      }
-    } catch (Exception $e) {
-      return ["success" => false, "response" => $e->getMessage()];
+    public function update( $id, $nombre ){
+        $this->db->set('MATE_NOMBRE', $nombre);
+        $this->db->where('MATE_MATERIA', $id);
+        return $this->db->update('materias');
     }
-  }
-
-
-  public function get_by_id($id)
-  {
-    try {
-      $this->db->where('id', $id);
-      $result = $this->db->get('alumnos');
-
-      if ($result->num_rows() > 0) {
-        return ["success" => true, "response" => $result->row()];
-      } else {
-        return ["success" => false, "response" => "No se pudo obtener datos"];
-      }
-    } catch (Exception $e) {
-      return ["success" => false, "response" => $e->getMessage()];
-    }
-  }
 
     public function delete( $id ){
         $this->db->set('MATE_ACTIVO', 0);
@@ -94,30 +85,4 @@ WHERE GRUP_GRUPO = '$curso' AND MATE_ACTIVO = 1
     }
     
 
-  public function get_by_id2($id)
-  {
-
-    $result = $this->db->query("SELECT * FROM alumnos WHERE id = '$id'");
-    if ($result->num_rows() > 0) {
-      return $result->row();
-    } else {
-      return null;
-    }
-  }
-
-  // Elaborado por Angel Camara
-  public function password()
-  {
-
-    $result = $this->db->query("SELECT USUA_PASSWORD FROM alumnos JOIN usuarios ON ALUM_MATRICULA = USUA_MATRICULA");
-    if ($result->num_rows() > 0) {
-      return $result->row();
-
-      //return result() => muchos
-      //return row() => primero, uno
-
-    } else {
-      return null;
-    }
-  }
 }
