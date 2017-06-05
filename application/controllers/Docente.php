@@ -20,8 +20,6 @@ class Docente extends CI_Controller{
 
 	public function index2(){
 
-
-
 	    $data = array('page_title' => 'SC :: Grupos');
 	    $this->load->view('layout/head', $data);
 	    $this->load->view('layout/header');
