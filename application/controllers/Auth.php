@@ -30,7 +30,7 @@ class Auth extends CI_Controller {
 
 		if($response["success"]){ // Comprueba que la fila no este vacia
       		$usuario = $response["response"];
-			if($usuario->USUA_PASSWORD == $password){
+			if($usuario->USUA_PASSWORD == $password AND $usuario->USUA_ACTIVO == 1) {
 				$data = array(
 					'id' 		=> $usuario->USUA_USUARIO,
 					'rol'		=> $usuario->USUA_ROL,
