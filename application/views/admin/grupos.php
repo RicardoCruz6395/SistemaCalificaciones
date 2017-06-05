@@ -19,7 +19,7 @@
                                 <header><i class="fa fa-users"></i> GRUPOS</header>
                             </div><!--end .card-head -->
                             <div class="card-body style-default-bright">
-                                <div class="col-md-12">
+                                <div class="col-md-12 table-responsive">
                                     <table class="table datatable table-bordered table-hover" id="table-grupos">
                                         <thead>
                                             <tr>
@@ -47,36 +47,33 @@
     <script src="<?= base_url() ?>assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
     <script src="<?= base_url() ?>assets/js/libs/DataTables/jquery.dataTables.js"></script>
     <script type="text/javascript">
+        var table = $('#table-grupos').DataTable({
+            'ajax': {
+                'url' : '<?= base_url() ?>admin/postGrupos',
+                'type' : 'POST'
+            },
+            'columnDefs' : [{
+                className : 'text-center',
+                'targets' : [0,1,5]
+            }],
+        });
+
+
+        $('#recargar').click(function(e){
+            table.ajax.reload();
+        });
+
+        $('#agregar').click(function (e) {
+            e.preventDefault();
+            
+            SCModals.openModal({
+                title : 'NUEVO GRUPO',
+                btnOk : '<i class="fa fa-floppy-o"></i> GUARDAR',
+                url : base_url + 'admin/postGrupoForm',
+            });
+        });
+
         $(document).ready(function() {
-            var table = $('#table-grupos').DataTable({
-                'ajax': {
-                    'url' : '<?= base_url() ?>admin/postGrupos',
-                    'type' : 'POST'
-                },
-                'columnDefs' : [{
-                    className : 'text-center',
-                    'targets' : [0,1,5]
-                }],
-            });
-
-
-            $('#recargar').click(function(e){
-                table.ajax.reload();
-            });
-
-            $('#agregar').click(function (e) {
-                e.preventDefault();
-
-                SCModals.openModal({
-                    title : 'GRUPO',
-                    url : base_url + 'admin/postGrupoForm',
-                    data : { grupo : 1 },
-                });
-
-                
-            });
-
-
             $('.btn-danger').live('click',function(e){
                 id = this.getAttribute('data-p');
                 SCAlerts.confirmCancel({
@@ -86,7 +83,12 @@
                         postAjax({
                             url : base_url + 'admin/deleteGrupo',
                             data : { id : id },
-                            success : function(response){
+                            success : function(data){
+                                toastr.options.positionClass = 'toast-bottom-right';
+                                if( data.deleted )
+                                    toastr.success( data.message )
+                                else
+                                    toastr.error( data.message )
                                 table.ajax.reload();
                             }
                         });
@@ -94,6 +96,28 @@
                 });
             });
 
+            $('.btn-success').live('click',function(e){
+                id = this.getAttribute('data-p');
+                e.preventDefault();
+
+                SCModals.openModal({
+                    title : 'EDITAR ALUMNO',
+                    btnOk : '<i class="fa fa-floppy-o"></i> GUARDAR CAMBIOS',
+                    url : base_url + 'admin/postAlumnoFormEdit',
+                    data : { id : id }
+                });
+            });
+
+            $('.btn-warning').live('click',function(e){
+                id = this.getAttribute('data-p');
+                e.preventDefault();
+
+                SCModals.openModal({
+                    title : 'LISTA DE ALUMNOS',
+                    url : base_url + 'admin/postListaAlumnosGrupo',
+                    data : { id : id }
+                });
+            });
         });
 
 

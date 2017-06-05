@@ -8,7 +8,7 @@
                             <div class="card-head">
                                 <div class="tools">
                                     <div class="btn-group">
-                                        <a class="btn btn-icon-toggle" data-toggle="modal" data-target="#general-modal" id="agregar">
+                                        <a class="btn btn-icon-toggle" id="agregar">
                                             <i class="fa fa-plus"></i>
                                         </a>
                                         <a class="btn btn-icon-toggle btn-refresh" id="recargar">
@@ -24,6 +24,7 @@
                                         <thead>
                                         	<tr>
                                                 <th>MATRÍCULA</th>
+                                                <th>CARRERA</th>
                                                 <th>NOMBRE COMPLETO</th>
                                                 <th>SEMESTRE</th>
                                                 <th>OPCIONES</th>
@@ -44,37 +45,33 @@
     <script src="<?= base_url() ?>assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
     <script src="<?= base_url() ?>assets/js/libs/DataTables/jquery.dataTables.js"></script>
     <script type="text/javascript">
+        
+        var table = $('#table-materias').DataTable({
+            'ajax': {
+                'url' : '<?= base_url() ?>admin/postAlumnos',
+                'type' : 'POST'
+            },
+            'columnDefs' : [{
+                className : 'text-center',
+                'targets' : [3,4]     
+            }],
+        });
+
+        $('#recargar').click(function(e){
+            table.ajax.reload();
+        });
+
+        $('#agregar').click(function (e) {
+            e.preventDefault();
+            
+            SCModals.openModal({
+                title : 'NUEVO ALUMNO',
+                btnOk : '<i class="fa fa-floppy-o"></i> GUARDAR',
+                url : base_url + 'admin/postAlumnoForm',
+            });
+        });
+
         $(document).ready(function() {
-            var table = $('#table-materias').DataTable({
-                'ajax': {
-                    'url' : '<?= base_url() ?>admin/postAlumnos',
-                    'type' : 'POST'
-                },
-                'columnDefs' : [{
-                    className : 'text-center',
-                    'targets' : [3]     
-                }],
-            });
-
-            $('#recargar').click(function(e){
-                table.ajax.reload();
-            });
-
-            $('#agregar').click(function (e) {
-                e.preventDefault();
-                
-                $('.modal-body', '#general-modal').html('<div class="text-center"><i class="fa fa-spin fa-spinner"></i></div>');
-
-                postAjax({
-                    url : base_url + 'admin/postAlumnoForm',
-                    data : { grupo : 1 },
-                    success : function(response){
-                        $('.modal-content', '#general-modal').html(response);
-                    }
-                });
-            });
-
-
             $('.btn-danger').live('click',function(e){
                 id = this.getAttribute('data-p');
                 SCAlerts.confirmCancel({
@@ -84,11 +81,28 @@
                         postAjax({
                             url : base_url + 'admin/deleteAlumno',
                             data : { id : id },
-                            success : function(response){
+                            success : function(data){
+                                toastr.options.positionClass = 'toast-bottom-right';
+                                if( data.deleted )
+                                    toastr.success( data.message )
+                                else
+                                    toastr.error( data.message )
                                 table.ajax.reload();
                             }
                         });
                     }
+                });
+            });
+
+            $('.btn-success').live('click',function(e){
+                id = this.getAttribute('data-p');
+                e.preventDefault();
+
+                SCModals.openModal({
+                    title : 'EDITAR ALUMNO',
+                    btnOk : '<i class="fa fa-floppy-o"></i> GUARDAR CAMBIOS',
+                    url : base_url + 'admin/postAlumnoFormEdit',
+                    data : { id : id }
                 });
             });
         });

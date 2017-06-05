@@ -7,6 +7,39 @@ class Alumnos_model extends CI_Model {
         return $result->result();
     }
 
+    public function getById( $id ){
+        $this->db->where('ALUM_ALUMNO', $id);
+        $result = $this->db->get('alumnos');
+        return $result->row();
+    }
+
+    public function getByMatricula( $matricula ){
+        $this->db->where('ALUM_MATRICULA', $matricula);
+        $result = $this->db->get('alumnos');
+        return $result->row();
+    }
+
+    public function insert( $matricula, $nombre, $apellidos, $semestre, $carrera, $usuario_id ){
+        $datos = [
+            'ALUM_MATRICULA' => $matricula,
+            'ALUM_NOMBRE'    => $nombre,
+            'ALUM_APELLIDOS' => $apellidos,
+            'ALUM_SEMESTRE'  => $semestre,
+            'ALUM_CARRERA'   => $carrera,
+            'ALUM_USUARIO'   => $usuario_id
+         ];
+        return $this->db->insert('alumnos', $datos );
+    }
+
+    public function update( $id, $nombre, $apellidos, $semestre, $carrera ){
+        $this->db->set('ALUM_NOMBRE', $nombre);
+        $this->db->set('ALUM_APELLIDOS', $apellidos);
+        $this->db->set('ALUM_SEMESTRE', $semestre);
+        $this->db->set('ALUM_CARRERA', $carrera);
+        $this->db->where('ALUM_ALUMNO', $id);
+        return $this->db->update('alumnos');
+    }
+
     public function semestre( $id_alumno ){
          $sql = "SELECT semestres.*
                 FROM alumnos

@@ -13,8 +13,19 @@ class Alumno extends CI_Controller {
 	public function index(){
         $this->load->model('alumnos_model');
 		$periodo = $this->alumnos_model->getUltimoPeriodo( $this->alumno->ALUM_ALUMNO );
-        $periodo = $periodo->GRUP_PERIODO;
-        redirect('alumno/periodo/' . $periodo);
+        
+        if( $periodo ){
+            $periodo = $periodo->GRUP_PERIODO;
+            redirect('alumno/periodo/' . $periodo);
+        }else{
+            $data1 = ['page_title'    => 'SC :: Panel de Calificaciones'];
+
+            $this->load->view('layout/head'   , $data1);
+            $this->load->view('layout/header');
+            $this->load->view('alumno/index');
+            $this->load->view('layout/menu');
+            $this->load->view('layout/scripts');
+        }
 	}
 
     public function periodo( $id_periodo = null ){
@@ -70,7 +81,6 @@ class Alumno extends CI_Controller {
             ksort($unidades);
 
             $data1 = ['page_title'    => 'SC :: Panel de Calificaciones'];
-            $data2 = ['nombre_usuario' => $alumno->ALUM_NOMBRE ];
             $data3 = [
                 'materias'       => $materias,
                 'unidades'       => $unidades,
@@ -80,12 +90,12 @@ class Alumno extends CI_Controller {
             ];
 
             $this->load->view('layout/head'   , $data1);
-            $this->load->view('layout/header' , $data2);
-            $this->load->view('alumno/index'  , $data3);
+            $this->load->view('layout/header');
+            $this->load->view('alumno/panel_calificaciones'  , $data3);
             $this->load->view('layout/menu');
             $this->load->view('layout/scripts');
         }else{
-            $this->index();
+            redirect('alumno/');
         }
 
     }

@@ -47,7 +47,7 @@ function postAjax( params ) {
                 alert('Página no encontrada :(');
             },
             500: function (response) {
-                console.log(response);
+                //console.log(response);
                 alert('Ocurrió un error en el servidor');
             }
         }
@@ -62,7 +62,7 @@ function postAjax( params ) {
     })
 
     .fail(function(response) {
-      console.log("Error",response);
+      //console.log("Error",response);
       //modal.addClass('shake');
       //after_submit($this, response, modal);
       //return response;
@@ -163,42 +163,6 @@ var SCAlerts = new function(){
         }).then(function () {
             options.success();
         }, function(dismiss){})
-    };
-
-    this.input = function(options){
-        swal({
-          title: options.title || '',
-          text: options.message || '',
-          input: options.typeInput || 'text',
-          showCancelButton: options.btnCancel || false,
-          confirmButtonText:  options.confirmText || 'Aceptar',
-          cancelButtonText:  options.cancelText || 'Cancelar',
-          showLoaderOnConfirm: options.loader || false,
-          preConfirm: options.promiseCallback,
-          allowOutsideClick: false
-        }).then(
-            options.successCallback,
-            function(dismiss){}
-        );
-    };
-
-    this.waiting = function(options){
-        swal({
-          type: 'warning',
-          title: options.title || '',
-          html: options.html || '',
-          text: options.message || '',
-          showCancelButton: options.btnCancel || false,
-          confirmButtonText:  options.confirmText || 'Aceptar',
-          cancelButtonText:  options.cancelText || 'Cancelar',
-          showLoaderOnConfirm: options.loader || false,
-          preConfirm: options.promiseCallback,
-          allowOutsideClick: false,
-          reverseButtons: options.reverseButtons || false
-        }).then(
-            options.successCallback,
-            function(dismiss){}
-        );
     };
 
 };

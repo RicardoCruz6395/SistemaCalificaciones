@@ -1,12 +1,12 @@
 <form class="form floating-label form-validate" id="form-carrera">
 	<div class="form-group">
-		<input type="text" class="form-control" id="codigo" name="codigo" data-rule-minlength="3" maxlength="10" required="" aria-required="true" aria-describedby="codigo-error" aria-invalid="true"><span id="codigo-error" class="help-block">Información requerida</span>
+		<input type="text" class="form-control dirty" id="codigo" name="codigo" data-rule-minlength="3" maxlength="10" required="" aria-required="true" aria-describedby="codigo-error" aria-invalid="true"><span id="codigo-error" class="help-block">Información requerida</span>
 		<label for="codigo">Código</label>
 		<p class="help-block">Introduzca 3 a 10 caracteres</p>
 	</div>
 	<div class="form-group">
-		<input type="text" class="form-control" id="carrera" name="carrera" data-rule-minlenght="1" required="" aria-required="true" aria-describedby="carrera-error" aria-invalid="true"><span id="carrera-error" class="help-block">Información requerida</span>
-		<label for="carrera">Nombre de la carreras</label>
+		<input type="text" class="form-control dirty" id="carrera" name="carrera" data-rule-minlenght="1" required="" aria-required="true" aria-describedby="carrera-error" aria-invalid="true"><span id="carrera-error" class="help-block">Información requerida</span>
+		<label for="carrera">Nombre de la carrera</label>
 	</div>
 </form>
 <script type="text/javascript">

@@ -58,14 +58,10 @@
                           </div><!--end .input-group -->
                         </div><!--end .form-group -->
                         <div class="form-group floating-label">
-                          <div class="input-group">
-                            <div class="input-group-btn">
-                              <button class="btn btn-primary btn-submit" type="submit"><i class="fa fa-unlock"></i> Guardar cambios</button>
-                            </div>
-                            <div class="input-group-btn">
-                              <a class="btn btn-default" href="<?=base_url()?>"><i class="fa fa-times"></i> Cancelar</a>
-                            </div>
-                          </div><!--end .input-group -->
+                          <div class="col-md-12 text-right">
+                            <button class="btn btn-default" href="<?=base_url()?>"><i class="fa fa-times"></i> Cancelar</button>
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-unlock"></i> Guardar cambios</button>
+                          </div>
                         </div><!--end .form-group -->
                         <span class="loading" style="display: none">
                           <i style="display: none" class="fa fa-spinner loading fa-spin fa-1x fa-fw"></i> Loading...
@@ -100,7 +96,7 @@
           data[0].value = CryptoJS.SHA512(data[0].value);
           data[1].value = CryptoJS.SHA512(data[1].value);
           data[2].value = CryptoJS.SHA512(data[2].value);
-          toastr.options.positionClass = 'toast-bottom-left';
+          toastr.options.positionClass = 'toast-bottom-right';
 
           postAjax({
             url: $(this).attr('action'),
@@ -108,9 +104,10 @@
             success : function(response){
               end();
               if(response.success){
-                toastr.success('Exito: '+response.message, '');
+                toastr.success(response.message);
+                location.reload();
               }else{
-                toastr.error('Error: '+response.message, '');
+                toastr.error(response.message);
               }
             }
           });          

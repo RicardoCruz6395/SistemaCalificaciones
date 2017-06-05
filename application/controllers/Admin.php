@@ -45,6 +45,8 @@ class Admin extends CI_Controller {
         $this->load->view('layout/scripts');
 	}
 
+    /***** GRUPOS ******/
+
     public function grupos(){
 
         $title = ['page_title'    => 'SC :: Grupos'];
@@ -92,10 +94,14 @@ class Admin extends CI_Controller {
         $this->printJSON($data);
     }
 
-	public function alumnos(){
-		$data1 = ['page_title'    => 'SC :: Alumnos'];
 
-		$this->load->view('layout/head'   , $data1);
+
+    /***** ALUMNOS *****/
+
+	public function alumnos(){
+		$title = ['page_title'    => 'SC :: Alumnos'];
+
+		$this->load->view('layout/head'   , $title);
         $this->load->view('layout/header');
         $this->load->view('admin/alumnos', []);
         $this->load->view('layout/menu');
@@ -103,7 +109,8 @@ class Admin extends CI_Controller {
 	}
 
 	public function postAlumnos(){
-		$this->load->model('alumnos_model');
+        $this->load->model('alumnos_model');
+		$this->load->model('carreras_model');
         $alumnos = $this->alumnos_model->getAlumnos();
 
         $data['data'] = [];
@@ -116,6 +123,7 @@ class Admin extends CI_Controller {
 
         	$data['data'][] = [
         		$a->ALUM_MATRICULA,
+                $this->carreras_model->getById( $a->ALUM_CARRERA )->CARR_NOMBRE,
         		$a->ALUM_NOMBRE . ' ' . $a->ALUM_APELLIDOS,
         		$this->alumnos_model->semestre($a->ALUM_ALUMNO)->SEME_NOMBRE,
         		$opciones
@@ -125,92 +133,144 @@ class Admin extends CI_Controller {
         $this->printJSON($data);
 	}
 
-	public function materias(){
-		$data1 = ['page_title'    => 'SC :: Materias'];
+    public function postAlumnoForm(){
+        $this->load->model('semestres_model');
+        $this->load->model('carreras_model');
+        $semestres = $this->semestres_model->getSemestres();
+        $carreras = $this->carreras_model->getCarreras();
 
-		$this->load->view('layout/head'   , $data1);
+        $select_semestres = '';
+        foreach ($semestres as $s) {
+            $select_semestres .= '<option value="' . $s->SEME_SEMESTRE . '">' . $s->SEME_NOMBRE . '</option>';
+        }
+
+        $select_carreras = '';
+        foreach ($carreras as $c) {
+            $select_carreras .= '<option value="' . $c->CARR_CARRERA . '">' . $c->CARR_NOMBRE . '</option>';
+        }
+
+        $this->load->view('admin/alumnos_form', ['semestres' => $select_semestres, 'carreras' => $select_carreras]);
+    }
+
+    public function addAlumno(){
+        $matricula =  $this->input->post('matricula');
+        $nombre    = strtoupper( trim($this->input->post('nombre')) );
+        $apellidos = strtoupper( trim($this->input->post('apellidos')) );
+        $semestre  = $this->input->post('semestre');
+        $carrera   = $this->input->post('carrera');
+        $hash      =  $this->input->post('matricula_hash');
+
+        
+        $this->load->model('alumnos_model');
+        $existe = $this->alumnos_model->getByMatricula( $matricula );
+
+        $insert = false;
+        if( !$existe ){
+            
+            $usuario_id = null;
+            $this->db->trans_start();
+            $this->usuarios_model->insert( $matricula, $hash, 2);
+            $usuario_id = $this->db->insert_id();
+            $alumno = $this->alumnos_model->insert( $matricula, $nombre, $apellidos, $semestre, $carrera, $usuario_id );
+            $this->db->trans_complete();
+
+            if( $alumno ){
+                $insert  = true;
+                $message = 'El alumno se creó correctamente';
+            }else{
+                $message = 'No se pudo guardar el alumno';
+            }
+        }else{
+            $message = 'Ya existe un alumno con la matrícula <b>' . $matricula . '</b>';
+        }
+
+        $data = [ 'insert' => $insert, 'message' => $message ];
+
+        $this->printJSON( $data );
+    }
+
+    public function postAlumnoFormEdit(){
+        $id = $this->input->post('id');
+        $this->load->model('alumnos_model');
+        $alumno = $this->alumnos_model->getById( $id );
+        $this->load->model('semestres_model');
+        $this->load->model('carreras_model');
+        $semestres = $this->semestres_model->getSemestres();
+        $carreras = $this->carreras_model->getCarreras();
+
+        $select_semestres = '';
+        foreach ($semestres as $s) {
+            $selected = ($alumno->ALUM_SEMESTRE == $s->SEME_SEMESTRE ) ? ' selected' : '';
+            $select_semestres .= '<option value="' . $s->SEME_SEMESTRE . '"' . $selected . '>' . $s->SEME_NOMBRE . '</option>';
+        }
+
+        $select_carreras = '';
+        foreach ($carreras as $c) {
+            $selected = ($alumno->ALUM_CARRERA == $c->CARR_CARRERA ) ? ' selected' : '';
+            $select_carreras .= '<option value="' . $c->CARR_CARRERA . '"' . $selected . '>' . $c->CARR_NOMBRE . '</option>';
+        }
+
+        $this->load->view('admin/alumnos_form_edit',
+            ['semestres' => $select_semestres, 'carreras' => $select_carreras, 'alumno' => $alumno]);
+    }
+
+    public function editAlumno(){
+        $id = $this->input->post('id');
+        $nombre    = strtoupper( trim($this->input->post('nombre')) );
+        $apellidos = strtoupper( trim($this->input->post('apellidos')) );
+        $semestre  = $this->input->post('semestre');
+        $carrera   = $this->input->post('carrera');
+
+        $this->load->model('alumnos_model');
+        $alumno = $this->alumnos_model->update( $id, $nombre, $apellidos, $semestre, $carrera );
+
+        $edited = false;
+        if( $alumno ){
+            $edited = true;
+            $message = 'Los cambios se guardaron correctamente';
+        }else{
+            $message = 'No se pudieron guardar los cambios';
+        }
+        
+        $data = [ 'edited' => $edited, 'message' => $message ];
+        $this->printJSON( $data );
+    }
+
+    /****** MATERIAS ******/
+    public function materias(){
+        $data1 = ['page_title'    => 'SC :: Materias'];
+
+        $this->load->view('layout/head'   , $data1);
         $this->load->view('layout/header');
         $this->load->view('admin/materias');
         $this->load->view('layout/menu');
         $this->load->view('layout/scripts');
-	}
+    }
 
-	public function postMaterias(){
-		$this->load->model('materias_model');
+    public function postMaterias(){
+        $this->load->model('materias_model');
         $materias = $this->materias_model->getMaterias();
 
         $data['data'] = [];
 
         foreach ($materias as $m) {
 
-        	$unidades = $this->materias_model->unidades( $m->MATE_MATERIA );
-        	$num_unidades = count( $unidades );
-
-        	$opciones = '
-        	<button class="btn btn-xs btn-success" data-p="'.$m->MATE_MATERIA.'"><i class="fa fa-pencil"></i></button>
-        	<button class="btn btn-xs btn-danger" data-p="'.$m->MATE_MATERIA.'"><i class="fa fa-trash-o"></i></button>';
-
-        	$data['data'][] = [
-        		$m->MATE_CLAVE,
-        		$m->MATE_NOMBRE,
-        		$num_unidades,
-        		$opciones
-        	];
-        }
-
-        $this->printJSON($data);
-	}
-
-    public function docentes(){
-
-        $data1 = ['page_title'    => 'SC :: Docentes'];
-
-        $this->load->view('layout/head'   , $data1);
-        $this->load->view('layout/header');
-        $this->load->view('admin/docentes'  , []);
-        $this->load->view('layout/menu');
-        $this->load->view('layout/scripts');
-        
-    }
-
-    public function postDocentes(){
-
-        $this->load->model('docentes_model');
-        $docentes = $this->docentes_model->getDocentes();
-
-        $data['data'] = [];
-
-        foreach ($docentes as $d) {
+            $unidades = $this->materias_model->unidades( $m->MATE_MATERIA );
+            $num_unidades = count( $unidades );
 
             $opciones = '
-            <button class="btn btn-xs btn-success" data-p="'.$d->DOCE_DOCENTE.'"><i class="fa fa-pencil"></i></button>
-            <button class="btn btn-xs btn-danger" data-p="'.$d->DOCE_DOCENTE.'"><i class="fa fa-trash-o"></i></button>';
-
-            $usuario_status = '<span class="text-default">NO CREADO</span>';
-
-            $usuario = $this->docentes_model->usuario( $d->DOCE_DOCENTE );
-            if( $usuario ){
-                $usuario_status = '<span class="text-success">ACTIVO</span>';
-                if(!$usuario->USUA_ACTIVO)
-                    $usuario_status = '<span class="text-danger">DESACTIVADO</span>'; 
-            }
-
-            $fecha = date('d-m-Y', strtotime($d->DOCE_CREATED_AT));
+            <button class="btn btn-xs btn-success" data-p="'.$m->MATE_MATERIA.'"><i class="fa fa-pencil"></i></button>
+            <button class="btn btn-xs btn-danger" data-p="'.$m->MATE_MATERIA.'"><i class="fa fa-trash-o"></i></button>';
 
             $data['data'][] = [
-                $d->DOCE_MATRICULA,
-                $d->DOCE_NOMBRE . ' ' . $d->DOCE_APELLIDOS,
-                $fecha,
-                $usuario_status,
+                $m->MATE_CLAVE,
+                $m->MATE_NOMBRE,
+                $num_unidades,
                 $opciones
             ];
         }
 
-        $this->printJSON( $data );        
-    }
-
-    public function postDocenteForm(){
-        echo '<span class="text-danger">Hola</span>';
+        $this->printJSON($data);
     }
 
     public function postMateriaForm(){
@@ -277,16 +337,144 @@ class Admin extends CI_Controller {
         
         $data = [ 'edited' => $edited, 'message' => $message ];
         $this->printJSON( $data );
-
     }
 
-    public function postAlumnoForm(){
-        echo '<span class="text-danger">Hola</span>';
-    }
-
+    
     public function postGrupoForm(){
         echo '<span class="text-danger">Hola</span>';
     }
+
+    /****** DOCENTES ******/
+    public function docentes(){
+
+        $title = ['page_title'    => 'SC :: Docentes'];
+
+        $this->load->view('layout/head'   , $title);
+        $this->load->view('layout/header');
+        $this->load->view('admin/docentes');
+        $this->load->view('layout/menu');
+        $this->load->view('layout/scripts');   
+    }
+
+    public function postDocentes(){
+
+        $this->load->model('docentes_model');
+        $docentes = $this->docentes_model->getDocentes();
+
+        $data['data'] = [];
+
+        foreach ($docentes as $d) {
+
+            $opciones = '
+            <button class="btn btn-xs btn-success" data-p="'.$d->DOCE_DOCENTE.'"><i class="fa fa-pencil"></i></button>
+            <button class="btn btn-xs btn-danger" data-p="'.$d->DOCE_DOCENTE.'"><i class="fa fa-trash-o"></i></button>';
+
+            $usuario_status = '<span class="text-default">NO CREADO</span>';
+
+            $usuario = $this->docentes_model->usuario( $d->DOCE_DOCENTE );
+            $usuario_status = '<button class="btn btn-xs btn-warning change" data-p="'.$d->DOCE_DOCENTE.'"><i class="fa fa-user"></i> ACTIVO</button>';
+            if(!$usuario->USUA_ACTIVO)
+                $usuario_status = '<button class="btn btn-xs btn-default change" data-p="'.$d->DOCE_DOCENTE.'"><i class="fa fa-user"></i> DESACTIVADO</button>';
+
+            $fecha = date('d-m-Y', strtotime($d->DOCE_CREATED_AT));
+
+            $data['data'][] = [
+                $d->DOCE_MATRICULA,
+                $d->DOCE_NOMBRE . ' ' . $d->DOCE_APELLIDOS,
+                $fecha,
+                $usuario_status,
+                $opciones
+            ];
+        }
+
+        $this->printJSON( $data );        
+    }
+
+    public function postDocenteForm(){
+        $this->load->view('admin/docentes_form');
+    }
+
+    public function addDocente(){
+        $matricula = trim($this->input->post('matricula'));
+        $nombre    = strtoupper( trim($this->input->post('nombre')) );
+        $apellidos = strtoupper( trim($this->input->post('apellidos')) );
+        $hash      = $this->input->post('matricula_hash');
+
+        $this->load->model('docentes_model');
+        $existe = $this->docentes_model->getByMatricula( $matricula );
+
+        $insert = false;
+        if( !$existe ){
+            
+            $usuario_id = null;
+            $this->db->trans_start();
+            $this->usuarios_model->insert( $matricula, $hash, 1);
+            $usuario_id = $this->db->insert_id();
+            $docente = $this->docentes_model->insert( $matricula, $nombre, $apellidos, $usuario_id );
+            $this->db->trans_complete();
+
+            if( $docente ){
+                $insert  = true;
+                $message = 'El docente se creó correctamente';
+            }else{
+                $message = 'No se pudo guardar el docente';
+            }
+        }else{
+            $message = 'Ya existe un docente con la matrícula <b>' . $matricula . '</b>';
+        }
+
+        $data = [ 'insert' => $insert, 'message' => $message ];
+
+        $this->printJSON( $data );
+    }
+
+    public function postDocenteFormEdit(){
+        $id = $this->input->post('id');
+        $this->load->model('docentes_model');
+        $docente = $this->docentes_model->getById( $id );
+        $this->load->view('admin/docentes_form_edit', ['docente' => $docente]);
+    }
+
+    public function editDocente(){
+        $id = $this->input->post('id');
+        $nombre    = strtoupper( trim($this->input->post('nombre')) );
+        $apellidos = strtoupper( trim($this->input->post('apellidos')) );
+
+        $this->load->model('docentes_model');
+        $docente = $this->docentes_model->update($id, $nombre, $apellidos );
+
+        $edited = false;
+        if( $docente ){
+            $edited = true;
+            $message = 'Los cambios se guardaron correctamente';
+        }else{
+            $message = 'No se pudieron guardar los cambios';
+        }
+        
+        $data = [ 'edited' => $edited, 'message' => $message ];
+        $this->printJSON( $data );
+    }
+
+    public function changeStatusDocente(){
+        $id = $this->input->post('id');
+        $this->load->model('docentes_model');
+        $docente = $this->docentes_model->getById( $id );
+        $usuario = $this->usuarios_model->changeStatus( $docente->DOCE_USUARIO );
+
+        $change = false;
+        if( $usuario ){
+            $change = true;
+            $message = 'Se ha cambiado el status';
+        }else{
+            $message = 'No se pudo cambiar el status';
+        }
+
+        $data = [ 'change' => $change, 'message' => $message ];
+
+        $this->printJSON( $data );
+    }
+
+    /***** DELETES *****/
 
     public function deleteMateria(){
         $id = $this->input->post('id');

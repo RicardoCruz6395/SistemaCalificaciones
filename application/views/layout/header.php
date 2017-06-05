@@ -1,10 +1,17 @@
 <body class="menubar-hoverable header-fixed menubar-pin">
-    <!-- BEGIN HEADER-->
-    <div class="modal fade" id="general-modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+    <div class="modal fade" id="general-modal" tabindex="-1" role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="general-modal-close">&times;</button>
+                    <h4 class="modal-title" id="general-modal-title">Modal</h4>
+                </div>
                 <div class="modal-body">
-                    <div class="text-center"><i class="fa fa-spin fa-spinner"></i></div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="general-modal-cancel">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="general-modal-ok">Aceptar</button>
                 </div>
             </div>
         </div>

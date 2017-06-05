@@ -8,7 +8,7 @@
                             <div class="card-head">
                                 <div class="tools">
                                     <div class="btn-group">
-                                        <a class="btn btn-icon-toggle" data-toggle="modal" data-target="#general-modal" id="agregar">
+                                        <a class="btn btn-icon-toggle" id="agregar">
                                             <i class="fa fa-plus"></i>
                                         </a>
                                         <a class="btn btn-icon-toggle btn-refresh" id="recargar">
@@ -26,7 +26,7 @@
                                                 <th>MATR&Iacute;CULA</th>
                                                 <th>NOMBRE COMPLETO</th>
                                                 <th>FECHA ALTA</th>
-                                                <th>STATUS</th>
+                                                <th>USUARIO</th>
                                             	<th>OPCIONES</th>
                                             </tr>
                                         </thead>
@@ -45,39 +45,34 @@
     <script src="<?= base_url() ?>assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
     <script src="<?= base_url() ?>assets/js/libs/DataTables/jquery.dataTables.js"></script>
     <script type="text/javascript">
+        var table = $('#table-docentes').DataTable({
+            'ajax': {
+                'url' : '<?= base_url() ?>admin/postDocentes',
+                'type' : 'POST'
+            },
+            'columnDefs' : [{
+                className : 'text-center',
+                'targets' : [2,3,4]     
+            }],
+            'order': [[ 1, 'asc' ]]
+        });
+
+
+        $('#recargar').click(function(e){
+            table.ajax.reload();
+        });
+
+        $('#agregar').click(function (e) {
+            e.preventDefault();
+            
+            SCModals.openModal({
+                title : 'NUEVO DOCENTE',
+                btnOk : '<i class="fa fa-floppy-o"></i> GUARDAR',
+                url : base_url + 'admin/postDocenteForm',
+            });
+        });
+
         $(document).ready(function() {
-            var table = $('#table-docentes').DataTable({
-                'ajax': {
-                    'url' : '<?= base_url() ?>admin/postDocentes',
-                    'type' : 'POST'
-                },
-                'columnDefs' : [{
-                    className : 'text-center',
-                    'targets' : [2,3,4]     
-                }],
-                'order': [[ 1, 'asc' ]]
-            });
-
-
-            $('#recargar').click(function(e){
-                table.ajax.reload();
-            });
-
-            $('#agregar').click(function (e) {
-                e.preventDefault();
-                
-                $('.modal-body', '#general-modal').html('<div class="text-center"><i class="fa fa-spin fa-spinner"></i></div>');
-
-                postAjax({
-                    url : base_url + 'admin/postDocenteForm',
-                    data : { grupo : 1 },
-                    success : function(response){
-                        $('.modal-content', '#general-modal').html(response);
-                    }
-                });
-            });
-
-
             $('.btn-danger').live('click',function(e){
                 id = this.getAttribute('data-p');
                 SCAlerts.confirmCancel({
@@ -87,11 +82,50 @@
                         postAjax({
                             url : base_url + 'admin/deleteDocente',
                             data : { id : id },
-                            success : function(response){
+                            success : function(data){
+                                toastr.options.positionClass = 'toast-bottom-right';
+                                if( data.deleted )
+                                    toastr.success( data.message )
+                                else
+                                    toastr.error( data.message )
                                 table.ajax.reload();
                             }
                         });
                     }
+                });
+            });
+
+            $('.change').live('click',function(e){
+                id = this.getAttribute('data-p');
+                SCAlerts.confirmCancel({
+                    title : 'Cambiar status del usuario',
+                    message : '¿Desea cambiarlo?',
+                    success : function(){
+                        postAjax({
+                            url : base_url + 'admin/changeStatusDocente',
+                            data : { id : id },
+                            success : function(data){
+                                toastr.options.positionClass = 'toast-bottom-right';
+                                if( data.change )
+                                    toastr.success( data.message )
+                                else
+                                    toastr.error( data.message )
+                                table.ajax.reload();
+                            }
+                        });
+                    }
+                });
+            });
+
+            $('.btn-success').live('click',function(e){
+                id = this.getAttribute('data-p');
+                e.preventDefault();
+
+                SCModals.openModal({
+                    title : 'EDITAR DOCENTE',
+                    btnOk : '<i class="fa fa-floppy-o"></i> GUARDAR CAMBIOS',
+                    url : base_url + 'admin/postDocenteFormEdit',
+                    data : { id : id }
                 });
             });
 

@@ -3,9 +3,25 @@
 class Usuarios_model extends CI_Model{
 
 
+    public function insert( $matricula, $hash, $rol ){
+        $datos = [
+            'USUA_MATRICULA' => $matricula,
+            'USUA_PASSWORD'  => $hash,
+            'USUA_ROL'       => $rol 
+        ];
+        return $this->db->insert('usuarios', $datos);
+    }
+
+    public function changeStatus( $id_usuario ){
+        $sql = "UPDATE usuarios
+                SET USUA_ACTIVO = (USUA_ACTIVO * -1 + 1)
+                WHERE USUA_USUARIO = $id_usuario;";
+        return $this->db->query( $sql );
+    }
+
     public function getDatosUsuario(){
-        $id_usuario = $this->session->userdata['id'];
-        switch ($this->session->userdata('rol')){
+        $id_usuario = $this->session->id;
+        switch ($this->session->rol){
             case 1:
                 $this->db->where('DOCE_USUARIO', $id_usuario);
                 return $this->db->get('docentes')->row();

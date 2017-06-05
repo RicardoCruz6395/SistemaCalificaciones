@@ -8,6 +8,12 @@ class Docentes_model extends CI_Model{
         return $result->row();
     }
 
+    public function getByMatricula( $matricula ){
+        $this->db->where('DOCE_MATRICULA', $matricula);
+        $result = $this->db->get('docentes');
+        return $result->row();
+    }    
+
     public function getDocentes(){
         $this->db->where('DOCE_ACTIVO', 1);
         $result = $this->db->get('docentes');
@@ -21,6 +27,23 @@ class Docentes_model extends CI_Model{
                 WHERE DOCE_DOCENTE = '$id_docente'
                 LIMIT 1;";
         return $this->db->query($sql)->row();
+    }
+
+    public function insert( $matricula, $nombre, $apellidos, $usuario_id ){
+        $datos = [
+            'DOCE_MATRICULA' => $matricula,
+            'DOCE_NOMBRE'    => $nombre,
+            'DOCE_APELLIDOS' => $apellidos,
+            'DOCE_USUARIO'   => $usuario_id
+         ];
+        return $this->db->insert('docentes', $datos );
+    }
+
+    public function update( $id, $nombre, $apellidos ){
+        $this->db->set('DOCE_NOMBRE'    , $nombre);
+        $this->db->set('DOCE_APELLIDOS' , $apellidos);
+        $this->db->where('DOCE_DOCENTE', $id);
+        return $this->db->update('docentes');
     }
 
     public function getGruposByPeriodo( $id_periodo ){
@@ -48,9 +71,6 @@ class Docentes_model extends CI_Model{
         }
 
     }
-
-
-
 
     public function get(){
         try{

@@ -20,7 +20,7 @@
 			<!-- BEGIN MAIN MENU -->
 			<ul id="main-menu" class="gui-controls">
 				<?php
-					if( $params[0] == 'admin' || $params[0] == 'configuracion' ){
+					if( in_array($params[0], ['admin','configuracion','auth']) ){
 
 						$active = ' class="active expanded expanding"';
 						$active2 = 'active';

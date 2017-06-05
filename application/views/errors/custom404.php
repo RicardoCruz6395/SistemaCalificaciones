@@ -31,12 +31,6 @@
 
 				<!-- BEGIN 404 MESSAGE -->
 				<section>
-					<div class="section-header">
-						<ol class="breadcrumb">
-							<li><a href="<?=base_url()?>">Inicio</a></li>
-							<li class="active">404</li>
-						</ol>
-					</div>
 					<div class="section-body contain-lg">
 						<div class="row">
 							<div class="col-lg-12 text-center">
