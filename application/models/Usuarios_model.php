@@ -66,7 +66,7 @@ class Usuarios_model extends CI_Model{
 
     public function get_by_id($id){
         try {
-            $this->db->where('id', $id);
+            $this->db->where('USUA_USUARIO', $id);
             $result = $this->db->get('usuarios');
 
             if ($result->num_rows() > 0)
@@ -90,5 +90,19 @@ class Usuarios_model extends CI_Model{
         } catch (Exception $e) {
             return ["success" => false, "response" => $e->getMessage()];
         }
+    }
+
+    public function set_password($password){
+        $data = array(
+               'USUA_PASSWORD' => $password
+            );
+
+        $this->db->where('USUA_USUARIO', $this->session->id);
+        $this->db->update('usuarios', $data); 
+
+        if ($this->db->affected_rows() > 0){
+            return true;
+        }
+        return false;
     }
 }

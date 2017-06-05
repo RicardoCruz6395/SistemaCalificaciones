@@ -70,7 +70,7 @@ class Alumnos_model extends CI_Model {
                 ) a
                 LEFT JOIN
                 (
-                    SELECT CALI_GRUPO_DETALLE, CALI_UNIDAD, CALI_OBTENCION, CALI_PUNTAJE, OBTE_NOMBRE
+                    SELECT CALI_GRUPO_DETALLE, CALI_UNIDAD, CALI_OBTENCION, CALI_PUNTAJE, OBTE_NOMBRE, OBTE_OBTENCION
                     FROM grupos_detalles
                     JOIN calificaciones ON GDET_DETALLE = CALI_GRUPO_DETALLE
                     JOIN obtenciones ON CALI_OBTENCION = OBTE_OBTENCION
