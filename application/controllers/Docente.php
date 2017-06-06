@@ -158,8 +158,10 @@ class Docente extends CI_Controller{
 
     }
 
-	public function test(){
-      echo "test";
+    public function test(){
+        $json = file_get_contents('php://input');
+        $obj = json_decode($json);
+        print_r($obj);
   }
 
 }
