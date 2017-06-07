@@ -12,9 +12,10 @@ class Usuarios_model extends CI_Model{
         return $this->db->insert('usuarios', $datos);
     }
 
-    public function changeStatus( $id_usuario ){
+    public function changeStatus( $id_usuario, $status = null ){
+        $status = ($status == null ) ? '(USUA_ACTIVO * -1 + 1)' : $status;
         $sql = "UPDATE usuarios
-                SET USUA_ACTIVO = (USUA_ACTIVO * -1 + 1)
+                SET USUA_ACTIVO = $status
                 WHERE USUA_USUARIO = $id_usuario;";
         return $this->db->query( $sql );
     }

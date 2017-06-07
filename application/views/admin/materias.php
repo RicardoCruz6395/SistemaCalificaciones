@@ -52,6 +52,10 @@
             'columnDefs' : [{
                 className : 'text-center',
                 'targets' : [2,3]     
+            },
+            {
+                width: '15%',
+                'targets': [0,2,3]
             }],
             'order': [[ 1, 'asc' ]]
         });

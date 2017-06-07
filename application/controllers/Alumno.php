@@ -18,7 +18,7 @@ class Alumno extends CI_Controller {
             $periodo = $periodo->GRUP_PERIODO;
             redirect('alumno/periodo/' . $periodo);
         }else{
-            $data1 = ['page_title'    => 'SC :: Panel de Calificaciones'];
+            $data1 = ['page_title'    => 'SCP :: Panel de Calificaciones'];
 
             $this->load->view('layout/head'   , $data1);
             $this->load->view('layout/header');
@@ -80,7 +80,7 @@ class Alumno extends CI_Controller {
 
             ksort($unidades);
 
-            $data1 = ['page_title'    => 'SC :: Panel de Calificaciones'];
+            $data1 = ['page_title'    => 'SCP :: Panel de Calificaciones'];
             $data3 = [
                 'materias'       => $materias,
                 'unidades'       => $unidades,

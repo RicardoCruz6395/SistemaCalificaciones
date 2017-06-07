@@ -20,7 +20,7 @@ class Docente extends CI_Controller{
 
 	public function index2(){
 
-	    $data = array('page_title' => 'SC :: Grupos');
+	    $data = array('page_title' => 'SCP :: Grupos');
 	    $this->load->view('layout/head', $data);
 	    $this->load->view('layout/header');
 	    $this->load->model('docentes_model');
@@ -34,7 +34,7 @@ class Docente extends CI_Controller{
 
 	public function periodo_old( $periodo = null ){
 		
-		$data = array('page_title' => 'SC :: Lista de grupos');
+		$data = array('page_title' => 'SCP :: Lista de grupos');
 	    $this->load->view('layout/head', $data);
 	    $this->load->view('layout/header');
 	    $this->load->model('docentes_model');
@@ -63,7 +63,7 @@ class Docente extends CI_Controller{
 
     public function calificar($grupo){
 
-	    $data = array('page_title' => 'SC :: Calificar');
+	    $data = array('page_title' => 'SCP :: Calificar');
         $data2 = ['nombre_usuario' => $this->docente->DOCE_NOMBRE ];
 
 	    $this->load->view('layout/head'   , $data);
@@ -138,7 +138,7 @@ class Docente extends CI_Controller{
 
             /*********** LISTA DE grupos *************/
             $this->load->model('docentes_model');
-            $data1 = ['page_title'    => 'SC :: Panel de Calificaciones'];
+            $data1 = ['page_title'    => 'SCP :: Panel de Calificaciones'];
             $data2 = ['nombre_usuario' => $docente->DOCE_DOCENTE ];
             $data3 = [
             	"grupos" => $this->docentes_model->getGruposByPeriodo( $id_periodo ),

@@ -1,7 +1,7 @@
 <form class="form floating-label form-validate" id="form-materia">
 	<input type="hidden" name="id" value="<?=$materia->MATE_MATERIA?>">
 	<div class="form-group">
-		<input type="text" id="clave" class="form-control dirty" disabled="disabled" value="<?=$materia->MATE_CLAVE?>">
+		<input type="text" id="clave" class="form-control dirty" disabled="disabled" value="<?=$materia->MATE_CODIGO?>">
 		<label for="clave">Clave</label>
 	</div>
 	<div class="form-group">

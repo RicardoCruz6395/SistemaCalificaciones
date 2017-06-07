@@ -22,14 +22,14 @@ class Materias_model extends CI_Model{
         return $this->db->query($sql)->result();
     }
 
-    public function getByClave( $clave ){
-        $this->db->where('MATE_CLAVE', $clave);
+    public function getByCodigo( $codigo ){
+        $this->db->where('MATE_CODIGO', $codigo);
         $result = $this->db->get('materias');
         return $result->row();
     }
 
-    public function insert($clave, $nombre){
-        return $this->db->insert('materias',['MATE_CLAVE'=>$clave, 'MATE_NOMBRE'=>$nombre]);
+    public function insert($codigi, $nombre){
+        return $this->db->insert('materias',['MATE_CODIGO'=>$codigo, 'MATE_NOMBRE'=>$nombre]);
     }
 
   public function getImparte()

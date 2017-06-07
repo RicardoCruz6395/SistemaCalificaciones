@@ -24,7 +24,8 @@
                                         <thead>
                                         	<tr>
                                                 <th>#</th>
-                                                <th>NOMBRE</th>
+                                                <th>NOMBRE DEL AULA</th>
+                                                <th>FECHA DE CREACIÓN</th>
                                                 <th>OPCIONES</th>
                                         	</tr>
                                         </thead>
@@ -50,9 +51,9 @@
             },
             'columnDefs' : [{
                 className : 'text-center',
-                'targets' : [1,2]     
+                'targets' : [0,2,3]     
             }],
-            'order': [[ 1, 'asc' ]]
+            'order': [[ 0, 'asc' ]]
         });
 
 
