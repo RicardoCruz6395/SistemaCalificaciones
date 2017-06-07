@@ -69,7 +69,7 @@ class Auth extends CI_Controller {
 			redirect('auth/login');
 		}else{
 			//$this->load->view('');
-			$data = array('page_title' => 'SC :: Cambiar contraseña');
+			$data = array('page_title' => 'SCP :: Cambiar contraseña');
 			$this->load->view('layout/head', $data);
 			$this->load->view('layout/header');
 			$this->load->view('auth/password');

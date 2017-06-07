@@ -48,7 +48,7 @@ class Docentes_model extends CI_Model{
 
     public function getGruposByPeriodo( $id_periodo ){
 
-        $sql = "SELECT GRUP_GRUPO, MATE_CLAVE, MATE_NOMBRE, SEME_NOMBRE, COUNT(*) NUM_ALUMNOS, AULA_NOMBRE, CARR_NOMBRE 
+        $sql = "SELECT GRUP_GRUPO, MATE_CODIGO, MATE_NOMBRE, SEME_NOMBRE, COUNT(*) NUM_ALUMNOS, AULA_NOMBRE, CARR_NOMBRE 
                 FROM grupos
                 JOIN grupos_detalles ON GRUP_GRUPO = GDET_GRUPO
                 JOIN aulas ON GRUP_AULA = AULA_AULA
