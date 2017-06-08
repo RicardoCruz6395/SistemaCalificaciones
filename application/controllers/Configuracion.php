@@ -36,7 +36,7 @@ class Configuracion extends CI_Controller {
         $this->load->model('periodos_nombres_model');
         $this->load->model('ciclos_escolares_model');
         $this->load->model('periodos_model');
-        $periodos = $this->periodos_model->getPeriodos();
+        $periodos = $this->periodos_model->getPeriodos( [1] );
 
         $data['data'] = [];
 
@@ -138,7 +138,7 @@ class Configuracion extends CI_Controller {
         $existe = $this->periodos_model->get( $tipo, $ciclo );
 
         $edited = false;
-        if( !$existe ){
+        if( !$existe || $existe->PERI_PERIODO == $id ){
 
             $periodo = $this->periodos_model->update( $id, $tipo, $ciclo );
 
@@ -166,7 +166,7 @@ class Configuracion extends CI_Controller {
 
     public function postAulas(){
         $this->load->model('aulas_model');
-        $aulas = $this->aulas_model->getAulas();
+        $aulas = $this->aulas_model->getAulas( [1] );
 
         $data['data'] = [];
 

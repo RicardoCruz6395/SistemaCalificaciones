@@ -5,7 +5,7 @@
 		<label for="codigo">Código</label>
 	</div>
 	<div class="form-group">
-		<input type="text" class="form-control dirty" id="carrera" name="carrera" data-rule-minlenght="1" required="" aria-required="true" aria-describedby="carrera-error" aria-invalid="true" value="<?=$carrera->CARR_NOMBRE?>"><span id="carrera-error" class="help-block">Información requerida</span>
+		<input type="text" class="form-control dirty" id="carrera" name="carrera" data-rule-minlenght="1"  maxlength="70" required="" aria-required="true" aria-describedby="carrera-error" aria-invalid="true" value="<?=$carrera->CARR_NOMBRE?>"><span id="carrera-error" class="help-block">Información requerida</span>
 		<label for="carrera">Nombre de la carreras</label>
 	</div>
 </form>

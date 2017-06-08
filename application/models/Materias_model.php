@@ -8,8 +8,8 @@ class Materias_model extends CI_Model{
         return $result->row();
     }
 
-    public function getMaterias(){
-        $this->db->where('MATE_ACTIVO', 1);
+    public function getMaterias( $activo = [0,1] ){
+        $this->db->where_in('MATE_ACTIVO', $activo);
         $result = $this->db->get('materias');
         return $result->result();
     }

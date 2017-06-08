@@ -10,9 +10,11 @@
                             </div><!--end .card-head -->
                             <div class="card-body">
                                 <div class="form-group col-md-4 col-md-offset-8">
-                                    <label for="select13" class="col-sm-2 control-label"><i class="fa fa-fw fa-search"></i></label>
+                                    <label for="select13" class="col-sm-2 control-label"><i class="fa fa-search"></i></label>
                                     <div class="col-sm-10">
-                                        <?=$periodos?>
+                                        <select id="periodos" class="form-control">
+                                            <?=$periodos?>
+                                        </select>
                                         <div class="form-control-line"></div>
                                     </div>
                                 </div>

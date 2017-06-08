@@ -1,10 +1,32 @@
 <form class="form floating-label form-validate" id="form-grupo">
 	<div class="form-group">
+		<select id="periodo" name="periodo" class="form-control dirty" required="" aria-required="true">
+			<option value="">SELECCIONE UNA OPCIÓN...</option>
+			<?=$periodos?>
+		</select>
+		<label for="periodo">Periodo</label>
+	</div>
+	<div class="form-group">
 		<select id="semestre" name="semestre" class="form-control dirty" required="" aria-required="true">
 			<option value="">SELECCIONE UNA OPCIÓN...</option>
 			<?=$semestres?>
+			<option value="0">NO ESPECIFICADO</option>	
 		</select>
 		<label for="semestre">Semestre</label>
+	</div>
+	<div class="form-group">
+		<select id="materia" name="materia" class="form-control dirty" required="" aria-required="true">
+			<option value="">SELECCIONE UNA OPCIÓN...</option>
+			<?=$materias?>
+		</select>
+		<label for="materia">Materia</label>
+	</div>
+	<div class="form-group">
+		<select id="docente" name="docente" class="form-control dirty" required="" aria-required="true">
+			<option value="">SELECCIONE UNA OPCIÓN...</option>
+			<?=$docentes?>
+		</select>
+		<label for="docente">Docente</label>
 	</div>
 	<div class="form-group">
 		<select id="carrera" name="carrera" class="form-control dirty" required="" aria-required="true">
@@ -12,6 +34,13 @@
 			<?=$carreras?>
 		</select>
 		<label for="carrera">Carrera</label>
+	</div>
+	<div class="form-group">
+		<select id="aula" name="aula" class="form-control dirty" required="" aria-required="true">
+			<option value="">SELECCIONE UNA OPCIÓN...</option>
+			<?=$aulas?>
+		</select>
+		<label for="aula">Aula</label>
 	</div>
 </form>
 <script type="text/javascript">
@@ -32,7 +61,7 @@
 		this.formSubmit = function( form ){
 			if(form.valid()){
 				postAjax({
-					url : base_url + 'admin/addAlumno',
+					url : base_url + 'admin/addGrupo',
 					data : form.serialize(),
 					success : function(data){
 						toastr.options.positionClass = 'toast-bottom-right';
