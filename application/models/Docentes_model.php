@@ -46,7 +46,7 @@ class Docentes_model extends CI_Model{
         return $this->db->update('docentes');
     }
 
-    public function getGruposByPeriodo( $id_periodo ){
+    public function getGruposByPeriodo( $id_periodo, $docente ){
 
         $sql = "SELECT GRUP_GRUPO, MATE_CODIGO, MATE_NOMBRE, SEME_NOMBRE, COUNT(*) NUM_ALUMNOS, AULA_NOMBRE, CARR_NOMBRE 
                 FROM grupos
@@ -55,7 +55,7 @@ class Docentes_model extends CI_Model{
                 JOIN carreras ON GRUP_CARRERA = CARR_CARRERA
                 JOIN materias ON GRUP_MATERIA = MATE_MATERIA
                 JOIN semestres ON GRUP_SEMESTRE = SEME_SEMESTRE
-                WHERE GRUP_DOCENTE = 1
+                WHERE GRUP_DOCENTE = '".$docente."'
                 AND GDET_ACTIVO = 1
                 AND GRUP_ACTIVO = 1
                 AND GRUP_PERIODO = $id_periodo
@@ -127,6 +127,94 @@ class Docentes_model extends CI_Model{
 
         return $this->db->query( $sql )->row();
 
+    }
+
+    public function grabarCalificaciones($data){
+
+        $existe = $this->existe_calificacion($data);
+        
+        if($existe != NULL){
+            return $this->actualizar_calificacion($data);
+        }else{
+            return $this->insertar_calificacion($data);
+        }
+        
+    }
+
+    public function existe_calificacion($data){
+
+        $unidad = $this->get_unidad($data->unidad, $data->materia);
+
+        $sql = "SELECT * FROM calificaciones 
+                JOIN grupos_detalles ON CALI_GRUPO_DETALLE = GDET_DETALLE 
+                WHERE 
+                GDET_DETALLE = ".$data->id. " 
+                AND CALI_UNIDAD = ".$unidad. " 
+                ";
+
+        $result = $this->db->query($sql);
+
+        if($result->num_rows() > 0) {
+            return $result->row();
+        }else{
+            return null;
+        }
+    }
+
+    public function insertar_calificacion($data){
+        try {
+
+            $unidad = $this->get_unidad($data->unidad, $data->materia);
+
+            $datos = [
+                'CALI_GRUPO_DETALLE'=> $data->id,
+                'CALI_UNIDAD'       => $unidad,
+                'CALI_OBTENCION'    => 1,
+                'CALI_PUNTAJE'      => $data->calificacion
+             ];
+
+             $this->db->insert('calificaciones', $datos );
+
+             return ["success"=>true, "message"=>"Calificación insertada"];
+            
+        } catch (Exception $e) {
+
+            return ["success"=>false, "message"=>$e->getMessage()];
+            
+        }
+        
+        return false;
+    }
+
+    public function actualizar_calificacion($data){
+        try {
+
+            $unidad = $this->get_unidad($data->unidad, $data->materia);
+
+            $this->db->set('CALI_OBTENCION', 2);
+            $this->db->set('CALI_PUNTAJE', $data->calificacion);
+            $this->db->where('CALI_GRUPO_DETALLE', $data->id);
+            $this->db->where('CALI_UNIDAD', $unidad);
+            
+            $this->db->update('calificaciones');
+            return ["success"=>true, "message"=>"Calificación actualizada"];
+            
+        } catch (Exception $e) {
+
+            return ["success"=>false, "message"=>$e->getMessage()];
+            
+        }
+        return false;
+        
+        
+    }
+
+    public function get_unidad($unidad='', $materia=''){
+
+        $sql = "SELECT UNID_UNIDAD FROM unidades WHERE UNID_MATERIA = '$materia' 
+                AND UNID_NUMERO = '$unidad' "; 
+        $result = $this->db->query($sql)->row()->UNID_UNIDAD;
+        return $result;
     }
 
 
