@@ -19,6 +19,7 @@
 		<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/theme-1/libs/rickshaw/rickshaw.css" />
 		<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/theme-1/libs/morris/morris.core.css" />
 		<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/theme-1/libs/toastr/toastr.css" />
+		<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/iziToast/dist/css/iziToast.min.css" />
 
 		<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/sweetalert2.min.css" />
         <link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/animate.min.css" />
