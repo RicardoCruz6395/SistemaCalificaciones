@@ -36,14 +36,15 @@ function end() {
 }
 
 function postAjax( params ) {
+    start();
     
     $.ajax({
         method: params.type || 'POST',
         url: params.url,
         data: params.data || {},
         proccessData : true,
-        contentType:  params.contentType || '',
-        dataType:  params.dataType || '',
+        contentType:  params.contentType || 'application/x-www-form-urlencoded; charset=UTF-8',
+        dataType:  params.dataType || 'html',
         statusCode: {
             404: function () {
                 alert('Página no encontrada :(');
@@ -75,6 +76,7 @@ function postAjax( params ) {
     .complete(function (response, xhr) {
         if( params.complete )
             params.complete(response);
+        end();
       //callback(response);
       //console.log("Complete, Status: " + xhr);
       //after_submit($this, response);

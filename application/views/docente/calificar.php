@@ -18,12 +18,14 @@
                   <div class="form-group">
                     <label for="" class="form-control-label">Semestre</label>
                     <input type="text" class="form-control" value=" <?= $grupo->SEME_NOMBRE ?> " readonly>
+                    <input type="hidden" id="grupo" class="form-control" value=" <?= $grupo->GRUP_GRUPO ?> " readonly>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="" class="form-control-label">Materia</label>
                     <input type="text" class="form-control" value=" <?= $grupo->MATE_NOMBRE ?> " readonly>
+                    <input type="text" id="materia" class="form-control" value=" <?= $grupo->MATE_MATERIA ?> " readonly>
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -48,7 +50,10 @@
                   <div class="btn-group">
                     <a class="btn btn-icon-toggle btn-collapse"><i class="fa fa-angle-down"></i></a>
                   </div>
-                  <button class="btn btn-primary btn-save-cali"> <i class="fa fa-save"></i> GUARDAR</button>
+                  <span class="loading" style="display: none">
+                    <i style="display: none" class="fa fa-spinner loading fa-spin fa-1x fa-fw"></i> Guardando...
+                  </span>
+                  <button class="btn btn-primary btn-save-cali btn-submit"> <i class="fa fa-save"></i> GUARDAR</button>
                 </div>
 
               </div><!--end .card-head -->
@@ -86,7 +91,7 @@
                         $n_unidades = 0;
                         $suma = 0;
                         foreach ($unidades as $keyU => $u){
-                          echo '<td class="text-center calif" data-name="cal-'.$keyU.'">';
+                          echo '<td class="text-center calif" data-name="'.$keyU.'">';
                           $calificacion = null;
                           if(array_key_exists($keyU, $calificaciones[$keyA])){
                             $calificacion = $calificaciones[ $keyA ][ $keyU ][0];
@@ -99,10 +104,10 @@
                           switch (true) {
                             case ( $calificacion == null ):
                             $obtencion = '<sup class="badge pointer style-danger">R</sup>';
-                            echo '<button type="button" class=" cal btn ink-reaction btn-floating-action btn-primary text-center" >0</button>'.$obtencion;
+                            echo '<button type="button" class=" cal btn ink-reaction btn-floating-action btn-warning text-center" >0</button>'.$obtencion;
                             break;
                             case ( $calificacion < 70 ):
-                            echo '<button type="button" class=" cal btn ink-reaction btn-floating-action btn-primary text-center">N/A</button>' .$obtencion;
+                            echo '<button type="button" class=" cal btn ink-reaction btn-floating-action btn-danger text-center">'. $calificacion .'</button>' .$obtencion;
                             break;
                             case ( $calificacion >= 70 ):
                             echo '<button type="button" class=" cal btn ink-reaction btn-floating-action btn-primary text-center">'. $calificacion .'</button>' . $obtencion;
@@ -296,10 +301,11 @@
   }
 
   $(".btn-save-cali").click(function() {
+
     var $this = $(this);
-    
-    //var element = {};
     var data = [];
+    var grupo = $("#grupo").val();
+    var materia = $("#materia").val();
 
     $("#tabla-cal").find('.calif').each(function () {
       var element = {};
@@ -307,14 +313,14 @@
       element.id = dato.id;
       element.unidad = dato.name;
       element.calificacion = dato.value;
+      element.grupo = grupo;
+      element.materia = materia;
       data.push({element:element});
       
     });
-    console.log(data);
-    console.log("__________________");
-    console.log(JSON.stringify(data));
+    
     postAjax({
-      url: base_url+"docente/test",
+      url: base_url+"docente/guardar_calificacion",
       data: JSON.stringify(data),
       contentType: 'application/json',
       dataType:  'json',
@@ -322,7 +328,12 @@
 
         console.log(response);
 
-      }
+        if(response.success)
+          toastr.success('Calificaciones guardadas', '');
+        else
+          toastr.error('Calificaciones no guardadas', '');
+
+      }       
 
     });
 

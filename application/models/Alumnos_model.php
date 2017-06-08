@@ -155,14 +155,14 @@ class Alumnos_model extends CI_Model {
         return $this->db->update('alumnos');
     }
 
-  public function getByGrupo( $id_grupo ){
-
+  public function getByGrupo($grupo){
+    
     $sql = "SELECT ALUM_MATRICULA, ALUM_ALUMNO, ALUM_NOMBRE, ALUM_APELLIDOS, SEME_NOMBRE
                 FROM alumnos
                 JOIN grupos_detalles ON ALUM_ALUMNO = GDET_ALUMNO
                 JOIN grupos ON GRUP_GRUPO = GDET_GRUPO
                 JOIN semestres ON ALUM_SEMESTRE = SEME_SEMESTRE
-                WHERE GRUP_GRUPO = $id_grupo
+                WHERE GRUP_GRUPO = '$grupo'
                 AND GDET_ACTIVO = 1
                 AND GRUP_ACTIVO = 1
                 ;

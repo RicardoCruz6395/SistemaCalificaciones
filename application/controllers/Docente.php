@@ -55,7 +55,7 @@ class Docente extends CI_Controller{
 	    $this->load->model('alumnos_model');
 
 	    $data = [
-	    	"alumnos" => $this->alumnos_model->getByGrupo($this->input->post('grupo'))
+	    	"alumnos" => $this->alumnos_model->getByGrupo($this->input->post('grupo')),
 	    ];
 
 	    $this->load->view('docente/listaAlumnos', $data);
@@ -141,7 +141,7 @@ class Docente extends CI_Controller{
             $data1 = ['page_title'    => 'SCP :: Panel de Calificaciones'];
             $data2 = ['nombre_usuario' => $docente->DOCE_DOCENTE ];
             $data3 = [
-            	"grupos" => $this->docentes_model->getGruposByPeriodo( $id_periodo ),
+            	"grupos" => $this->docentes_model->getGruposByPeriodo( $id_periodo, $docente->DOCE_DOCENTE ),
             	'periodos'       => $select,
                 'nombre_periodo' => $nombre_periodo
         	];
@@ -158,10 +158,24 @@ class Docente extends CI_Controller{
 
     }
 
-    public function test(){
-        $json = file_get_contents('php://input');
-        $obj = json_decode($json);
-        print_r($obj);
+    public function guardar_calificacion(){
+        header('Content-Type: application/json');
+
+        try {
+
+            $json = file_get_contents('php://input');
+            $obj = json_decode($json);
+            
+            foreach ($obj as $keyC => $cali) {
+                $this->load->model('docentes_model');
+                $result = $this->docentes_model->grabarCalificaciones($cali->element);
+            }
+            echo json_encode(["success"=>true, "message"=>"Calificación guardada"]);
+            
+        } catch (Exception $e) {
+            echo json_encode(["success"=>false, "message"=>"Calificación no guardada"]);
+        }
+        
   }
 
 }
