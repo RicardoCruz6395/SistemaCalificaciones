@@ -1,6 +1,6 @@
 <form class="form floating-label form-validate" id="form-aula">
 	<div class="form-group">
-		<input type="text" class="form-control" id="aula" name="aula" data-rule-minlenght="1" required="" aria-required="true" aria-describedby="aula-error" aria-invalid="true"><span id="aula-error" class="help-block">Información requerida</span>
+		<input type="text" class="form-control dirty" id="aula" name="aula" data-rule-minlenght="1" maxlength="10" required="" aria-required="true" aria-describedby="aula-error" aria-invalid="true"><span id="aula-error" class="help-block">Información requerida</span>
 		<label for="aula">Nombre del aula</label>
 	</div>
 </form>

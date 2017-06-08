@@ -5,7 +5,7 @@
 		<p class="help-block">Introduzca 3 a 10 caracteres</p>
 	</div>
 	<div class="form-group">
-		<input type="text" class="form-control dirty" id="carrera" name="carrera" data-rule-minlenght="1" required="" aria-required="true" aria-describedby="carrera-error" aria-invalid="true"><span id="carrera-error" class="help-block">Información requerida</span>
+		<input type="text" class="form-control dirty" id="carrera" name="carrera" data-rule-minlenght="1" maxlength="70" required="" aria-required="true" aria-describedby="carrera-error" aria-invalid="true"><span id="carrera-error" class="help-block">Información requerida</span>
 		<label for="carrera">Nombre de la carrera</label>
 	</div>
 </form>

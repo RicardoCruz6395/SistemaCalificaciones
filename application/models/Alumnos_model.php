@@ -55,6 +55,7 @@ class Alumnos_model extends CI_Model {
                 JOIN grupos_detalles ON ALUM_ALUMNO = GDET_ALUMNO
                 JOIN grupos ON GDET_GRUPO = GRUP_GRUPO
                 WHERE ALUM_ALUMNO = $id_alumno
+                AND GDET_ACTIVO = 1
                 ORDER BY GRUP_PERIODO DESC LIMIT 1;";
 
         return $this->db->query( $sql )->row();

@@ -17,23 +17,26 @@ class Configuracion extends CI_Controller {
 		redirect('/');
 	}
 
+    public function viewGeneral( $title, $view, $data = []){
+        $this->load->view('layout/head', $title);
+        $this->load->view('layout/header');
+        $this->load->view( $view, $data);
+        $this->load->view('layout/menu');
+        $this->load->view('layout/scripts');
+    }
+
     /***** PERIODOS *****/
 
 	public function periodos(){
-		$title = ['page_title'    => 'SC :: Periodos'];
-
-		$this->load->view('layout/head'   , $title);
-        $this->load->view('layout/header');
-        $this->load->view('configuracion/periodos');
-        $this->load->view('layout/menu');
-        $this->load->view('layout/scripts');
+		$title = ['page_title'    => 'SCP :: Periodos'];
+        $this->viewGeneral( $title, 'configuracion/periodos' );
 	}
 
 	public function postPeriodos(){
         $this->load->model('periodos_nombres_model');
         $this->load->model('ciclos_escolares_model');
         $this->load->model('periodos_model');
-        $periodos = $this->periodos_model->getPeriodos();
+        $periodos = $this->periodos_model->getPeriodos( [1] );
 
         $data['data'] = [];
 
@@ -135,7 +138,7 @@ class Configuracion extends CI_Controller {
         $existe = $this->periodos_model->get( $tipo, $ciclo );
 
         $edited = false;
-        if( !$existe ){
+        if( !$existe || $existe->PERI_PERIODO == $id ){
 
             $periodo = $this->periodos_model->update( $id, $tipo, $ciclo );
 
@@ -157,18 +160,13 @@ class Configuracion extends CI_Controller {
     /****** AULAS ******/
 
     public function aulas(){
-        $title = ['page_title'    => 'SC :: Aulas'];
-
-        $this->load->view('layout/head'   , $title);
-        $this->load->view('layout/header' );
-        $this->load->view('configuracion/aulas');
-        $this->load->view('layout/menu');
-        $this->load->view('layout/scripts');
+        $title = ['page_title'    => 'SCP :: Aulas'];
+        $this->viewGeneral( $title, 'configuracion/aulas' );
     }
 
     public function postAulas(){
         $this->load->model('aulas_model');
-        $aulas = $this->aulas_model->getAulas();
+        $aulas = $this->aulas_model->getAulas( [1] );
 
         $data['data'] = [];
 
@@ -181,6 +179,7 @@ class Configuracion extends CI_Controller {
             $data['data'][] = [
                 $a->AULA_AULA,
                 $a->AULA_NOMBRE,
+                date('m-d-Y', strtotime($a->AULA_CREATED_AT)),
                 $opciones
             ];
         }
@@ -247,18 +246,13 @@ class Configuracion extends CI_Controller {
     /***** CARRERAS ***/
 
     public function carreras(){
-        $title = ['page_title'    => 'SC :: Carreras'];
-
-        $this->load->view('layout/head'   , $title);
-        $this->load->view('layout/header');
-        $this->load->view('configuracion/carreras');
-        $this->load->view('layout/menu');
-        $this->load->view('layout/scripts');
+        $title = ['page_title'    => 'SCP :: Carreras'];
+        $this->viewGeneral( $title, 'configuracion/carreras' );
     }
 
     public function postCarreras(){
         $this->load->model('carreras_model');
-        $carreras = $this->carreras_model->getCarreras();
+        $carreras = $this->carreras_model->getCarreras( [1] );
 
         $data['data'] = [];
 

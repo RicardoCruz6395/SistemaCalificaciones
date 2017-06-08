@@ -28,7 +28,7 @@
                   <table class="table datatable table-bordered table-hover" id="table-grupos">
                     <thead>
                     <tr>
-                      <th>CLAVE</th>
+                      <th>CÓDIGO</th>
                       <th>MATERIA</th>
                       <th>SEMESTRE</th>
                       <th>ALUMNOS</th>
@@ -44,7 +44,7 @@
                       foreach ($grupos as $grupo) {
                           ?>
                         <tr>
-                          <td> <?= $grupo->MATE_CLAVE ?> </td>
+                          <td> <?= $grupo->MATE_CODIGO ?> </td>
                           <td> <?= $grupo->MATE_NOMBRE ?> </td>
                           <td> <?= $grupo->SEME_NOMBRE ?> </td>
                           <td>

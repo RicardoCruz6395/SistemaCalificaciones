@@ -1,8 +1,9 @@
 <?php
 class Semestres_model extends CI_Model{
     
-    public function getById( $semestre ){
-        $result = $this->db->query("SELECT SEME_NOMBRE FROM semestres WHERE SEME_SEMESTRE =  $semestre;");
+    public function getById( $id ){
+        $this->db->where('SEME_SEMESTRE', $id);
+    	$result = $this->db->get('semestres');
         return $result->row();
     }
 

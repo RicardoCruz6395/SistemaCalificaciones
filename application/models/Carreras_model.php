@@ -1,8 +1,8 @@
 <?php
 class Carreras_model extends CI_Model{
 
-	public function getCarreras(){
-		$this->db->where('CARR_ACTIVO', 1);
+	public function getCarreras( $activo = [0,1] ){
+		$this->db->where_in('CARR_ACTIVO',$activo);
     	$result = $this->db->get('carreras');
     	return $result->result();
 	}

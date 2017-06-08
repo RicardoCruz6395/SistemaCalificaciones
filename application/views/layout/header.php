@@ -23,7 +23,7 @@
                     <li class="header-nav-brand">
                         <div class="brand-holder">
                             <a href="<?=base_url()?>">
-                                <span class="text-lg text-bold text-primary">Sistema calificaciones</span>
+                                <img src="<?=base_url()?>assets/img/logo.png" />
                             </a>
                         </div>
                     </li>

@@ -2,17 +2,17 @@
 	<input type="hidden" name="id" value="<?=$periodo->PERI_PERIODO?>">
 	<div class="form-group">
 		<select id="tipo_periodo" name="tipo_periodo" class="form-control dirty" required="" aria-required="true">
-			<option value="">SELECCIONE UN TIPO DE PERIODO...</option>
+			<option value="">SELECCIONE UNA OPCIÓN...</option>
 			<?=$tipos_periodos?>
 		</select>
-		<label for="tipo_periodo">TIPO DE PERIODO</label>
+		<label for="tipo_periodo">Tipo de periodo</label>
 	</div>
 	<div class="form-group">
 		<select id="ciclo_escolar" name="ciclo_escolar" class="form-control dirty" required="" aria-required="true">
-			<option value="">SELECCIONE UN CICLO ESCOLAR...</option>
+			<option value="">SELECCIONE UNA OPCIÓN...</option>
 			<?=$ciclos_escolares?>
 		</select>
-		<label for="tipo_periodo">CICLO ESCOLAR</label>
+		<label for="tipo_periodo">Ciclo escolar</label>
 	</div>
 </form>
 <script type="text/javascript">

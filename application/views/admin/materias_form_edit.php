@@ -1,7 +1,7 @@
 <form class="form floating-label form-validate" id="form-materia">
 	<input type="hidden" name="id" value="<?=$materia->MATE_MATERIA?>">
 	<div class="form-group">
-		<input type="text" id="clave" class="form-control dirty" disabled="disabled" value="<?=$materia->MATE_CLAVE?>">
+		<input type="text" id="clave" class="form-control dirty" disabled="disabled" value="<?=$materia->MATE_CODIGO?>">
 		<label for="clave">Clave</label>
 	</div>
 	<div class="form-group">
@@ -9,7 +9,7 @@
 		<label for="unidades">Nó. Unidades</label>
 	</div>
 	<div class="form-group">
-		<input type="text" class="form-control dirty" id="materia" name="materia" data-rule-minlenght="1" required="" aria-required="true" aria-describedby="materia-error" aria-invalid="true" value="<?=$materia->MATE_NOMBRE?>"><span id="materia-error" class="help-block">Información requerida</span>
+		<input type="text" class="form-control dirty" id="materia" name="materia" data-rule-minlenght="1"  maxlength="70" required="" aria-required="true" aria-describedby="materia-error" aria-invalid="true" value="<?=$materia->MATE_NOMBRE?>"><span id="materia-error" class="help-block">Información requerida</span>
 		<label for="materia">Nombre de la materia</label>
 	</div>
 </form>

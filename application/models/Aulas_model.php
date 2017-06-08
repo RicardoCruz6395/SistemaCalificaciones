@@ -1,8 +1,8 @@
 <?php
 class Aulas_model extends CI_Model{
 
-	public function getAulas(){
-		$this->db->where('AULA_ACTIVO', 1);
+	public function getAulas( $activo = [0,1] ){
+		$this->db->where_in('AULA_ACTIVO', $activo);
     	$result = $this->db->get('aulas');
     	return $result->result();
 	}

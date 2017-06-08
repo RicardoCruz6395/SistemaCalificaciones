@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Sistema de Calificaciones :: Iniciar Sesión</title>
+		<title>SCP :: Iniciar sesión</title>
 
 		<!-- BEGIN META -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="keywords" content="your,keywords">
 		<meta name="description" content="Short explanation about this website">
+		<link rel="icon" type="icon/x" href="<?=base_url()?>assets/img/icon.ico">
+
 		<!-- END META -->
 
 		<!-- BEGIN STYLESHEETS -->
@@ -41,14 +43,13 @@
 							<br/><br/>
 							<form class="form floating-label form-validate" action="<?=base_url('auth/postLogin')?>" id="form_login" accept-charset="utf-8" method="post">
 								<div class="form-group">
-									<input type="text" class="form-control" id="matricula" name="matricula" required data-rule-minlength="6" data-rule-maxlength="12">
+									<input type="text" class="form-control dirty" id="matricula" name="matricula" required data-rule-minlength="6" data-rule-maxlength="12">
 									<label for="matricula">Matricula</label>
 								</div>
 								<div class="form-group">
-									<input type="password" class="form-control" id="password" name="password" required data-rule-minlength="6" 	>
+									<input type="password" class="form-control dirty" id="password" name="password" required data-rule-minlength="6">
 									<label for="password">Contraseña</label>
 								</div>
-									<p class="help-block"><a href="<?=base_url('auth/password_forgot')?>">Olvidé mi contraseña</a></p>
 								<br/>
 								<div class="row">
 									<div class="col-xs-6 text-left">
@@ -66,91 +67,83 @@
 							</form>
 						</div><!--end .col -->
 						<div class="col-sm-5 col-sm-offset-1 text-center">
-              <img src="<?=base_url('assets/img/itch/logo.png')?>" style="width: 80%;" alt="">
-            </div><!--end .col -->
-							</div><!--end .row -->
-						</div><!--end .card-body -->
-					</div><!--end .card -->
-				</section>
-				<!-- END LOGIN SECTION -->
+              				<img src="<?=base_url('assets/img/itch/logo.png')?>" style="width: 80%;" alt="">
+            			</div><!--end .col -->
+					</div><!--end .row -->
+				</div><!--end .card-body -->
+			</div><!--end .card -->
+		</section>
+		<!-- END LOGIN SECTION -->
 
-				<!-- BEGIN JAVASCRIPT -->
-				<script>var base_url = '<?=base_url()?>';</script>
-				<script src="<?=base_url()?>assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
-				<script src="<?=base_url()?>assets/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
-				<script src="<?=base_url()?>assets/js/libs/bootstrap/bootstrap.min.js"></script>
-				<script src="<?=base_url()?>assets/js/libs/spin.js/spin.min.js"></script>
-				<script src="<?=base_url()?>assets/js/libs/autosize/jquery.autosize.min.js"></script>
-				<script src="<?=base_url()?>assets/js/libs/nanoscroller/jquery.nanoscroller.min.js"></script>
-				<script src="<?=base_url()?>assets/js/libs/jquery-validation/dist/jquery.validate.js"></script>
-				<script src="<?=base_url()?>assets/js/libs/jquery-validation/dist/additional-methods.min.js"></script>
-				<script src="<?=base_url()?>assets/js/libs/toastr/toastr.js"></script>
-				<script src="<?=base_url()?>assets/js/core/source/App.js"></script>
-				<script src="<?=base_url()?>assets/js/core/source/AppNavigation.js"></script>
-				<script src="<?=base_url()?>assets/js/core/source/AppOffcanvas.js"></script>
-				<script src="<?=base_url()?>assets/js/core/source/AppCard.js"></script>
-				<script src="<?=base_url()?>assets/js/core/source/AppForm.js"></script>
-				<script src="<?=base_url()?>assets/js/core/source/AppNavSearch.js"></script>
-				<script src="<?=base_url()?>assets/js/core/source/AppVendor.js"></script>
-				<script src="<?=base_url()?>assets/js/core/demo/Demo.js"></script>
-				<script src="<?=base_url()?>assets/js/core/main.js"></script>
-				<script src="<?=base_url()?>assets/CryptoJS/components/core.js"></script>
-				<script src="<?=base_url()?>assets/CryptoJS/rollups/sha512.js"></script>
-				<!-- END JAVASCRIPT -->
+		<!-- BEGIN JAVASCRIPT -->
+		<script>var base_url = '<?=base_url()?>';</script>
+		<script src="<?=base_url()?>assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
+		<script src="<?=base_url()?>assets/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
+		<script src="<?=base_url()?>assets/js/libs/bootstrap/bootstrap.min.js"></script>
+		<script src="<?=base_url()?>assets/js/libs/spin.js/spin.min.js"></script>
+		<script src="<?=base_url()?>assets/js/libs/autosize/jquery.autosize.min.js"></script>
+		<script src="<?=base_url()?>assets/js/libs/nanoscroller/jquery.nanoscroller.min.js"></script>
+		<script src="<?=base_url()?>assets/js/libs/jquery-validation/dist/jquery.validate.js"></script>
+		<script src="<?=base_url()?>assets/js/libs/jquery-validation/dist/additional-methods.min.js"></script>
+		<script src="<?=base_url()?>assets/js/libs/toastr/toastr.js"></script>
+		<script src="<?=base_url()?>assets/js/core/source/App.js"></script>
+		<script src="<?=base_url()?>assets/js/core/source/AppNavigation.js"></script>
+		<script src="<?=base_url()?>assets/js/core/source/AppOffcanvas.js"></script>
+		<script src="<?=base_url()?>assets/js/core/source/AppCard.js"></script>
+		<script src="<?=base_url()?>assets/js/core/source/AppForm.js"></script>
+		<script src="<?=base_url()?>assets/js/core/source/AppNavSearch.js"></script>
+		<script src="<?=base_url()?>assets/js/core/source/AppVendor.js"></script>
+		<script src="<?=base_url()?>assets/js/core/demo/Demo.js"></script>
+		<script src="<?=base_url()?>assets/js/core/main.js"></script>
+		<script src="<?=base_url()?>assets/CryptoJS/components/core.js"></script>
+		<script src="<?=base_url()?>assets/CryptoJS/rollups/sha512.js"></script>
+		<!-- END JAVASCRIPT -->
 
-				<script>	
-				$('#form_login').submit(function(e) {
-					var $this = $(this);
-					e.preventDefault();
-					start();
-					
-					if (!$this.valid()) {   // checks form for validity
-	                	e.preventDefault();
-	                	end();
-	                	return false;
-	                }
+		<script type="text/javascript">
+			$('#form_login').submit(function(e) {
+				var $this = $(this);
+				e.preventDefault();
+				start();
+			
+				if (!$this.valid()) {
+	            	e.preventDefault();
+	            	end();
+	            	return false;
+	            }
 
-          var data = $(this).serializeArray();
-					console.log(data);
-					console.log(data[1].value);
-					console.log(CryptoJS.SHA512(data[1].value));
+				var data = $(this).serializeArray();
+				data[1].value = CryptoJS.SHA512(data[1].value);
+			 	toastr.options.positionClass = 'toast-bottom-left';
 
-					data[1].value = CryptoJS.SHA512(data[1].value);
-          toastr.options.positionClass = 'toast-bottom-left';
+				$.post($(this).attr('action'), data)
+				.done(function(data) {
+		         	if(data.success){
+						toastr.success('Bienvenido: '+data.rol, '');
+              			setTimeout(function(){
+                			redirect('../home/');
+ 	            		},500);
+          			}else{
+    					toastr.error('Error: '+data.message, '');
+          			}
+	        	})
+			    .fail(function (xhr) {
+        			toastr.error(xhr, '');
+      			})
+			    .complete(function () {
+        			end();
+      			});
+	        	return false;
+			});
 
-					$.post($(this).attr('action'), data)
-			        .done(function(data) {
-                console.log(data);
-                  if(data.success){
-							        toastr.success('Bienvenido: '+data.rol, '');
-                      setTimeout(function(){
-                        redirect("../home/");
-                        //window.location.href = "../home/";
-                      },500);
-                  }else{
-                    toastr.error('Error: '+data.message, '');
-                  }
-			        })
-					    .fail(function (xhr) {
-					      console.log("Error de ejecución: "+xhr);
-                toastr.error(xhr, '');
-              })
-					    .complete(function () {
-                end();
-              });
-			        return false;
-				});
+			function redirect(url) {
+			    if(navigator.userAgent.match(/Android/i)){
+			        document.location=url;
+	            }else{
+			        window.location.replace(url);
+	            }
+	        }
+			
+		</script>
 
-				function redirect(url) {
-				    if(navigator.userAgent.match(/Android/i)){
-				        document.location=url;
-                    }else{
-				        window.location.replace(url);
-                    }
-
-                }
-					
-				</script>
-
-			</body>
-		</html>
+	</body>
+</html>
