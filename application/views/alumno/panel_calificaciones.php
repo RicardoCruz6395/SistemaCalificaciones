@@ -20,7 +20,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="table-responsive">
-                                        <table class="table datatable table-bordered table-hover" id="mytablem">
+                                        <table class="table datatable table-bordered table-hover" id="table-calificaciones">
                                             <thead>
                                                 <tr>
                                                     <th>MATERIA</th>
@@ -35,7 +35,7 @@
                                                     foreach ($materias as $keyM => $m){
                                                     echo '<tr>
                                                             <td>
-                                                                <a href="#general-modal" data-toggle="modal" class="openBtn text-primary" data-g="'.$keyM.'">'.$m[0].'</a>
+                                                                <a href="#" class="reporte" data-g="'.$keyM.'">'.$m[0].'</a>
                                                             </td>';
                                                         foreach ($unidades as $keyU => $u){
                                                             echo '<td class="text-center">';
@@ -56,7 +56,7 @@
                                                                 }
                                                                 switch (true) {
                                                                     case ( $calificacion == null ):
-                                                                        echo '<button type="button" class="btn ink-reaction btn-floating-action btn-danger text-center" disabled> . . . </button><sup class="badge style-default" title="Sin capturar">&nbsp;&nbsp;&nbsp;&nbsp;</sup>';
+                                                                        echo '<button type="button" class="btn ink-reaction btn-floating-action btn-default text-center" disabled> . . . </button><sup class="badge style-default" title="Sin capturar">&nbsp;&nbsp;&nbsp;&nbsp;</sup>';
                                                                         break;
                                                                     case ( $calificacion < 70 ):
                                                                         echo '<button type="button" class="btn ink-reaction btn-floating-action btn-danger text-center">N/A</button>' . $obtencion;
@@ -71,7 +71,21 @@
                                                         echo '</td>';
                                                         } // foreach unidades
 
-                                                        echo '<td class="text-center primary">89</td>';
+                                                        echo '<td class="text-center">';
+
+                                                        switch (true) {
+                                                            case ( $m[2] == -1 ):
+                                                                echo '<button type="button" class="btn ink-reaction btn-floating-action btn-default text-center" disabled> . . . </button>';
+                                                                break;
+                                                            case ( $m[2] == 0 ):
+                                                                echo '<button type="button" class="btn ink-reaction btn-floating-action btn-danger text-center">N/A</button>';
+                                                                break;
+                                                            default:
+                                                                echo '<button type="button" class="btn ink-reaction btn-floating-action btn-warning text-center">'. $m[2] .'</button>';
+                                                                break;
+                                                        }
+
+                                                        echo '</td>';
 
                                                     echo '</tr>';
                                                     } 
@@ -91,8 +105,19 @@
     <script src="<?=base_url()?>assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
     <script type="text/javascript">
 
-    $('#periodos').change(function(){
-        location.href = this.value;
-    });
+        $('#periodos').change(function(){
+            location.href = this.value;
+        });
+
+        $('.reporte', '#table-calificaciones').on('click',function(e){
+            id = this.getAttribute('data-g');
+            e.preventDefault();
+
+            SCModals.openModal({
+                title : 'REPORTE DE CALIFICACIONES',
+                url : base_url + 'alumno/postGrupoReporteCalificaciones',
+                data : { id : id }
+            });
+        });
         
     </script>
