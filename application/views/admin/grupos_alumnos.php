@@ -134,7 +134,6 @@
                             url : base_url + 'admin/deleteAlumnoFromGrupo',
                             data : { id : id },
                             success : function(data){
-                                toastr.options.positionClass = 'toast-bottom-right';
                                 if( data.deleted )
                                     toastr.success( data.message )
                                 else
