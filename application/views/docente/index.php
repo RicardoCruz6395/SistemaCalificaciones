@@ -107,6 +107,21 @@
     <script src="<?= base_url() ?>assets/js/libs/DataTables/jquery.dataTables.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+
+          $('#periodos').change(function(){
+              var opt = $(this).find("option:selected").val();
+              console.log(opt);
+              redirect(''+opt);
+          });
+
+          function redirect(url) {
+          if(navigator.userAgent.match(/Android/i)){
+              document.location=url;
+              }else{
+              window.location.replace(url);
+              }
+          }
+
             var table = $('#table-grupos').DataTable({
                 /*'ajax': {
                     'url' : '<?= base_url() ?>docente/postGrupos',

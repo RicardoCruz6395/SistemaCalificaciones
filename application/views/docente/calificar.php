@@ -25,7 +25,7 @@
                   <div class="form-group">
                     <label for="" class="form-control-label">Materia</label>
                     <input type="text" class="form-control" value=" <?= $grupo->MATE_NOMBRE ?> " readonly>
-                    <input type="text" id="materia" class="form-control" value=" <?= $grupo->MATE_MATERIA ?> " readonly>
+                    <input type="hidden" id="materia" class="form-control" value=" <?= $grupo->MATE_MATERIA ?> " readonly>
                   </div>
                 </div>
                 <div class="col-md-6">
