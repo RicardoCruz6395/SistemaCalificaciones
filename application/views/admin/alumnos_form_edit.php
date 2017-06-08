@@ -5,11 +5,11 @@
 		<label for="matricula">Matrícula</label>
 	</div>
 	<div class="form-group">
-		<input type="text" class="form-control dirty" id="nombre" name="nombre" data-rule-minlenght="1" required="" aria-required="true" aria-describedby="nombre-error" aria-invalid="true" value="<?=$alumno->ALUM_NOMBRE?>"><span id="nombre-error" class="help-block">Información requerida</span>
+		<input type="text" class="form-control dirty" id="nombre" name="nombre" data-rule-minlenght="1" maxlength="50" required="" aria-required="true" aria-describedby="nombre-error" aria-invalid="true" value="<?=$alumno->ALUM_NOMBRE?>"><span id="nombre-error" class="help-block">Información requerida</span>
 		<label for="nombre">Nombre (s)</label>
 	</div>
 	<div class="form-group">
-		<input type="text" class="form-control dirty" id="apellidos" name="apellidos" data-rule-minlenght="1" required="" aria-required="true" aria-describedby="apellidos-error" aria-invalid="true" value="<?=$alumno->ALUM_APELLIDOS?>"><span id="apellidos-error" class="help-block">Información requerida</span>
+		<input type="text" class="form-control dirty" id="apellidos" name="apellidos" data-rule-minlenght="1" maxlength="50" required="" aria-required="true" aria-describedby="apellidos-error" aria-invalid="true" value="<?=$alumno->ALUM_APELLIDOS?>"><span id="apellidos-error" class="help-block">Información requerida</span>
 		<label for="apellidos">Apellidos</label>
 	</div>
 	<div class="form-group">

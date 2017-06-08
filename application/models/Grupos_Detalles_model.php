@@ -23,4 +23,14 @@ class Grupos_Detalles_model extends CI_Model{
 		return $this->db->query($sql)->row();
     }
 
+    public function insert($id_grupo, $id_alumno){
+        return $this->db->insert('grupos_detalles', [ 'GDET_GRUPO' => $id_grupo, 'GDET_ALUMNO' => $id_alumno ]);       
+    }
+
+    public function delete( $id ){
+        $this->db->set('GDET_ACTIVO', 0);
+        $this->db->where('GDET_DETALLE', $id);
+        return $this->db->update('grupos_detalles');
+    }
+
 }

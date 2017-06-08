@@ -14,8 +14,8 @@ class Docentes_model extends CI_Model{
         return $result->row();
     }    
 
-    public function getDocentes(){
-        $this->db->where('DOCE_ACTIVO', 1);
+    public function getDocentes( $activo = [0,1] ){
+        $this->db->where_in('DOCE_ACTIVO', $activo);
         $result = $this->db->get('docentes');
         return $result->result();
     }

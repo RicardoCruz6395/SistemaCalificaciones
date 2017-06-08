@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Sistema de Calificaciones :: Error 404</title>
+		<title><?=$title?></title>
 
 		<!-- BEGIN META -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="keywords" content="your,keywords">
 		<meta name="description" content="Short explanation about this website">
+		<link rel="icon" type="icon/x" href="<?=base_url()?>assets/img/icon.ico">
 		<!-- END META -->
 
 		<!-- BEGIN STYLESHEETS -->
-		<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/theme-1/bootstrap.css?1422792965" />
-		<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/theme-1/materialadmin.css?1425466319" />
-		<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/theme-1/font-awesome.min.css?1422529194" />
-		<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/theme-1/material-design-iconic-font.min.css?1421434286" />
-		<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/theme-1/libs/toastr/toastr.css?1425466569" />
+		<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/theme-1/bootstrap.css" />
+		<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/theme-1/materialadmin.css" />
+		<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/theme-1/font-awesome.min.css" />
+		<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/theme-1/material-design-iconic-font.min.css" />
+		<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/theme-1/libs/toastr/toastr.css" />
 		<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/custom.css" />
 		<!-- END STYLESHEETS -->
 
@@ -62,18 +63,11 @@
 				<script src="<?=base_url()?>assets/js/libs/spin.js/spin.min.js"></script>
 				<script src="<?=base_url()?>assets/js/libs/autosize/jquery.autosize.min.js"></script>
 				<script src="<?=base_url()?>assets/js/libs/nanoscroller/jquery.nanoscroller.min.js"></script>
-				<script src="<?=base_url()?>assets/js/libs/jquery-validation/dist/jquery.validate.js"></script>
-				<script src="<?=base_url()?>assets/js/libs/jquery-validation/dist/additional-methods.min.js"></script>
-				<script src="<?=base_url()?>assets/js/libs/toastr/toastr.js"></script>
 				<script src="<?=base_url()?>assets/js/core/source/App.js"></script>
 				<script src="<?=base_url()?>assets/js/core/source/AppNavigation.js"></script>
 				<script src="<?=base_url()?>assets/js/core/source/AppOffcanvas.js"></script>
-				<script src="<?=base_url()?>assets/js/core/source/AppCard.js"></script>
-				<script src="<?=base_url()?>assets/js/core/source/AppForm.js"></script>
-				<script src="<?=base_url()?>assets/js/core/source/AppNavSearch.js"></script>
 				<script src="<?=base_url()?>assets/js/core/source/AppVendor.js"></script>
 				<script src="<?=base_url()?>assets/js/core/demo/Demo.js"></script>
-				<script src="<?=base_url()?>assets/js/core/main.js"></script>
 				<script src="<?=base_url()?>assets/CryptoJS/components/core.js"></script>
 				<!-- END JAVASCRIPT -->
 

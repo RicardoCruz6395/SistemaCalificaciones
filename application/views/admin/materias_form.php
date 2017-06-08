@@ -10,7 +10,7 @@
 		<p class="help-block">Introduzca una cantidad</p>
 	</div>
 	<div class="form-group">
-		<input type="text" class="form-control dirty" id="materia" name="materia" data-rule-minlenght="1" required="" aria-required="true" aria-describedby="materia-error" aria-invalid="true"><span id="materia-error" class="help-block">Información requerida</span>
+		<input type="text" class="form-control dirty" id="materia" name="materia" data-rule-minlenght="1" maxlength="70" required="" aria-required="true" aria-describedby="materia-error" aria-invalid="true"><span id="materia-error" class="help-block">Información requerida</span>
 		<label for="materia">Nombre de la materia</label>
 	</div>
 </form>

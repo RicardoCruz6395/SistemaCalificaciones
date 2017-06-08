@@ -19,7 +19,7 @@
                                 <header><i class="fa fa-users"></i> GRUPOS</header>
                             </div><!--end .card-head -->
                             <div class="card-body style-default-bright">
-                                <div class="col-md-12 table-responsive">
+                                <div class="table-responsive">
                                     <table class="table datatable table-bordered table-hover" id="table-grupos">
                                         <thead>
                                             <tr>
@@ -28,7 +28,7 @@
                                                 <th>CARRERA</th>
                                                 <th>MATERIA</th>
                                                 <th>DOCENTE</th>
-                                                <th>NÓ. ALUMNOS</th>
+                                                <th>ALUMNOS</th>
                                             	<th>OPCIONES</th>
                                             </tr>
                                         </thead>
@@ -52,10 +52,10 @@
                 'url' : '<?= base_url() ?>admin/postGrupos',
                 'type' : 'POST'
             },
-            'columnDefs' : [{
-                className : 'text-center',
-                'targets' : [0,1,5]
-            }],
+            'columnDefs' : [
+                { className : 'text-center','targets' : [0,1,5,6] },
+                { width: '12%', 'targets': [1,5,6] },
+            ],
         });
 
 
@@ -101,20 +101,9 @@
                 e.preventDefault();
 
                 SCModals.openModal({
-                    title : 'EDITAR ALUMNO',
+                    title : 'EDITAR GRUPO',
                     btnOk : '<i class="fa fa-floppy-o"></i> GUARDAR CAMBIOS',
-                    url : base_url + 'admin/postAlumnoFormEdit',
-                    data : { id : id }
-                });
-            });
-
-            $('.btn-warning').live('click',function(e){
-                id = this.getAttribute('data-p');
-                e.preventDefault();
-
-                SCModals.openModal({
-                    title : 'LISTA DE ALUMNOS',
-                    url : base_url + 'admin/postListaAlumnosGrupo',
+                    url : base_url + 'admin/postGrupoFormEdit',
                     data : { id : id }
                 });
             });

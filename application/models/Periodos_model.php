@@ -1,8 +1,8 @@
 <?php
 class Periodos_model extends CI_Model{
 
-	public function getPeriodos(){
-		$this->db->where('PERI_ACTIVO', 1);
+	public function getPeriodos( $activo = [0,1] ){
+		$this->db->where_in('PERI_ACTIVO', $activo);
     	$result = $this->db->get('periodos');
     	return $result->result();
 	}

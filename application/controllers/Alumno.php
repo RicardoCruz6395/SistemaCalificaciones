@@ -13,90 +13,75 @@ class Alumno extends CI_Controller {
 	public function index(){
         $this->load->model('alumnos_model');
 		$periodo = $this->alumnos_model->getUltimoPeriodo( $this->alumno->ALUM_ALUMNO );
-        
         if( $periodo ){
             $periodo = $periodo->GRUP_PERIODO;
             redirect('alumno/periodo/' . $periodo);
         }else{
-            $data1 = ['page_title'    => 'SCP :: Panel de Calificaciones'];
-
-            $this->load->view('layout/head'   , $data1);
-            $this->load->view('layout/header');
-            $this->load->view('alumno/index');
-            $this->load->view('layout/menu');
-            $this->load->view('layout/scripts');
+            $title = ['page_title'    => 'SCP :: Panel de Calificaciones'];
+            $this->viewGeneral( $title, 'alumno/index');
         }
 	}
 
+    public function viewGeneral( $title, $view, $data = []){
+        $this->load->view('layout/head', $title);
+        $this->load->view('layout/header');
+        $this->load->view( $view, $data);
+        $this->load->view('layout/menu');
+        $this->load->view('layout/scripts');
+    }
+
     public function periodo( $id_periodo = null ){
 
-        if( $id_periodo ){
+        if( !$id_periodo ) redirect('alumno/');
 
-            /******* NOMBRE DEL PERIODO ****************/
-            $this->load->model('periodos_model');
-            $nombre_periodo = $this->periodos_model->getNombrePeriodoById( $id_periodo );
-            
-            if(!$nombre_periodo){
-                $this->index();
+        /******* NOMBRE DEL PERIODO ****************/
+        $this->load->model('periodos_model');
+        $nombre_periodo = $this->periodos_model->getNombrePeriodoById( $id_periodo );
+        
+        if(!$nombre_periodo) redirect('alumno/');
+
+        /******* LISTA DE LOS PERIODOS ***********/
+        $periodos = $this->periodos_model->getListaPeriodosByAlumno( $this->alumno->ALUM_ALUMNO );
+        
+        $existe = false;
+        foreach ($periodos as $periodo) {
+            if($periodo->PERI_PERIODO == $id_periodo){
+                $existe = true;
+                break;
             }
-
-            /******** DATOS DEL ALUMNO *****************/
-            $this->load->model('usuarios_model');       
-            $alumno = $this->usuarios_model->getDatosUsuario();
-
-            /******* LISTA DE LOS PERIODOS ***********/
-            $periodos = $this->periodos_model->getListaPeriodosByAlumno( $alumno->ALUM_ALUMNO );
-
-            $existe = false;
-            foreach ($periodos as $periodo) {
-                if($periodo->PERI_PERIODO == $id_periodo){
-                    $existe = true;
-                    break;
-                }
-            }
-
-            if(!$existe){
-                $this->index();
-            }
-
-            $select = '<select id="periodos" class="form-control">';
-            foreach($periodos as $periodo) {
-                $selected = $periodo->PERI_PERIODO == $id_periodo ? ' selected' : '' ;
-                $nombre = $this->periodos_model->getNombrePeriodoById( $periodo->PERI_PERIODO );
-                $select .= '<option value="'. $periodo->PERI_PERIODO . '"'. $selected . '>' . $nombre . '</option>';
-            }
-            $select .= '</select>';
-
-
-            /*********** LISTA DE CALIFICACIONES Y MATERIAS *************/
-            $this->load->model('alumnos_model');
-            $SQLcalificaciones = $this->alumnos_model->getMateriasByPeriodo( $alumno->ALUM_ALUMNO, $id_periodo );
-            
-            foreach ($SQLcalificaciones as $key => $c) {
-                $materias[ $c->GDET_DETALLE ] = $c->MATE_NOMBRE;
-                $unidades[ $c->UNID_NUMERO ] = $c->UNID_NOMBRE;
-                $calificaciones[ $c->GDET_DETALLE ][ $c->UNID_NUMERO ] = $c->CALI_PUNTAJE;
-            }
-
-            ksort($unidades);
-
-            $data1 = ['page_title'    => 'SCP :: Panel de Calificaciones'];
-            $data3 = [
-                'materias'       => $materias,
-                'unidades'       => $unidades,
-                'calificaciones' => $calificaciones,
-                'periodos'       => $select,
-                'nombre_periodo' => $nombre_periodo
-            ];
-
-            $this->load->view('layout/head'   , $data1);
-            $this->load->view('layout/header');
-            $this->load->view('alumno/panel_calificaciones'  , $data3);
-            $this->load->view('layout/menu');
-            $this->load->view('layout/scripts');
-        }else{
-            redirect('alumno/');
         }
+
+        if(!$existe) redirect('alumno/');
+
+        $select = '';
+        foreach($periodos as $periodo) {
+            $selected = $periodo->PERI_PERIODO == $id_periodo ? ' selected' : '' ;
+            $nombre = $this->periodos_model->getNombrePeriodoById( $periodo->PERI_PERIODO );
+            $select .= '<option value="'. $periodo->PERI_PERIODO . '"'. $selected . '>' . $nombre . '</option>';
+        }
+
+        /*********** LISTA DE CALIFICACIONES Y MATERIAS *************/
+        $this->load->model('alumnos_model');
+        $SQLcalificaciones = $this->alumnos_model->getMateriasByPeriodo( $this->alumno->ALUM_ALUMNO, $id_periodo );
+        
+        foreach ($SQLcalificaciones as $key => $c) {
+            $materias[ $c->GDET_DETALLE ] = $c->MATE_NOMBRE;
+            $unidades[ $c->UNID_NUMERO ] = $c->UNID_NOMBRE;
+            $calificaciones[ $c->GDET_DETALLE ][ $c->UNID_NUMERO ] = $c->CALI_PUNTAJE;
+        }
+
+        ksort($unidades);
+
+        $title = ['page_title'    => 'SCP :: Panel de Calificaciones'];
+        $datos = [
+            'materias'       => $materias,
+            'unidades'       => $unidades,
+            'calificaciones' => $calificaciones,
+            'periodos'       => $select,
+            'nombre_periodo' => $nombre_periodo
+        ];
+
+        $this->viewGeneral( $title, 'alumno/panel_calificaciones', $datos);
 
     }
 
