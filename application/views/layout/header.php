@@ -1,11 +1,7 @@
 <?php
     $menu = '';
-    switch ($this->session->rol) {
-        case 1:
-        case 3:
-            $menu = ' menubar-pin';
-            break;
-    }
+    if($this->session->rol == 3)
+        $menu = ' menubar-pin';
 ?>
 
 <body class="header-fixed<?=$menu?>">
