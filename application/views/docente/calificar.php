@@ -302,6 +302,10 @@
       data.push({element:element});
       
     });
+
+    iziToast.settings({
+        icon: 'fontawesome',
+    });
     
     postAjax({
       url: base_url+"docente/guardar_calificacion",
@@ -312,7 +316,7 @@
 
         console.log(response);
 
-        if(response.success)
+        if(response.success){
           //toastr.success('Calificaciones guardadas', '');
             iziToast.show({
                 id: 'haduken',
@@ -332,8 +336,16 @@
                 },
                 iconColor: 'rgb(0, 255, 184)'
             });
-        else
-          toastr.error('Error: Calificaciones no guardadas', '');
+        }
+        else{
+          //toastr.error('Error: Calificaciones no guardadas', '');
+          iziToast.error({
+              title: 'Error',
+              message: 'Ocurrió un error inesperado',
+          });
+          
+        }
+
 
       }       
 
