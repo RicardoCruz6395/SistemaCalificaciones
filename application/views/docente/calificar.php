@@ -149,6 +149,7 @@
     </section>
   </div>
   <script src="<?= base_url() ?>assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
+  <script src="<?= base_url() ?>assets/iziToast/dist/js/iziToast.min.js"></script>
   <script type="text/javascript">
 
   //toastr.options.positionClass = 'toast-bottom-left';
@@ -301,6 +302,10 @@
       data.push({element:element});
       
     });
+
+    iziToast.settings({
+        icon: 'fontawesome',
+    });
     
     postAjax({
       url: base_url+"docente/guardar_calificacion",
@@ -311,10 +316,36 @@
 
         console.log(response);
 
-        if(response.success)
-          toastr.success('Calificaciones guardadas', '');
-        else
-          toastr.error('Calificaciones no guardadas', '');
+        if(response.success){
+          //toastr.success('Calificaciones guardadas', '');
+            iziToast.show({
+                id: 'haduken',
+                color: 'dark',
+                icon: 'fa fa-save',
+                title: 'Correcto!',
+                message: 'Calificaciones guardadas',
+                position: 'topRight',
+                transitionIn: 'flipInX',
+                transitionOut: 'flipOutX',
+                progressBarColor: 'rgb(0, 255, 184)',
+                image: '../../assets/img/success.png',
+                imageWidth: 70,
+                layout:2,
+                onClose: function(){
+                    // console.info('onClose');
+                },
+                iconColor: 'rgb(0, 255, 184)'
+            });
+        }
+        else{
+          //toastr.error('Error: Calificaciones no guardadas', '');
+          iziToast.error({
+              title: 'Error',
+              message: 'Ocurrió un error inesperado',
+          });
+          
+        }
+
 
       }       
 
