@@ -64,7 +64,7 @@ class Alumnos_model extends CI_Model {
 
     public function getMateriasByPeriodo( $id_alumno, $periodo ){
         $sql = "SELECT * FROM (
-                    SELECT GDET_DETALLE, MATE_NOMBRE, UNID_UNIDAD, UNID_NUMERO, UNID_NOMBRE 
+                    SELECT GDET_DETALLE, MATE_MATERIA, MATE_NOMBRE, UNID_UNIDAD, UNID_NUMERO, UNID_NOMBRE 
                     FROM periodos
                     JOIN grupos ON PERI_PERIODO = GRUP_PERIODO
                     JOIN materias ON GRUP_MATERIA = MATE_MATERIA

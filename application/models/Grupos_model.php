@@ -36,7 +36,12 @@ class Grupos_model extends CI_Model{
     }
 
     public function materia( $id_grupo ){
-    	$sql = "SELECT materias.* FROM grupos JOIN materias ON (GRUP_MATERIA = MATE_MATERIA) WHERE GRUP_GRUPO = '$id_grupo' LIMIT 1;";
+        $sql = "SELECT materias.* FROM grupos JOIN materias ON (GRUP_MATERIA = MATE_MATERIA) WHERE GRUP_GRUPO = '$id_grupo' LIMIT 1;";
+        return $this->db->query($sql)->row();
+    }
+
+    public function semestre( $id_grupo ){
+        $sql = "SELECT semestres.* FROM grupos JOIN semestres ON (GRUP_SEMESTRE = SEME_SEMESTRE) WHERE GRUP_GRUPO = '$id_grupo' LIMIT 1;";
         return $this->db->query($sql)->row();
     }
 

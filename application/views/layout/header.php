@@ -1,4 +1,10 @@
-<body class="menubar-hoverable header-fixed menubar-pin">
+<?php
+    $menu = '';
+    if($this->session->rol == 3)
+        $menu = ' menubar-pin';
+?>
+
+<body class="header-fixed<?=$menu?>">
     <div class="modal fade" id="general-modal" tabindex="-1" role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -27,11 +33,13 @@
                             </a>
                         </div>
                     </li>
+                    <?php if($menu != ''): ?>
                     <li>
                         <a class="btn btn-icon-toggle menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
                             <i class="fa fa-bars"></i>
                         </a>
                     </li>
+                    <?php endif; ?>
                 </ul>
             </div>
             <div class="headerbar-right">
