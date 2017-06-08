@@ -27,6 +27,7 @@
                                                     <?php foreach($unidades as $unidad){
                                                         echo '<th class="text-center">' . $unidad . '</th>';
                                                     } ?>
+                                                    <th class="text-center">PROMEDIO</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -34,32 +35,44 @@
                                                     foreach ($materias as $keyM => $m){
                                                     echo '<tr>
                                                             <td>
-                                                                <a href="#myModal" data-toggle="modal" class="openBtn text-primary" data-g="'.$keyM.'">'.$m.'</a>
+                                                                <a href="#general-modal" data-toggle="modal" class="openBtn text-primary" data-g="'.$keyM.'">'.$m[0].'</a>
                                                             </td>';
                                                         foreach ($unidades as $keyU => $u){
                                                             echo '<td class="text-center">';
+                                                            if( $keyU <= $m[1] ){
                                                                 $calificacion = null;
                                                                 if(array_key_exists($keyU, $calificaciones[$keyM])){
-                                                                    $calificacion = $calificaciones[ $keyM ][ $keyU ];
+                                                                    $datos = $calificaciones[ $keyM ][ $keyU ];
 
-                                                                    $obtencion = $calificacion > 70 && $calificacion < 80 ? '<sup class="badge style-danger">R</sup>' : '';
+                                                                    $calificacion = $datos[0];
+                                                                    $obtencion = $datos[1];
+
+                                                                    if( $obtencion == 1 ){
+                                                                        $obtencion = '<sup class="badge style-success" title="Curso Normal"> CN </sup>' ;
+                                                                    }else{
+                                                                        $obtencion = '<sup class="badge style-warning" title="Curso Complementario"> CC </sup>';
+                                                                    } 
 
                                                                 }
                                                                 switch (true) {
                                                                     case ( $calificacion == null ):
-                                                                        echo '<button type="button" class="btn ink-reaction btn-floating-action btn-danger text-center" disabled> . . . </button>';
+                                                                        echo '<button type="button" class="btn ink-reaction btn-floating-action btn-danger text-center" disabled> . . . </button><sup class="badge style-default" title="Sin capturar">&nbsp;&nbsp;&nbsp;&nbsp;</sup>';
                                                                         break;
                                                                     case ( $calificacion < 70 ):
-                                                                        echo '<button type="button" class="btn ink-reaction btn-floating-action btn-danger text-center">N/A</button>';
+                                                                        echo '<button type="button" class="btn ink-reaction btn-floating-action btn-danger text-center">N/A</button>' . $obtencion;
                                                                         break;
                                                                     case ( $calificacion >= 70 ):
                                                                         echo '<button type="button" class="btn ink-reaction btn-floating-action btn-primary text-center">'. $calificacion .'</button>' . $obtencion;
                                                                         break;
                                                                     default: break;
                                                                 }
+                                                            }
                                                             
                                                         echo '</td>';
-                                                        }
+                                                        } // foreach unidades
+
+                                                        echo '<td class="text-center primary">89</td>';
+
                                                     echo '</tr>';
                                                     } 
                                                 ?>
@@ -75,7 +88,11 @@
         </section>
     </div><!--end #content-->
     <!-- END CONTENT -->
-    <script src="<?= base_url() ?>assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
+    <script src="<?=base_url()?>assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
     <script type="text/javascript">
+
+    $('#periodos').change(function(){
+        location.href = this.value;
+    });
         
     </script>

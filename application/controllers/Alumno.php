@@ -63,11 +63,18 @@ class Alumno extends CI_Controller {
         /*********** LISTA DE CALIFICACIONES Y MATERIAS *************/
         $this->load->model('alumnos_model');
         $SQLcalificaciones = $this->alumnos_model->getMateriasByPeriodo( $this->alumno->ALUM_ALUMNO, $id_periodo );
-        
+            
+        $this->load->model('materias_model');
         foreach ($SQLcalificaciones as $key => $c) {
-            $materias[ $c->GDET_DETALLE ] = $c->MATE_NOMBRE;
+            $materias[ $c->GDET_DETALLE ] = [
+                $c->MATE_NOMBRE,
+                count($this->materias_model->unidades( $c->MATE_MATERIA ))
+            ];
             $unidades[ $c->UNID_NUMERO ] = $c->UNID_NOMBRE;
-            $calificaciones[ $c->GDET_DETALLE ][ $c->UNID_NUMERO ] = $c->CALI_PUNTAJE;
+            $calificaciones[ $c->GDET_DETALLE ][ $c->UNID_NUMERO ] = [
+                $c->CALI_PUNTAJE,
+                $c->CALI_OBTENCION
+            ];
         }
 
         ksort($unidades);
