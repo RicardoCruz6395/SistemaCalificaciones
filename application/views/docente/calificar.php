@@ -143,23 +143,6 @@
                 </div>
               </div><!--end .card-body -->
             </div><!--end .card -->
-            <div class="card card-underline card-collapsed">
-              <div class="card-head">
-                <header>DEBUG</header>
-                <div class="tools">
-                  <div class="btn-group">
-                    <a class="btn btn-icon-toggle btn-collapse"><i class="fa fa-angle-down"></i></a>
-                  </div>
-                </div>
-              </div><!--end .card-head -->
-              <div class="card-body" style="display: none">
-                <pre>
-                  <?php var_dump($alumnos2);   ?>
-                  <?php var_dump($alumnos);   ?>
-                  <?php var_dump($calificaciones);   ?>
-                </pre>
-              </div><!--end .card-body -->
-            </div>
           </div><!--end .col -->
         </div>
       </div><!--end .section-body -->
@@ -294,7 +277,7 @@
       promedio = "N/A";
     }else{
       clase = "promedio btn ink-reaction btn-floating-action text-center btn-primary";
-      promedio = parseInt(promedio);
+      promedio = Math.round(promedio);
     }
     $(fila).find('.promedio').removeClass().addClass(clase).text(promedio);
 
