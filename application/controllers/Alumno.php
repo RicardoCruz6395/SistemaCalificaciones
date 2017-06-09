@@ -99,6 +99,9 @@ class Alumno extends CI_Controller {
             $materias[ $keyM ][2] = $promedio;
         }
 
+        $this->load->model('semestres_model');
+        $this->load->model('carreras_model');
+
         ksort($unidades);
 
         $title = ['page_title'    => 'SCP :: Panel de Calificaciones'];
@@ -107,7 +110,12 @@ class Alumno extends CI_Controller {
             'unidades'       => $unidades,
             'calificaciones' => $calificaciones,
             'periodos'       => $select,
-            'nombre_periodo' => $nombre_periodo
+            'nombre_periodo' => $nombre_periodo,
+
+            'matricula'       => $this->alumno->ALUM_MATRICULA,
+            'nombre_completo' => $this->alumno->ALUM_APELLIDOS . ' ' . $this->alumno->ALUM_NOMBRE , 
+            'nombre_semestre' => $this->semestres_model->getById( $this->alumno->ALUM_SEMESTRE )->SEME_NOMBRE,
+            'nombre_carrera'  => $this->carreras_model->getById( $this->alumno->ALUM_CARRERA )->CARR_NOMBRE
         ];
 
         $this->viewGeneral( $title, 'alumno/panel_calificaciones', $datos);

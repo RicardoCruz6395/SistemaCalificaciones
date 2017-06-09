@@ -25,7 +25,7 @@
         <link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/animate.min.css" />
 		<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/custom.css" />
 
-		<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/theme-1/materialadmin_print.css"  media="print"/>
+		<link type="text/css" rel="stylesheet" href="<?=base_url()?>assets/css/theme-1/materialadmin_print.css?6789"  media="print"/>
 		<style type="text/css" media="print">
 	    @page 
 	    {
