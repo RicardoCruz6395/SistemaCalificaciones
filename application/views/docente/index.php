@@ -66,8 +66,6 @@
                         <?php
 
                       }
-                    } else {
-                      echo "no Hay materias";
                     }
                     ?>
                     </tbody>

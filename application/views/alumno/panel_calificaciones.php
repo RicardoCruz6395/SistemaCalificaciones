@@ -6,10 +6,35 @@
                     <div class="col-md-12">
                         <div class="card card-underline">
                             <div class="card-head">
-                                <header><span class="text-primary">PANEL DE CALIFICACIONES ::</span> <?=$nombre_periodo?> </header>
+                                <header><span class="text-primary">PANEL DE CALIFICACIONES ::</span> <?=$nombre_periodo?>
+                                </header>
+                                <div class="tools">
+                                    <div class="btn-group">
+                                        <a class="btn btn-floating-action btn-primary" href="javascript:void(0);" onclick="javascript:window.print();"><i class="md md-print"></i></a>
+                                    </div>
+                                </div>
                             </div><!--end .card-head -->
                             <div class="card-body">
-                                <div class="form-group col-md-4 col-md-offset-8">
+                                <div class="row">
+                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="padding-bottom: 10px;"> 
+                                        <label style= "font-size: 15px;">Matrícula:</label>
+                                        <input class="form-control" name="framework" placeholder="<?=$matricula?>" type="text" readonly="readonly" />
+                                    </div>
+                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7" style="padding-bottom: 10px;">
+                                        <label style= "font-size: 15px;" >Nombre completo:</label>
+                                        <input class="form-control" name="semestre" placeholder="<?=$nombre_completo?>" id ="semestre" type="text" readonly="readonly" />
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="padding-bottom: 10px;">
+                                        <label style= "font-size: 15px;">Semestre:</label>
+                                        <input class="form-control" name="docente" placeholder="<?=$nombre_semestre?>" id ="docente" type="text" readonly="readonly" />
+                                    </div>
+                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7" style="padding-bottom: 10px;">
+                                        <label  style= "font-size: 15px;">Carrera:</label>
+                                        <input class="form-control" name="periodo" placeholder="<?=$nombre_carrera?>" id ="periodo" type="text" readonly="readonly" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4 col-md-offset-8" id="no-imprimir">
                                     <label for="select13" class="col-sm-2 control-label"><i class="fa fa-search"></i></label>
                                     <div class="col-sm-10">
                                         <select id="periodos" class="form-control">
