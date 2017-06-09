@@ -94,26 +94,3 @@ $db['local'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
-
-
-$db['remoto'] = array(
-    'dsn'	=> '',
-    'hostname' => '162.214.14.82',
-    'username' => 'calificaciones',
-    'password' => 'parciales',
-    'database' => 'sistema_calificaciones',
-    'dbdriver' => 'mysqli',
-    'dbprefix' => '',
-    'pconnect' => FALSE,
-    'db_debug' => (ENVIRONMENT !== 'production'),
-    'cache_on' => FALSE,
-    'cachedir' => '',
-    'char_set' => 'utf8',
-    'dbcollat' => 'utf8_general_ci',
-    'swap_pre' => '',
-    'encrypt' => FALSE,
-    'compress' => FALSE,
-    'stricton' => FALSE,
-    'failover' => array(),
-    'save_queries' => TRUE
-);
