@@ -155,7 +155,7 @@
   //toastr.options.positionClass = 'toast-bottom-left';
 
   $("#tabla-cal .cal").dblclick(function () {
-    console.log("dblclick");
+    //console.log("dblclick");
     var original = $.trim($(this).text());
     $(this).addClass('cellEditing');
 
@@ -166,9 +166,9 @@
     $(this).children().first().keypress(function (e) {
       if (e.which == 13) {
         var newContent = parseInt($(this).val());
-        console.log(newContent);
+        //console.log(newContent);
         if(newContent > 100 || isNaN(newContent)){
-          console.log("Calificación inválida");
+          //console.log("Calificación inválida");
           toastr.error('Calificación inválida, intenta de nuevo', '');
           $(this).children().first().focus();
         }else {
@@ -189,7 +189,7 @@
 
     $(".form-validate").on('submit', function (e) {
       e.preventDefault();
-      console.log("form cancelado");
+      //console.log("form cancelado");
     });
 
     $(this).children().first().blur(function () {
@@ -201,7 +201,7 @@
 
 
   $("#tabla-cal .pointer").dblclick(function () {
-    console.log("dblclick");
+    //console.log("dblclick");
     var original = $.trim($(this).text());
     $(this).addClass('cellEditing');
     $(this).html('<input type="text" maxlength="2"  minlength="1" class="form-control form-obt" value="'+original+'">');
@@ -211,7 +211,7 @@
       if (e.which == 13) {
 
         var newContent = $(this).val();
-        console.log(newContent);
+        //console.log(newContent);
           var cell = $(this).parent();
           cell.text(newContent);
           //if ($.trim(newContent) != original)
@@ -223,7 +223,7 @@
 
     $(".form-validate").on('submit', function (e) {
       e.preventDefault();
-      console.log("form cancelado");
+      //console.log("form cancelado");
     });
 
     $(this).children().first().blur(function () {
@@ -245,17 +245,17 @@
 
 
   var saveChanges = function (cell) {
-    console.log("datas");
-    console.log(getData(cell));
+    //console.log("datas");
+    //console.log(getData(cell));
     postAjax(base_url + 'docente/test', getData(cell), function (data) {
-      console.log(data);
+      //console.log(data);
     });
   };
 
   var calculaPromedio = function (cell) {
-    console.log("Calculando promedio...");
+    //console.log("Calculando promedio...");
     var fila = cell.parent().parent();
-    console.log(fila);
+    //console.log(fila);
     var suma = 0;
     var c = 0;
     var na = false;
@@ -271,7 +271,7 @@
       c++;
     });
     var promedio = suma/c;
-    console.log(promedio);
+    //console.log(promedio);
     var clase = "btn-primary";
     if(na){
       clase = "promedio btn ink-reaction btn-floating-action btn-danger text-center";
@@ -314,7 +314,7 @@
       dataType:  'json',
       success : function(response){
 
-        console.log(response);
+        //console.log(response);
 
         if(response.success){
           //toastr.success('Calificaciones guardadas', '');
@@ -332,7 +332,7 @@
                 imageWidth: 70,
                 layout:2,
                 onClose: function(){
-                    // console.info('onClose');
+                    // //console.info('onClose');
                 },
                 iconColor: 'rgb(0, 255, 184)'
             });
