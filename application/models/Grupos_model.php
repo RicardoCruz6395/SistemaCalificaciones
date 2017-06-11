@@ -67,6 +67,14 @@ class Grupos_model extends CI_Model{
         return $this->db->insert('grupos', $datos);
     }
 
+    public function update( $id_grupo, $semestre, $carrera, $aula ){
+        $this->db->set('GRUP_SEMESTRE' , $semestre);
+        $this->db->set('GRUP_CARRERA'  , $carrera);
+        $this->db->set('GRUP_AULA'     , $aula);
+        $this->db->where('GRUP_GRUPO', $id_grupo);
+        return $this->db->update('grupos');
+    }
+
     public function delete( $id ){
         $this->db->set('GRUP_ACTIVO', 0);
         $this->db->where('GRUP_GRUPO', $id);
