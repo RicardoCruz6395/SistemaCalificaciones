@@ -20,7 +20,7 @@
 			<!-- BEGIN MAIN MENU -->
 			<ul id="main-menu" class="gui-controls">
 				<?php
-					if( in_array($params[0], ['admin','configuracion','auth']) ){
+					if( $this->session->rol == 3 ){
 
 						$active = ' class="active expanded expanding"';
 						$active2 = 'active';

@@ -8,7 +8,7 @@ class Auth extends CI_Controller {
 		
 		$this->load->model('usuarios_model');
 		$this->load->library('encrypt');
-		//date_default_timezone_set("America/Cancun");
+		//date_default_timezone_set('America/Cancun');
 	}
 
 	public function index()
@@ -33,8 +33,8 @@ class Auth extends CI_Controller {
 		// Llama a la function getUser() del modelo usuarios
 		$response = $this->usuarios_model->get_by_matricula($matricula);
 
-		if($response["success"]){ // Comprueba que la fila no este vacia
-			$usuario = $response["response"];
+		if($response['success']){ // Comprueba que la fila no este vacia
+			$usuario = $response['response'];
 			if($usuario->USUA_PASSWORD == $password AND $usuario->USUA_ACTIVO == 1) {
 				$data = array(
 					'id' 		=> $usuario->USUA_USUARIO,
@@ -42,23 +42,23 @@ class Auth extends CI_Controller {
 					'login'		=> true
 					);
 				$this->session->set_userdata($data);
-				$data = ["success"=>true];
+				$data = ['success'=>true];
 				switch ($this->session->userdata('rol')){
 					case 1:
-					$data["rol"] = "Docente";
+					$data['rol'] = 'Docente';
 					break;
 					case 2:
-					$data["rol"] = "Alumno";
+					$data['rol'] = 'Alumno';
 					break;
 					case 3:
-					$data["rol"] = "Admin";
+					$data['rol'] = 'Admin';
 					break;
 				}
 			}else{
-				$data = ["success"=>false, "message"=>"Datos incorrectos"];
+				$data = ['success'=>false, 'message'=>'Datos incorrectos'];
 			}
 		}else{
-			$data = ["success"=>false, "message"=>"Datos incorrectos, no se ha registrado"];
+			$data = ['success'=>false, 'message'=>'Datos incorrectos, no se ha registrado'];
 		}
 		header('Content-Type: application/json');
 		echo json_encode($data);
@@ -82,27 +82,26 @@ class Auth extends CI_Controller {
 		if(!$this->session->login){
 			redirect('auth/login');
 		}else{
-			sleep(1);
 			$password	= $this->input->post('password');
 			$password_new	= $this->input->post('password_new');
 
 			$response = $this->usuarios_model->get_by_id($this->session->id);
 
-			if($response["success"]){ // Comprueba que la fila no este vacia
-				$usuario = $response["response"];
+			if($response['success']){ // Comprueba que la fila no este vacia
+				$usuario = $response['response'];
 				if($usuario->USUA_PASSWORD == $password) {
 
 					if($this->usuarios_model->set_password($password_new)){
-						$data = ["success"=>true, "message"=>"Contraseña cambiada correctamente"];	
+						$data = ['success'=>true, 'message'=>'Contraseña cambiada correctamente'];	
 					}else{
-						$data = ["success"=>false, "message"=>"Ocurrió un error al cambiar de contraseña"];	
+						$data = ['success'=>false, 'message'=>'Ocurrió un error al cambiar de contraseña'];	
 						
 					}
 				}else{
-					$data = ["success"=>false, "message"=>"Contraseña incorrecta"];	
+					$data = ['success'=>false, 'message'=>'Contraseña incorrecta'];	
 				}
 			}else{
-				$data = ["success"=>false, "message"=>"Datos incorrectos, no se ha registrado"];
+				$data = ['success'=>false, 'message'=>'Datos incorrectos, no se ha registrado'];
 			}
 		}
 		header('Content-Type: application/json');
