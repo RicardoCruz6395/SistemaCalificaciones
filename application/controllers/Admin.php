@@ -250,64 +250,97 @@ class Admin extends CI_Controller {
     }
 
     public function postGrupoFormEdit(){
+
+        $id_grupo = $this->input->post('id');
+
+        $this->load->model('grupos_model');
+        $grupo = $this->grupos_model->getById( $id_grupo );
+
         $this->load->model('periodos_model');
         $this->load->model('semestres_model');
         $this->load->model('materias_model');
         $this->load->model('docentes_model');
         $this->load->model('carreras_model');
-        $this->load->model('aulas_model');
 
-        $periodos  = $this->periodos_model->getPeriodos( [1] );
+        $periodo  = $this->periodos_model->getById( $grupo->GRUP_PERIODO );
+        $nombre_periodo = $this->periodos_model->getNombrePeriodoById( $periodo->PERI_PERIODO );
+
         $semestres = $this->semestres_model->getSemestres();
-        $materias  = $this->materias_model->getMaterias( [1] );
-        $docentes  = $this->docentes_model->getDocentes( [1] );
-        $carreras  = $this->carreras_model->getCarreras( [1] );
-        $aulas     = $this->aulas_model->getAulas( [1] );
-
-        $select_periodos = '';
-        foreach ($periodos as $p) {
-            $nombre_periodo = $this->periodos_model->getNombrePeriodoById( $p->PERI_PERIODO );
-            $select_periodos .= '<option value="' . $p->PERI_PERIODO . '">' . $nombre_periodo . '</option>';
-        }
-
         $select_semestres = '';
         foreach ($semestres as $s) {
-            $select_semestres .= '<option value="' . $s->SEME_SEMESTRE . '">' . $s->SEME_NOMBRE . '</option>';
+            $selected = $s->SEME_SEMESTRE == $grupo->GRUP_SEMESTRE ? ' selected' : '';
+            $select_semestres .= '<option value="' . $s->SEME_SEMESTRE . '"'.$selected.'>' . $s->SEME_NOMBRE . '</option>';
         }
 
-        $select_materias = '';
-        foreach ($materias as $m) {
-            $nombre_materia = $m->MATE_CODIGO . ' :: ' . $m->MATE_NOMBRE;
-            $select_materias .= '<option value="' . $m->MATE_MATERIA . '">' . $nombre_materia . '</option>';
-        }
+        $materia = $this->materias_model->getById( $grupo->GRUP_MATERIA );
+        $nombre_materia = $materia->MATE_CODIGO . ' :: ' . $materia->MATE_NOMBRE;
 
-        $select_docentes = '';
-        foreach ($docentes as $d) {
-            $nombre_docente = $d->DOCE_MATRICULA . ' :: ' . $d->DOCE_APELLIDOS .' '. $d->DOCE_NOMBRE;
-            $select_docentes .= '<option value="' . $d->DOCE_DOCENTE . '">' . $nombre_docente . '</option>';
-        }
-
+        $docente = $this->docentes_model->getById( $grupo->GRUP_DOCENTE );
+        $nombre_docente = $docente->DOCE_MATRICULA . ' :: ' . $docente->DOCE_APELLIDOS . ' ' . $docente->DOCE_NOMBRE;
+        
+        $carreras  = $this->carreras_model->getCarreras( [1] );
         $select_carreras = '';
         foreach ($carreras as $c) {
+            $selected = $c->CARR_CARRERA == $grupo->GRUP_CARRERA ? ' selected' : '';
             $nombre_carrera = $c->CARR_CODIGO . ' :: ' . $c->CARR_NOMBRE;
-            $select_carreras .= '<option value="' . $c->CARR_CARRERA . '">' . $nombre_carrera . '</option>';
+            $select_carreras .= '<option value="' . $c->CARR_CARRERA . '"'.$selected.'>' . $nombre_carrera . '</option>';
         }
 
+        $this->load->model('aulas_model');
+        $aulas     = $this->aulas_model->getAulas( [1] );
         $select_aulas = '';
         foreach ($aulas as $a) {
-            $select_aulas .= '<option value="' . $a->AULA_AULA . '">' . $a->AULA_NOMBRE . '</option>';
+            $selected = $a->AULA_AULA == $grupo->GRUP_AULA ? ' selected' : '';
+            $select_aulas .= '<option value="' . $a->AULA_AULA . '"'.$selected.'>' . $a->AULA_NOMBRE . '</option>';
         }
 
         $datos = [
-            'periodos'  => $select_periodos,
-            'semestres' => $select_semestres,
-            'materias'  => $select_materias,
-            'docentes'  => $select_docentes,
-            'carreras'  => $select_carreras,
-            'aulas'     => $select_aulas
+            'grupo'             => $id_grupo,
+            'nombre_periodo'    => $nombre_periodo,
+            'semestres'         => $select_semestres,
+            'nombre_materia'    => $nombre_materia,
+            'nombre_docente'    => $nombre_docente,
+            'carreras'          => $select_carreras,
+            'aulas'             => $select_aulas
         ];
 
-        $this->load->view('admin/grupos_form', $datos );   
+        $this->load->view('admin/grupos_form_edit', $datos );   
+    }
+
+    public function editGrupo(){
+        $id_grupo  = $this->input->post('id');
+        $semestre  = $this->input->post('semestre');
+        $carrera   = $this->input->post('carrera');
+        $aula      = $this->input->post('aula');
+
+        $semestre = $semestre == 0 ? null : $semestre;
+
+        $this->load->model('grupos_model');
+        $grupo = $this->grupos_model->getById( $id_grupo );
+        $periodo = $grupo->GRUP_PERIODO;
+        $materia = $grupo->GRUP_MATERIA;
+        $docente = $grupo->GRUP_DOCENTE;
+
+        $existe = $this->grupos_model->get( $periodo, $semestre, $materia, $docente, $carrera, $aula );
+
+        $edited = false;
+        if( !$existe || $existe->GRUP_GRUPO == $id_grupo ){
+            
+            $grupo = $this->grupos_model->update( $id_grupo, $semestre, $carrera, $aula );
+            
+            if( $grupo ){
+                $edited  = true;
+                $message = 'Los cambios se guardaron correctamente';
+            }else{
+                $message = 'No se pudo guardar los cambios';
+            }
+        }else{
+            $message = 'Ya existe un grupo con estas mismas especificaciones';
+        }
+
+        $data = [ 'edited' => $edited, 'message' => $message ];
+
+        $this->printJSON( $data );
     }
 
     /***** GRUPOS ALUMNOS *********/

@@ -44,7 +44,7 @@ function postAjax( params ) {
         data: params.data || {},
         proccessData : true,
         contentType:  params.contentType || 'application/x-www-form-urlencoded; charset=UTF-8',
-        dataType:  params.dataType || 'html',
+        dataType:  params.dataType || 'json',
         statusCode: {
             404: function () {
                 alert('Página no encontrada :(');
@@ -99,6 +99,7 @@ var SCModals = new function(){
             postAjax({
                 url  : options.url,
                 data : options.data || {},
+                dataType : 'html',
                 success : function( response ){
                     contenido.html(response);
                 }
